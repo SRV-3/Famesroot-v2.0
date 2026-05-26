@@ -3,6 +3,7 @@ import Lenis from 'lenis'
 import Hero from './sections/Hero'
 import About from './sections/About'
 import Service from './sections/Service'
+import Process from './sections/Process'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Hero />
       <About />
       <Service />
+      <Process />
     </main>
   )
 }

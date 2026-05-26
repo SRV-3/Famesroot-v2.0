@@ -171,7 +171,7 @@ export default function Service() {
                             className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                         >
                             Services That <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-white">Drive Impact.</span>
+                            <span className="text-primary">Drive Impact.</span>
                         </motion.h2>
                     </div>
                 </div>
