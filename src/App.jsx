@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import Lenis from 'lenis'
 import Hero from './sections/Hero'
 import About from './sections/About'
+import Service from './sections/Service'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Service />
     </main>
   )
 }
