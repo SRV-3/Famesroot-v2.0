@@ -79,6 +79,22 @@ export default function Contact() {
             {/* Massive Bottom Glow */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120vw] h-[60vw] rounded-[100%] bg-primary/10 blur-[150px] mix-blend-screen pointer-events-none z-0" />
             <div className="noise-overlay opacity-[0.05]" />
+            {/* Subtle Grid */}
+            <div
+                className="absolute inset-0 opacity-[0.02] pointer-events-none z-0"
+                style={{
+                    backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                    backgroundSize: '80px 80px'
+                }}
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,transparent_0%,#030303_80%)] opacity-90 pointer-events-none z-0" />
+            {/* Floating Decorative Crosses */}
+            <div className="absolute top-32 left-[8%] floating-cross pointer-events-none z-0">
+                <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+            </div>
+            <div className="absolute top-20 right-[12%] floating-cross pointer-events-none z-0">
+                <svg className="w-3 h-3 text-white/8" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+            </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10 flex flex-col items-center">
 
@@ -94,7 +110,12 @@ export default function Contact() {
                         >
                             <span className="text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">Let's Build</span><br />
                             <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>What People</span><br />
-                            <span className="text-primary drop-shadow-[0_0_40px_rgba(255,0,0,0.4)]">Remember.</span>
+                            <span className="text-primary drop-shadow-[0_0_40px_rgba(255,0,0,0.4)] scribble-underline animate">
+                                Remember.
+                                <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                                    <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
+                                </svg>
+                            </span>
                         </motion.h2>
                     </div>
 

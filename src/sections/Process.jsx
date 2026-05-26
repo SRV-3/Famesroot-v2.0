@@ -119,7 +119,12 @@ export default function Process() {
                                 className="text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                             >
                                 From Vision to <br />
-                                <span className="text-primary">Viral.</span>
+                                <span className="text-primary scribble-underline animate">
+                                    Viral.
+                                    <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                                        <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
+                                    </svg>
+                                </span>
                             </motion.h2>
                         </div>
 

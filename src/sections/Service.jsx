@@ -171,9 +171,22 @@ export default function Service() {
                             className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                         >
                             Services That <br />
-                            <span className="text-primary">Drive Impact.</span>
+                            <span className="text-primary scribble-underline animate">
+                                Drive Impact.
+                                <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                                    <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
+                                </svg>
+                            </span>
                         </motion.h2>
                     </div>
+                </div>
+
+                {/* Floating Decorative Crosses */}
+                <div className="absolute top-20 right-[15%] floating-cross pointer-events-none z-0">
+                    <svg className="w-4 h-4 text-primary/20" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                </div>
+                <div className="absolute bottom-32 left-[10%] floating-cross pointer-events-none z-0">
+                    <svg className="w-3 h-3 text-white/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
                 </div>
 
                 {/* Services Grid */}

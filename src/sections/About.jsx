@@ -32,6 +32,13 @@ export default function About() {
         <div className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-red-900/10 blur-[150px] mix-blend-screen opacity-50" />
         <div className="cinematic-vignette opacity-80" />
         <div className="noise-overlay opacity-[0.15]" />
+        {/* Floating Decorative Crosses */}
+        <div className="absolute top-24 right-[18%] floating-cross">
+            <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+        </div>
+        <div className="absolute bottom-40 left-[5%] floating-cross">
+            <svg className="w-3 h-3 text-white/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+        </div>
       </div>
 
       <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10 h-full flex flex-col justify-center">
@@ -63,7 +70,12 @@ export default function About() {
                   className="text-4xl md:text-5xl lg:text-6xl font-black font-montserrat uppercase leading-[0.95] tracking-tight text-white mb-2"
                 >
                   We Engineer<br />
-                  <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">Influence.</span>
+                  <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] scribble-underline animate">
+                    Influence.
+                    <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                      <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
+                    </svg>
+                  </span>
                 </motion.h2>
               </div>
             </div>

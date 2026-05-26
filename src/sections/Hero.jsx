@@ -1,9 +1,18 @@
 import { useEffect, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
 import gsap from 'gsap';
 
 export default function Hero() {
   const heroRef = useRef(null);
+
+  // Scroll-linked parallax fade-out
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.8], [0, -100]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.95]);
 
   // Mouse tracking for parallax
   const mouseX = useMotionValue(0);
@@ -91,10 +100,20 @@ export default function Hero() {
       {/* 4. Cinematic Vignette & Noise Overlay */}
       <div className="cinematic-vignette" />
       <div className="noise-overlay" />
+      
+      {/* Floating Decorative Crosses */}
+      <div className="absolute top-[15%] right-[10%] floating-cross pointer-events-none z-20">
+          <svg className="w-5 h-5 text-primary/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+      </div>
+      <div className="absolute bottom-[25%] left-[8%] floating-cross pointer-events-none z-20">
+          <svg className="w-3 h-3 text-white/8" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+      </div>
 
       {/* 5. Main Content Composition */}
-      <div className="container relative z-30 mx-auto px-6 md:px-12 max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between pointer-events-none pt-32 lg:pt-0">
-
+      <motion.div 
+        style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}
+        className="container relative z-30 mx-auto px-6 md:px-12 max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between pointer-events-none pt-32 lg:pt-0"
+      >
         {/* Left-Aligned Layout */}
         <motion.div
           style={{ x: textX, y: textY }}
@@ -211,7 +230,7 @@ export default function Hero() {
 
         </motion.div>
 
-      </div>
+      </motion.div>
 
     </section>
   );

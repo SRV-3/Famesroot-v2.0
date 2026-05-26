@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { CASE_STUDIES } from '../data/data';
 
 const CaseCard = ({ campaign, index }) => {
@@ -83,10 +83,28 @@ export default function CaseStudy() {
         <section id="work" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
-            <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
+            <div className="absolute inset-0 pointer-events-none z-0">
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
+                </div>
+                {/* Subtle Grid */}
+                <div
+                    className="absolute inset-0 opacity-[0.03]"
+                    style={{
+                        backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                        backgroundSize: '80px 80px'
+                    }}
+                />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_100%)] opacity-90" />
                 <div className="cinematic-vignette opacity-80" />
                 <div className="noise-overlay opacity-[0.1]" />
+                {/* Floating Decorative Crosses */}
+                <div className="absolute top-20 right-[15%] floating-cross">
+                    <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                </div>
+                <div className="absolute bottom-40 left-[6%] floating-cross">
+                    <svg className="w-3 h-3 text-white/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                </div>
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
@@ -116,7 +134,12 @@ export default function CaseStudy() {
                             className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                         >
                             Work That Moved <br />
-                            <span className="text-primary">Audiences.</span>
+                            <span className="text-primary scribble-underline animate">
+                                Audiences.
+                                <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                                    <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
+                                </svg>
+                            </span>
                         </motion.h2>
                     </div>
                 </div>

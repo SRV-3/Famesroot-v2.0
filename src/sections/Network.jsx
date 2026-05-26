@@ -137,6 +137,12 @@ export default function Network() {
                 <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
                 <div className="cinematic-vignette opacity-90" />
                 <div className="noise-overlay opacity-[0.1]" />
+                <div className="absolute top-16 left-[12%] floating-cross">
+                    <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                </div>
+                <div className="absolute bottom-24 right-[8%] floating-cross">
+                    <svg className="w-3 h-3 text-white/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                </div>
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
@@ -166,7 +172,12 @@ export default function Network() {
                                 className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                             >
                                 1,000+ Creators.<br />
-                                <span className="text-primary">All Verified. All Ready.</span>
+                                <span className="text-primary scribble-underline animate">
+                                    All Verified. All Ready.
+                                    <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                                        <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
+                                    </svg>
+                                </span>
                             </motion.h2>
                         </div>
                     </div>
