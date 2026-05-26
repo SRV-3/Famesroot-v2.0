@@ -1,6 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, animate } from 'motion/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import { CREATORS } from '../data/data';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // --- Mobile Swipe Card Component ---
 const SwipeCard = ({ creator, index, setCards }) => {
@@ -17,8 +21,8 @@ const SwipeCard = ({ creator, index, setCards }) => {
                     const top = next.shift();
                     next.push(top);
                     return next;
+                    x.set(0); // reset position for when it cycles back
                 });
-                x.set(0); // reset position for when it cycles back
             });
         } else {
             // Snap back to center
@@ -67,23 +71,19 @@ const SwipeCard = ({ creator, index, setCards }) => {
 };
 
 // --- Desktop Grid Component ---
-const CreatorCard = ({ creator, featured = false, delay = 0 }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-        className={`group relative rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] hover:border-primary/30 transition-colors duration-700 bg-[#0a0a0a] ${featured ? 'h-[650px]' : 'h-full min-h-[300px]'}`}
+const CreatorCard = ({ creator, featured = false }) => (
+    <div
+        className={`creator-card opacity-0 group relative rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] hover:border-primary/30 transition-colors duration-700 bg-[#0a0a0a] ${featured ? 'h-[650px]' : 'h-full min-h-[300px]'}`}
     >
         {/* Hover Glow */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-[inset_0_0_80px_rgba(255,0,0,0.15)] pointer-events-none z-10" />
 
-        {/* Image with zoom effect */}
+        {/* Image with parallax effect wrapper */}
         <div className="absolute inset-0 overflow-hidden">
             <img
                 src={creator.image}
                 alt={creator.name}
-                className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                className="creator-card-image w-full h-[120%] object-cover scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
             />
         </div>
 
@@ -120,17 +120,101 @@ const CreatorCard = ({ creator, featured = false, delay = 0 }) => (
                 </div>
             </div>
         </div>
-    </motion.div>
+    </div>
 );
 
 
 export default function Network() {
+    const containerRef = useRef(null);
     const [mobileCards, setMobileCards] = useState(CREATORS);
     const featuredCreator = CREATORS[0];
     const gridCreators = CREATORS.slice(1, 5); // Take next 4 for the grid
 
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Subtitle
+            gsap.fromTo(".network-subtitle",
+                { y: "100%", opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".network-subtitle",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            // Title
+            gsap.fromTo(".network-title-word",
+                { y: "110%" },
+                {
+                    y: "0%",
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".network-title",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+            // Scribble Draw
+            gsap.fromTo(".network-scribble path",
+                { strokeDashoffset: 600 },
+                {
+                    strokeDashoffset: 0,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".network-title",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            // Stagger Creator Cards
+            gsap.fromTo(".creator-card",
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.15,
+                    scrollTrigger: {
+                        trigger: ".network-grid-container",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            // Parallax on image zoom/movement inside CreatorCard
+            gsap.utils.toArray('.creator-card-image').forEach((img) => {
+                gsap.fromTo(img,
+                    { yPercent: -10 },
+                    {
+                        yPercent: 10,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: img.closest('.creator-card'),
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    }
+                );
+            });
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section id="network" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
+        <section id="network" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
@@ -151,48 +235,47 @@ export default function Network() {
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 lg:mb-24 gap-6">
                     <div className="flex flex-col">
                         <div className="overflow-hidden mb-4">
-                            <motion.div
-                                initial={{ y: "100%", opacity: 0 }}
-                                whileInView={{ y: 0, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                className="inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]"
-                            >
+                            <span className="network-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
                                 <span className="w-12 h-[1px] bg-primary/80" />
                                 Our Creator Network
-                            </motion.div>
+                            </span>
                         </div>
 
-                        <div className="overflow-hidden pb-4">
-                            <motion.h2
-                                initial={{ y: "100%", opacity: 0 }}
-                                whileInView={{ y: 0, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                                className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                            >
-                                1,000+ Creators.<br />
-                                <span className="text-primary scribble-underline animate">
-                                    All Verified. All Ready.
+                        <div className="network-title overflow-hidden pb-4">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                <span className="inline-block overflow-hidden mr-3">
+                                    <span className="network-title-word inline-block translate-y-[110%]">1,000+</span>
+                                </span>
+                                <span className="inline-block overflow-hidden mr-3">
+                                    <span className="network-title-word inline-block translate-y-[110%]">Creators.</span>
+                                </span>
+                                <br />
+                                <span className="text-primary scribble-underline network-scribble">
+                                    <span className="inline-block overflow-hidden mr-2">
+                                        <span className="network-title-word inline-block translate-y-[110%]">All</span>
+                                    </span>
+                                    <span className="inline-block overflow-hidden mr-2">
+                                        <span className="network-title-word inline-block translate-y-[110%]">Verified.</span>
+                                    </span>
+                                    <span className="inline-block overflow-hidden mr-2">
+                                        <span className="network-title-word inline-block translate-y-[110%]">All</span>
+                                    </span>
+                                    <span className="inline-block overflow-hidden mr-2">
+                                        <span className="network-title-word inline-block translate-y-[110%]">Ready.</span>
+                                    </span>
                                     <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                         <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
                                     </svg>
                                 </span>
-                            </motion.h2>
+                            </h2>
                         </div>
                     </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.4 }}
-                        className="hidden lg:block"
-                    >
+                    <div className="hidden lg:block">
                         <a href="#contact" className="inline-block px-8 py-4 rounded-full bg-white text-black font-bold uppercase tracking-wider text-sm hover:bg-gray-200 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                             Join Network
                         </a>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* Mobile: Swipe Carousel */}
@@ -213,19 +296,18 @@ export default function Network() {
                 </div>
 
                 {/* Desktop: Asymmetrical Grid */}
-                <div className="hidden lg:grid grid-cols-12 gap-8">
+                <div className="network-grid-container hidden lg:grid grid-cols-12 gap-8">
                     {/* Left Featured (Spans 5 cols) */}
                     <div className="col-span-5">
-                        <CreatorCard creator={featuredCreator} featured={true} delay={0.2} />
+                        <CreatorCard creator={featuredCreator} featured={true} />
                     </div>
 
                     {/* Right Nested Grid (Spans 7 cols) */}
                     <div className="col-span-7 grid grid-cols-2 gap-8 h-[650px]">
-                        {gridCreators.map((creator, idx) => (
+                        {gridCreators.map((creator) => (
                             <CreatorCard
                                 key={creator.id}
                                 creator={creator}
-                                delay={0.4 + (idx * 0.1)}
                             />
                         ))}
                     </div>

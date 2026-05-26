@@ -1,5 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Custom Magnetic Button
 const MagneticButton = ({ children, className }) => {
@@ -73,8 +77,91 @@ const FormInput = ({ label, type = "text", placeholder, textarea = false, option
 };
 
 export default function Contact() {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Title word reveal
+            gsap.fromTo(".contact-title-word",
+                { y: "110%" },
+                {
+                    y: "0%",
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".contact-title",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+            // Scribble Draw
+            gsap.fromTo(".contact-scribble path",
+                { strokeDashoffset: 600 },
+                {
+                    strokeDashoffset: 0,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".contact-title",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            // Sub-paragraph reveal
+            gsap.fromTo(".contact-desc",
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".contact-desc",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            // Buttons row reveal
+            gsap.fromTo(".contact-buttons-container",
+                { opacity: 0, scale: 0.95 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".contact-buttons-container",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            // Bottom grid container blocks reveal
+            gsap.fromTo(".contact-bottom-item",
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: ".contact-bottom-grid",
+                        start: "top 85%",
+                    }
+                }
+            );
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section id="contact" className="relative min-h-screen w-full bg-[#030303] pt-32 lg:pt-40 pb-10 overflow-hidden border-t border-white/[0.03]">
+        <section id="contact" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] pt-32 lg:pt-40 pb-10 overflow-hidden border-t border-white/[0.03]">
 
             {/* Massive Bottom Glow */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120vw] h-[60vw] rounded-[100%] bg-primary/10 blur-[150px] mix-blend-screen pointer-events-none z-0" />
@@ -101,43 +188,41 @@ export default function Contact() {
                 {/* --- TOP: CTA HEADLINE --- */}
                 <div className="w-full text-center mb-16 lg:mb-24 flex flex-col items-center">
                     <div className="overflow-hidden mb-8">
-                        <motion.h2
-                            initial={{ y: "100%", opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-6xl md:text-8xl lg:text-[110px] xl:text-[130px] font-black font-montserrat uppercase leading-[0.9] tracking-tighter"
-                        >
-                            <span className="text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">Let's Build</span><br />
-                            <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>What People</span><br />
-                            <span className="text-primary drop-shadow-[0_0_40px_rgba(255,0,0,0.4)] scribble-underline animate">
-                                Remember.
+                        <h2 className="contact-title text-6xl md:text-8xl lg:text-[110px] xl:text-[130px] font-black font-montserrat uppercase leading-[0.9] tracking-tighter">
+                            <span className="inline-block overflow-hidden">
+                                <span className="contact-title-word inline-block translate-y-[110%] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">Let's</span>
+                            </span>
+                            &nbsp;
+                            <span className="inline-block overflow-hidden">
+                                <span className="contact-title-word inline-block translate-y-[110%] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">Build</span>
+                            </span>
+                            <br />
+                            <span className="inline-block overflow-hidden">
+                                <span className="contact-title-word inline-block translate-y-[110%] text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>What</span>
+                            </span>
+                            &nbsp;
+                            <span className="inline-block overflow-hidden">
+                                <span className="contact-title-word inline-block translate-y-[110%] text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>People</span>
+                            </span>
+                            <br />
+                            <span className="text-primary scribble-underline contact-scribble">
+                                <span className="inline-block overflow-hidden">
+                                    <span className="contact-title-word inline-block translate-y-[110%] drop-shadow-[0_0_40px_rgba(255,0,0,0.4)]">Remember.</span>
+                                </span>
                                 <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                     <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
                                 </svg>
                             </span>
-                        </motion.h2>
+                        </h2>
                     </div>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className="text-gray-400 text-lg lg:text-xl font-medium max-w-2xl mx-auto"
-                    >
+                    <p className="contact-desc text-gray-400 text-lg lg:text-xl font-medium max-w-2xl mx-auto opacity-0">
                         Join the world's most innovative brands. Partner with our creator network to engineer your next cultural moment.
-                    </motion.p>
+                    </p>
                 </div>
 
                 {/* --- MIDDLE: MAGNETIC BUTTONS --- */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="flex flex-wrap justify-center gap-4 mb-24 lg:mb-32"
-                >
+                <div className="contact-buttons-container flex flex-wrap justify-center gap-4 mb-24 lg:mb-32 opacity-0">
                     <MagneticButton className="px-8 py-4 rounded-full bg-primary text-white font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(255,0,0,0.2)] hover:shadow-[0_0_40px_rgba(255,0,0,0.5)] transition-shadow duration-300">
                         Start a Campaign
                     </MagneticButton>
@@ -147,19 +232,13 @@ export default function Contact() {
                     <MagneticButton className="px-8 py-4 rounded-full bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-white/[0.05] transition-colors duration-300">
                         Follow Us
                     </MagneticButton>
-                </motion.div>
+                </div>
 
                 {/* --- BOTTOM: FORM & INFO --- */}
-                <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                <div className="contact-bottom-grid w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
                     {/* LEFT: FORM (7 cols) */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="col-span-1 lg:col-span-7 bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] rounded-[32px] p-8 lg:p-12 relative overflow-hidden"
-                    >
+                    <div className="contact-bottom-item opacity-0 col-span-1 lg:col-span-7 bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] rounded-[32px] p-8 lg:p-12 relative overflow-hidden">
                         {/* Inner form glow */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
 
@@ -203,16 +282,10 @@ export default function Contact() {
                                 Submit Inquiry →
                             </button>
                         </form>
-                    </motion.div>
+                    </div>
 
                     {/* RIGHT: CONTACT INFO (5 cols) */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="col-span-1 lg:col-span-5 flex flex-col gap-8"
-                    >
+                    <div className="contact-bottom-item opacity-0 col-span-1 lg:col-span-5 flex flex-col gap-8">
                         {/* Info Block */}
                         <div className="bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] rounded-[32px] p-8 lg:p-10 flex flex-col gap-8">
                             <div>
@@ -242,7 +315,7 @@ export default function Contact() {
                                 ))}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                 </div>
 

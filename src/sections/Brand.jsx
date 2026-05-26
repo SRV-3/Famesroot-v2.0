@@ -1,4 +1,8 @@
-import { motion } from 'motion/react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BRANDS = [
     { name: 'OnePlus', img: 'https://i.pinimg.com/1200x/73/28/43/732843c9b9d7c71ad3e7f0058811ddbf.jpg' },
@@ -11,11 +15,46 @@ const BRANDS = [
 ];
 
 export default function Brand() {
+    const containerRef = useRef(null);
     // Duplicate brands array twice to ensure perfect looping
     const marqueeItems = [...BRANDS, ...BRANDS, ...BRANDS];
 
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(".brand-header",
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".brand-header",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            gsap.fromTo(".brand-track-wrapper",
+                { opacity: 0, scale: 0.95 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.5,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".brand-track-wrapper",
+                        start: "top 95%",
+                    }
+                }
+            );
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section className="relative w-full bg-[#030303] py-24 overflow-hidden border-t border-white/[0.03]">
+        <section ref={containerRef} className="relative w-full bg-[#030303] py-24 overflow-hidden border-t border-white/[0.03]">
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[50vh] bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 blur-[120px] rounded-[100%] opacity-50" />
@@ -23,23 +62,17 @@ export default function Brand() {
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10 mb-16 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="inline-flex items-center gap-4"
-                >
+                <div className="brand-header inline-flex items-center gap-4 opacity-0">
                     <span className="w-12 h-[1px] bg-primary/80" />
                     <h2 className="text-primary font-bold tracking-[0.3em] text-xs md:text-sm uppercase drop-shadow-[0_0_15px_rgba(255,0,0,0.5)]">
                         Brands That Trust Famesroot
                     </h2>
                     <span className="w-12 h-[1px] bg-primary/80" />
-                </motion.div>
+                </div>
             </div>
 
             {/* Infinite Marquee Wrapper */}
-            <div className="relative w-full overflow-hidden flex z-10 group">
+            <div className="brand-track-wrapper relative w-full overflow-hidden flex z-10 group opacity-0">
 
                 {/* Fade Masks for edges */}
                 <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-[#030303] to-transparent z-20 pointer-events-none" />

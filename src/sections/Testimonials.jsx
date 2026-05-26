@@ -1,15 +1,14 @@
-import { useRef } from 'react';
-import { motion } from 'motion/react';
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import { TESTIMONIALS } from '../data/data';
 
-const TestimonialCard = ({ testimonial, index }) => {
+gsap.registerPlugin(ScrollTrigger);
+
+const TestimonialCard = ({ testimonial }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative flex flex-col justify-between p-10 lg:p-12 min-h-[400px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
+        <div
+            className="testimonial-card opacity-0 group relative flex flex-col justify-between p-10 lg:p-12 min-h-[400px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
         >
             {/* Dynamic Hover Glow */}
             <div
@@ -55,13 +54,81 @@ const TestimonialCard = ({ testimonial, index }) => {
                 </div>
 
             </div>
-        </motion.div>
+        </div>
     );
 };
 
 export default function Testimonials() {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Subtitle
+            gsap.fromTo(".testimonials-subtitle",
+                { y: "100%", opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".testimonials-subtitle",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            // Title Reveal
+            gsap.fromTo(".testimonials-title-word",
+                { y: "110%" },
+                {
+                    y: "0%",
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".testimonials-title",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+            // Draw SVG scribble
+            gsap.fromTo(".testimonials-scribble path",
+                { strokeDashoffset: 600 },
+                {
+                    strokeDashoffset: 0,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".testimonials-title",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            // Testimonial Cards Stagger Reveal
+            gsap.fromTo(".testimonial-card",
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: ".testimonial-grid",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section id="testimonials" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
+        <section id="testimonials" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
@@ -82,42 +149,38 @@ export default function Testimonials() {
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <motion.div
-                            initial={{ y: "100%", opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]"
-                        >
+                        <span className="testimonials-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
                             <span className="w-12 h-[1px] bg-primary/80" />
                             Client Love
                             <span className="w-12 h-[1px] bg-primary/80" />
-                        </motion.div>
+                        </span>
                     </div>
 
-                    <div className="overflow-hidden pb-4">
-                        <motion.h2
-                            initial={{ y: "100%", opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                            className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                        >
-                            What Brands <br />
-                            <span className="text-primary scribble-underline animate">
-                                Say.
+                    <div className="testimonials-title overflow-hidden pb-4">
+                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            <span className="inline-block overflow-hidden mr-3">
+                                <span className="testimonials-title-word inline-block translate-y-[110%]">What</span>
+                            </span>
+                            <span className="inline-block overflow-hidden mr-3">
+                                <span className="testimonials-title-word inline-block translate-y-[110%]">Brands</span>
+                            </span>
+                            <br />
+                            <span className="text-primary scribble-underline testimonials-scribble">
+                                <span className="inline-block overflow-hidden">
+                                    <span className="testimonials-title-word inline-block translate-y-[110%]">Say.</span>
+                                </span>
                                 <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                     <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
                                 </svg>
                             </span>
-                        </motion.h2>
+                        </h2>
                     </div>
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-                    {TESTIMONIALS.map((testimonial, index) => (
-                        <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
+                <div className="testimonial-grid grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                    {TESTIMONIALS.map((testimonial) => (
+                        <TestimonialCard key={testimonial.id} testimonial={testimonial} />
                     ))}
                 </div>
 

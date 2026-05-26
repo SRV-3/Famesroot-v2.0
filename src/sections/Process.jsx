@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
@@ -46,7 +45,64 @@ export default function Process() {
         let ctx = gsap.context(() => {
             let mm = gsap.matchMedia();
 
-            // Desktop Horizontal Scroll
+            // Text Reveals (Global for both mobile & desktop)
+            gsap.fromTo(".process-subtitle",
+                { x: -30, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".process-subtitle",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            gsap.fromTo(".process-title-word",
+                { y: "110%" },
+                {
+                    y: "0%",
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".process-title",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+            // Draw SVG scribble
+            gsap.fromTo(".process-scribble path",
+                { strokeDashoffset: 600 },
+                {
+                    strokeDashoffset: 0,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".process-title",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            gsap.fromTo(".process-desc",
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".process-desc",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            // Desktop Horizontal Scroll & staggers
             mm.add("(min-width: 1024px)", () => {
                 const track = trackRef.current;
 
@@ -58,11 +114,47 @@ export default function Process() {
                         trigger: containerRef.current,
                         pin: true,
                         scrub: 1,
-                        // End after scrolling the exact pixel width of the overflow
                         end: () => "+=" + (track.scrollWidth - window.innerWidth),
                         invalidateOnRefresh: true,
                     }
                 });
+
+                // Stagger cards horizontally as track moves
+                gsap.fromTo(".process-step-item",
+                    { opacity: 0, x: 120, filter: "blur(10px)" },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        filter: "blur(0px)",
+                        duration: 1,
+                        stagger: 0.15,
+                        ease: "power4.out",
+                        scrollTrigger: {
+                            trigger: containerRef.current,
+                            start: "top 20%",
+                            scrub: 1
+                        }
+                    }
+                );
+            });
+
+            // Mobile Vertical Stagger
+            mm.add("(max-width: 1023px)", () => {
+                gsap.fromTo(".process-step-item",
+                    { opacity: 0, y: 40, filter: "blur(10px)" },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                        duration: 1,
+                        stagger: 0.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: ".process-steps-container",
+                            start: "top 85%",
+                        }
+                    }
+                );
             });
 
             // Ambient background glow animation
@@ -98,71 +190,53 @@ export default function Process() {
                     {/* Intro / Header Block */}
                     <div className="w-full lg:w-[450px] shrink-0 flex flex-col justify-center h-full">
                         <div className="overflow-hidden mb-6">
-                            <motion.div
-                                initial={{ x: -30, opacity: 0 }}
-                                whileInView={{ x: 0, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                className="inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]"
-                            >
+                            <div className="process-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
                                 <span className="w-12 h-[1px] bg-primary/80" />
                                 How We Scale Culture
-                            </motion.div>
+                            </div>
                         </div>
 
-                        <div className="overflow-hidden pb-4">
-                            <motion.h2
-                                initial={{ y: "100%", opacity: 0 }}
-                                whileInView={{ y: 0, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                                className="text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                            >
-                                From Vision to <br />
-                                <span className="text-primary scribble-underline animate">
-                                    Viral.
+                        <div className="process-title overflow-hidden pb-4">
+                            <h2 className="text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                <span className="inline-block overflow-hidden mr-3">
+                                    <span className="process-title-word inline-block translate-y-[110%]">From</span>
+                                </span>
+                                <span className="inline-block overflow-hidden mr-3">
+                                    <span className="process-title-word inline-block translate-y-[110%]">Vision</span>
+                                </span>
+                                <span className="inline-block overflow-hidden mr-3">
+                                    <span className="process-title-word inline-block translate-y-[110%]">to</span>
+                                </span>
+                                <br />
+                                <span className="text-primary scribble-underline process-scribble">
+                                    <span className="inline-block overflow-hidden">
+                                        <span className="process-title-word inline-block translate-y-[110%]">Viral.</span>
+                                    </span>
                                     <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                         <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
                                     </svg>
                                 </span>
-                            </motion.h2>
+                            </h2>
                         </div>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-                            className="text-gray-300 font-inter leading-[1.9] max-w-[90%] mt-6"
-                        >
+                        <p className="process-desc text-gray-300 font-inter leading-[1.9] max-w-[90%] mt-6 opacity-0">
                             We don't just launch campaigns; we engineer cultural moments. Scroll to explore our proprietary 5-step methodology that turns raw attention into measurable impact.
-                        </motion.p>
+                        </p>
                     </div>
 
                     {/* Timeline Track & Steps */}
-                    <div className="relative flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                    <div className="process-steps-container relative flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
                         {/* Connecting Line */}
                         <div className="absolute left-[24px] lg:left-0 top-0 lg:top-1/2 w-[2px] lg:w-full h-full lg:h-[2px] bg-white/[0.05] -z-10 lg:-translate-y-1/2 rounded-full overflow-hidden">
-                            {/* Glowing progress runner */}
-                            <motion.div
-                                initial={{ height: 0, width: 0 }}
-                                whileInView={{ height: "100%", width: "100%" }}
-                                viewport={{ once: false, margin: "-20%" }}
-                                transition={{ duration: 2, ease: "easeOut" }}
-                                className="absolute top-0 left-0 w-full lg:w-[30%] h-[30%] lg:h-full bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-primary/50 to-primary shadow-[0_0_20px_rgba(255,0,0,0.5)]"
-                            />
+                            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-primary/50 to-primary shadow-[0_0_20px_rgba(255,0,0,0.5)]" />
                         </div>
 
                         {/* Steps */}
                         {STEPS.map((step, idx) => (
-                            <motion.div
+                            <div
                                 key={idx}
-                                initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-                                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: idx * 0.1 }}
-                                className="group relative flex flex-col lg:w-[320px] shrink-0 pl-16 lg:pl-0"
+                                className="process-step-item opacity-0 group relative flex flex-col lg:w-[320px] shrink-0 pl-16 lg:pl-0"
                             >
                                 {/* Node Indicator */}
                                 <div className="absolute left-[-2px] lg:left-0 lg:top-[-40px] w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#030303] border border-white/10 flex items-center justify-center -translate-x-1/2 lg:translate-x-0 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(255,0,0,0.3)] transition-all duration-700 z-10 overflow-hidden">
@@ -186,7 +260,7 @@ export default function Process() {
                                         {step.desc}
                                     </p>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
 

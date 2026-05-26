@@ -1,6 +1,9 @@
 import { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES = [
     {
@@ -23,7 +26,7 @@ const SERVICES = [
     }
 ];
 
-const ServiceCard = ({ service, variants, transition }) => {
+const ServiceCard = ({ service }) => {
     const ref = useRef(null);
 
     const x = useMotionValue(0);
@@ -67,9 +70,7 @@ const ServiceCard = ({ service, variants, transition }) => {
                 transformStyle: "preserve-3d",
             }}
             whileHover={{ scale: 1.03, zIndex: 20 }}
-            variants={variants}
-            transition={transition}
-            className="group relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-8 lg:p-10 cursor-pointer hover:border-primary/30 hover:shadow-[0_30px_80px_-15px_rgba(255,0,0,0.2)] transition-colors duration-700"
+            className="service-card-item opacity-0 group relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-8 lg:p-10 cursor-pointer hover:border-primary/30 hover:shadow-[0_30px_80px_-15px_rgba(255,0,0,0.2)] transition-all duration-700"
         >
             {/* Background Hover Details */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-[inset_0_0_60px_rgba(255,0,0,0.05)] rounded-2xl pointer-events-none" />
@@ -130,6 +131,68 @@ export default function Service() {
                 yoyo: true,
                 repeat: -1,
             });
+
+            // Subtitle
+            gsap.fromTo(".service-subtitle",
+                { y: "100%", opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".service-subtitle",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            // Title Reveal
+            gsap.fromTo(".service-title-word",
+                { y: "110%" },
+                {
+                    y: "0%",
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".service-title",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+            // Draw SVG scribble
+            gsap.fromTo(".service-scribble path",
+                { strokeDashoffset: 600 },
+                {
+                    strokeDashoffset: 0,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".service-title",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            // Cards Stagger
+            gsap.fromTo(".service-card-item",
+                { opacity: 0, y: 50, rotateX: 10 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: ".services-grid",
+                        start: "top 85%",
+                    }
+                }
+            );
+
         }, containerRef);
         return () => ctx.revert();
     }, []);
@@ -149,35 +212,35 @@ export default function Service() {
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <motion.div
-                            initial={{ y: "100%", opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]"
-                        >
+                        <span className="service-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
                             <span className="w-12 h-[1px] bg-primary/80" />
                             What We Do
                             <span className="w-12 h-[1px] bg-primary/80" />
-                        </motion.div>
+                        </span>
                     </div>
 
-                    <div className="overflow-hidden pb-4">
-                        <motion.h2
-                            initial={{ y: "100%", opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                            className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                        >
-                            Services That <br />
-                            <span className="text-primary scribble-underline animate">
-                                Drive Impact.
+                    <div className="service-title overflow-hidden pb-4">
+                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            <span className="inline-block overflow-hidden mr-3">
+                                <span className="service-title-word inline-block translate-y-[110%]">Services</span>
+                            </span>
+                            <span className="inline-block overflow-hidden mr-3">
+                                <span className="service-title-word inline-block translate-y-[110%]">That</span>
+                            </span>
+                            <br />
+                            <span className="text-primary scribble-underline service-scribble">
+                                <span className="inline-block overflow-hidden">
+                                    <span className="service-title-word inline-block translate-y-[110%]">Drive</span>
+                                </span>
+                                &nbsp;
+                                <span className="inline-block overflow-hidden">
+                                    <span className="service-title-word inline-block translate-y-[110%]">Impact.</span>
+                                </span>
                                 <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                     <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
                                 </svg>
                             </span>
-                        </motion.h2>
+                        </h2>
                     </div>
                 </div>
 
@@ -190,31 +253,14 @@ export default function Service() {
                 </div>
 
                 {/* Services Grid */}
-                <motion.div
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-100px" }}
-                    variants={{
-                        hidden: { opacity: 0 },
-                        show: {
-                            opacity: 1,
-                            transition: { staggerChildren: 0.2 }
-                        }
-                    }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 perspective-[1000px]"
-                >
+                <div className="services-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 perspective-[1000px]">
                     {SERVICES.map((service, idx) => (
                         <ServiceCard
                             key={idx}
                             service={service}
-                            variants={{
-                                hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
-                                show: { opacity: 1, y: 0, filter: "blur(0px)" }
-                            }}
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                         />
                     ))}
-                </motion.div>
+                </div>
 
             </div>
         </section>

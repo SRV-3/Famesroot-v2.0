@@ -1,15 +1,14 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import { CASE_STUDIES } from '../data/data';
 
-const CaseCard = ({ campaign, index }) => {
+gsap.registerPlugin(ScrollTrigger);
+
+const CaseCard = ({ campaign }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
+        <div
+            className="case-card opacity-0 group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
         >
             {/* Dynamic Hover Glow based on themeColor */}
             <div
@@ -28,7 +27,7 @@ const CaseCard = ({ campaign, index }) => {
                 <img
                     src={campaign.brandLogo}
                     alt={campaign.brandName}
-                    className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    className="case-card-image w-full h-[120%] object-cover scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
                 />
 
                 {/* Simulated Logo overlay using Text for now (user will replace) */}
@@ -74,13 +73,117 @@ const CaseCard = ({ campaign, index }) => {
                 </div>
 
             </div>
-        </motion.div>
+        </div>
     );
 };
 
 export default function CaseStudy() {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Subtitle
+            gsap.fromTo(".case-subtitle",
+                { y: "100%", opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: ".case-subtitle",
+                        start: "top 90%",
+                    }
+                }
+            );
+
+            // Title
+            gsap.fromTo(".case-title-word",
+                { y: "110%" },
+                {
+                    y: "0%",
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".case-title",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+            // Scribble Draw
+            gsap.fromTo(".case-scribble path",
+                { strokeDashoffset: 600 },
+                {
+                    strokeDashoffset: 0,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".case-title",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            // Staggered Cards Reveal
+            gsap.fromTo(".case-card",
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power4.out",
+                    stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: ".case-grid",
+                        start: "top 85%",
+                    }
+                }
+            );
+
+            // Image Parallax scroll inside card headers
+            gsap.utils.toArray('.case-card-image').forEach((img) => {
+                gsap.fromTo(img,
+                    { yPercent: -10 },
+                    {
+                        yPercent: 10,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: img.closest('.case-card'),
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    }
+                );
+            });
+
+            // Music Marketing section entrance timeline
+            const musicTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".music-marketing-box",
+                    start: "top 85%",
+                }
+            });
+
+            musicTl.fromTo(".music-marketing-box",
+                { opacity: 0, y: 50 },
+                { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }
+            );
+
+            musicTl.fromTo(".music-stat-card",
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 1, ease: "power4.out", stagger: 0.1 },
+                "-=0.8"
+            );
+
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section id="work" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
+        <section id="work" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none z-0">
@@ -112,53 +215,46 @@ export default function CaseStudy() {
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <motion.div
-                            initial={{ y: "100%", opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]"
-                        >
+                        <span className="case-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
                             <span className="w-12 h-[1px] bg-primary/80" />
                             Selected Campaigns
                             <span className="w-12 h-[1px] bg-primary/80" />
-                        </motion.div>
+                        </span>
                     </div>
 
-                    <div className="overflow-hidden pb-4">
-                        <motion.h2
-                            initial={{ y: "100%", opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                            className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                        >
-                            Work That Moved <br />
-                            <span className="text-primary scribble-underline animate">
-                                Audiences.
+                    <div className="case-title overflow-hidden pb-4">
+                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            <span className="inline-block overflow-hidden mr-3">
+                                <span className="case-title-word inline-block translate-y-[110%]">Work</span>
+                            </span>
+                            <span className="inline-block overflow-hidden mr-3">
+                                <span className="case-title-word inline-block translate-y-[110%]">That</span>
+                            </span>
+                            <span className="inline-block overflow-hidden mr-3">
+                                <span className="case-title-word inline-block translate-y-[110%]">Moved</span>
+                            </span>
+                            <br />
+                            <span className="text-primary scribble-underline case-scribble">
+                                <span className="inline-block overflow-hidden">
+                                    <span className="case-title-word inline-block translate-y-[110%]">Audiences.</span>
+                                </span>
                                 <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                     <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
                                 </svg>
                             </span>
-                        </motion.h2>
+                        </h2>
                     </div>
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
-                    {CASE_STUDIES.map((campaign, index) => (
-                        <CaseCard key={campaign.id} campaign={campaign} index={index} />
+                <div className="case-grid grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+                    {CASE_STUDIES.map((campaign) => (
+                        <CaseCard key={campaign.id} campaign={campaign} />
                     ))}
                 </div>
 
                 {/* Music Marketing Dedicated Highlight */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#0a0a0a] to-[#030303] border border-white/[0.05] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
-                >
+                <div className="music-marketing-box opacity-0 w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#0a0a0a] to-[#030303] border border-white/[0.05] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
                     {/* Atmospheric Glowing Background */}
                     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[40px]">
                         <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-cyan-500/10 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
@@ -195,13 +291,9 @@ export default function CaseStudy() {
                             { value: "218.6K", label: "Engagements" },
                             { value: "3+", label: "Songs Launched" }
                         ].map((stat, i) => (
-                            <motion.div 
+                            <div 
                                 key={stat.label}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: 0.2 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
-                                className={`flex flex-col gap-2 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl hover:bg-white/[0.04] transition-colors duration-500 ${i === 2 ? 'sm:col-span-2' : ''}`}
+                                className={`music-stat-card opacity-0 flex flex-col gap-2 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl hover:bg-white/[0.04] transition-colors duration-500 ${i === 2 ? 'sm:col-span-2' : ''}`}
                             >
                                 <span className="text-4xl lg:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                                     {stat.value}
@@ -209,10 +301,10 @@ export default function CaseStudy() {
                                 <span className="text-cyan-400 text-sm font-bold uppercase tracking-widest">
                                     {stat.label}
                                 </span>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
-                </motion.div>
+                </div>
 
             </div>
         </section>

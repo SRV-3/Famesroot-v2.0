@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -44,7 +47,7 @@ export default function Hero() {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // GSAP continuous ambient motion
+    // GSAP animations
     const ctx = gsap.context(() => {
       // Atmospheric fog movement
       gsap.to(".fog-layer", {
@@ -58,6 +61,43 @@ export default function Hero() {
         stagger: 3
       });
 
+      // Reveal headline words
+      gsap.fromTo(".hero-title-word",
+        { y: "110%", rotate: 2 },
+        {
+          y: "0%",
+          rotate: 0,
+          duration: 1.4,
+          ease: "power4.out",
+          stagger: 0.15,
+          delay: 0.2
+        }
+      );
+
+      // Reveal subheadline / badge
+      gsap.fromTo(".hero-badge",
+        { y: "100%", opacity: 0 },
+        { y: "0%", opacity: 1, duration: 1.2, ease: "power4.out", delay: 0.1 }
+      );
+
+      // Reveal CTAs
+      gsap.fromTo(".hero-ctas",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.6 }
+      );
+
+      // Parallax scroll on glowing fog layers
+      gsap.to(".fog-layer", {
+        y: (i) => i ? -80 : 80,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+
       // Stats counting animation
       gsap.utils.toArray('.stat-number').forEach((el, index) => {
         const target = parseFloat(el.getAttribute('data-target'));
@@ -68,7 +108,10 @@ export default function Hero() {
             duration: 2.5 + (index * 0.5),
             ease: "power4.out",
             snap: { innerHTML: 1 },
-            scrollTrigger: el // Only if ScrollTrigger is used, but this is Hero so it's fine to just run
+            scrollTrigger: {
+              trigger: el,
+              start: "top 95%",
+            }
           }
         );
       });
@@ -122,49 +165,30 @@ export default function Hero() {
 
           {/* Subheading */}
           <div className="overflow-hidden mb-10">
-            <motion.div
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: "0%", opacity: 1 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            >
+            <div className="hero-badge">
               <span className="inline-flex items-center gap-3 py-1 px-3 glass rounded-full text-[10px] md:text-xs font-semibold tracking-[0.3em] text-gray-300 uppercase shadow-[0_0_20px_rgba(255,0,0,0.1)] border border-white/5">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(255,0,0,0.8)]" />
                 India's #1 Performance-First Agency
               </span>
-            </motion.div>
+            </div>
           </div>
 
           {/* Cinematic Masked Headline */}
           <div className="mb-12 flex flex-col gap-1">
             <div className="overflow-hidden pb-1">
-              <motion.h1
-                initial={{ y: "110%", rotate: 2 }}
-                animate={{ y: "0%", rotate: 0 }}
-                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-                className="text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-black uppercase leading-[0.85] tracking-[-0.05em] text-white mix-blend-plus-lighter"
-              >
+              <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-black uppercase leading-[0.85] tracking-[-0.05em] text-white mix-blend-plus-lighter translate-y-[110%] hero-title-word">
                 Where Brands
-              </motion.h1>
+              </h1>
             </div>
             <div className="overflow-hidden pt-1">
-              <motion.h1
-                initial={{ y: "110%", rotate: -2 }}
-                animate={{ y: "0%", rotate: 0 }}
-                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
-                className="text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-black uppercase leading-[0.85] tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-red-800 drop-shadow-[0_0_40px_rgba(255,0,0,0.3)]"
-              >
+              <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-black uppercase leading-[0.85] tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-red-800 drop-shadow-[0_0_40px_rgba(255,0,0,0.3)] translate-y-[110%] hero-title-word">
                 Become Culture.
-              </motion.h1>
+              </h1>
             </div>
           </div>
 
           {/* Premium CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-6 items-start mb-8 lg:mb-0"
-          >
+          <div className="hero-ctas flex flex-col sm:flex-row gap-6 items-start mb-8 lg:mb-0">
             <a href="#contact" className="inline-block relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] pointer-events-auto">
               <span className="relative z-10 group-hover:text-white transition-colors duration-500">Start a Campaign</span>
               <div className="absolute inset-0 h-full w-full bg-primary translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] z-0"></div>
@@ -177,7 +201,7 @@ export default function Hero() {
                 </svg>
               </span>
             </a>
-          </motion.div>
+          </div>
 
         </motion.div>
 
