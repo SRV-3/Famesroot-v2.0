@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 import Hero from './sections/Hero'
+import About from './sections/About'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
     <main className="bg-background min-h-screen text-white font-inter">
       <Navbar />
       <Hero />
+      <About />
     </main>
   )
 }
