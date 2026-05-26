@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { TESTIMONIALS } from '../data/data';
+import Typewriter from '../components/Typewriter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,9 +166,11 @@ export default function Testimonials() {
                                 <span className="testimonials-title-word inline-block translate-y-[110%]">Brands</span>
                             </span>
                             <br />
-                            <span className="text-primary scribble-underline testimonials-scribble">
+                            <span className="text-primary scribble-underline testimonials-scribble inline-flex items-center">
                                 <span className="inline-block overflow-hidden">
-                                    <span className="testimonials-title-word inline-block translate-y-[110%]">Say.</span>
+                                    <span className="testimonials-title-word inline-block translate-y-[110%]">
+                                        <Typewriter words={["Say.", "Think.", "Achieve.", "Scale."]} textClassName="text-primary" cursorClassName="bg-primary" />
+                                    </span>
                                 </span>
                                 <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                     <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />

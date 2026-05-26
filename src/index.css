@@ -154,6 +154,18 @@
 .floating-cross:nth-child(2) { animation-delay: -4s; animation-duration: 16s; }
 .floating-cross:nth-child(3) { animation-delay: -8s; animation-duration: 14s; }
 
+/* ── Rotating Tech Circles ── */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 50s linear infinite;
+}
+.animate-spin-reverse-slow {
+  animation: spinSlow 75s linear infinite reverse;
+}
+
 /* ── Section Divider Glow ── */
 .section-divider {
   position: relative;
