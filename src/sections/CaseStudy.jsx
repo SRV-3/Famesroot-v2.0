@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { motion, useMotionValue, useMotionTemplate } from 'motion/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { CASE_STUDIES } from '../data/data';
@@ -79,6 +80,16 @@ const CaseCard = ({ campaign }) => {
 
 export default function CaseStudy() {
     const containerRef = useRef(null);
+    const musicRef = useRef(null);
+    const spotlightX = useMotionValue(0);
+    const spotlightY = useMotionValue(0);
+
+    const handleMouseMove = (e) => {
+        if (!musicRef.current) return;
+        const rect = musicRef.current.getBoundingClientRect();
+        spotlightX.set(e.clientX - rect.left);
+        spotlightY.set(e.clientY - rect.top);
+    };
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -254,11 +265,23 @@ export default function CaseStudy() {
                 </div>
 
                 {/* Music Marketing Dedicated Highlight */}
-                <div className="music-marketing-box opacity-0 w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#0a0a0a] to-[#030303] border border-white/[0.05] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+                <motion.div 
+                    ref={musicRef}
+                    onMouseMove={handleMouseMove}
+                    className="music-marketing-box opacity-0 group w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#111111]/40 to-[#070707]/30 border border-white/[0.06] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-primary/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(255,0,0,0.25)]"
+                >
+                    {/* Spotlight Glow */}
+                    <motion.div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[40px] pointer-events-none z-0"
+                        style={{
+                            background: useMotionTemplate`radial-gradient(450px circle at ${spotlightX}px ${spotlightY}px, rgba(255, 0, 0, 0.08), transparent 80%)`
+                        }}
+                    />
+
                     {/* Atmospheric Glowing Background */}
                     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[40px]">
-                        <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-cyan-500/10 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
-                        <div className="absolute bottom-0 left-0 w-[60vw] lg:w-[30vw] h-[60vw] lg:h-[30vw] bg-blue-600/5 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 mix-blend-screen" />
+                        <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-primary/10 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
+                        <div className="absolute bottom-0 left-0 w-[60vw] lg:w-[30vw] h-[60vw] lg:h-[30vw] bg-primary/5 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 mix-blend-screen" />
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_100%)] opacity-80" />
                         <div className="noise-overlay opacity-[0.05]" />
                     </div>
@@ -266,15 +289,20 @@ export default function CaseStudy() {
                     {/* Content Left */}
                     <div className="relative z-10 w-full lg:w-1/2 flex flex-col gap-6">
                         <div className="inline-flex items-center gap-3">
-                            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)] animate-pulse" />
-                            <span className="text-cyan-400 font-bold tracking-[0.2em] text-xs uppercase drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                            {/* Dynamic jumping audio waves */}
+                            <div className="flex items-end gap-[3px] h-3.5 shrink-0">
+                                <span className="w-[2px] bg-primary rounded-full h-2 animate-pulse" />
+                                <span className="w-[2px] bg-primary rounded-full h-3.5 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                                <span className="w-[2px] bg-primary rounded-full h-2.5 animate-pulse" style={{ animationDelay: '0.4s' }} />
+                            </div>
+                            <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase drop-shadow-[0_0_8px_rgba(255,0,0,0.5)]">
                                 Featured Capability
                             </span>
                         </div>
                         
                         <h3 className="text-4xl lg:text-5xl xl:text-6xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                             Music Marketing —<br />
-                            <span className="text-cyan-400 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                            <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary via-red-500 to-red-800">
                                 A Vertical We've Built from Scratch
                             </span>
                         </h3>
@@ -293,18 +321,18 @@ export default function CaseStudy() {
                         ].map((stat, i) => (
                             <div 
                                 key={stat.label}
-                                className={`music-stat-card opacity-0 flex flex-col gap-2 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl hover:bg-white/[0.04] transition-colors duration-500 ${i === 2 ? 'sm:col-span-2' : ''}`}
+                                className={`music-stat-card opacity-0 relative flex flex-col gap-2 p-6 rounded-2xl bg-[#111111]/20 border border-white/[0.05] hover:border-primary/30 hover:bg-[#070707]/60 transition-colors duration-500 z-10 overflow-hidden ${i === 2 ? 'sm:col-span-2' : ''}`}
                             >
-                                <span className="text-4xl lg:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                                <span className="text-4xl lg:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors duration-500">
                                     {stat.value}
                                 </span>
-                                <span className="text-cyan-400 text-sm font-bold uppercase tracking-widest">
+                                <span className="text-primary text-xs font-bold uppercase tracking-widest">
                                     {stat.label}
                                 </span>
                             </div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
 
             </div>
         </section>

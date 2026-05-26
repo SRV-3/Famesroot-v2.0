@@ -65,7 +65,7 @@ function App() {
       {/* Scroll Progress Bar */}
       {!isLoading && <motion.div className="scroll-progress" style={{ scaleX }} />}
 
-      {!isLoading && <Navbar />}
+      <Navbar isLoading={isLoading} />
       <main>
         <Hero />
         <Brand />

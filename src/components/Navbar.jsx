@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { name: 'Contact', href: '#contact' }
 ];
 
-export default function Navbar() {
+export default function Navbar({ isLoading }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -43,8 +43,8 @@ export default function Navbar() {
     <>
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        animate={isLoading ? { y: -100, opacity: 0 } : { y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b border-transparent ${
           isScrolled ? 'bg-background/80 backdrop-blur-md border-white/5 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' : 'bg-transparent py-6'
         }`}
