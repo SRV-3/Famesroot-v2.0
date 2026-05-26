@@ -18,6 +18,13 @@
     overflow-x: hidden;
   }
 
+  /* Hide standard system cursor on desktop hover-based screen pointers */
+  @media (hover: hover) and (pointer: fine) {
+    *, html, body, a, button, input, select, textarea, [role="button"], .cursor-pointer {
+      cursor: none !important;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-montserrat);
   }

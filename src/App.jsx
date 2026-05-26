@@ -12,6 +12,7 @@ import CaseStudy from './sections/CaseStudy'
 import Testimonials from './sections/Testimonials'
 import Contact from './sections/Contact'
 import Navbar from './components/Navbar'
+import CustomCursor from './components/CustomCursor'
 
 function App() {
   const { scrollYProgress } = useScroll()
@@ -38,6 +39,9 @@ function App() {
 
   return (
     <div className="bg-[#030303] min-h-screen text-white font-inter selection:bg-primary/30 selection:text-white">
+      {/* Custom Mouse Cursor */}
+      <CustomCursor />
+
       {/* Scroll Progress Bar */}
       <motion.div className="scroll-progress" style={{ scaleX }} />
 
