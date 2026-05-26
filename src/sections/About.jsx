@@ -130,32 +130,29 @@ export default function About() {
             {/* Main Profile Card (Male) - Back Left Layer */}
             <motion.div
               variants={{
-                stacked: { x: -10, y: -10, rotate: -4, scale: 0.95 },
-                fanned: { x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? -180 : -120, y: typeof window !== 'undefined' && window.innerWidth >= 1024 ? -120 : -80, rotate: -12, scale: 1 }
+                stacked: { x: -5, y: -5, rotate: -4, scale: 0.95 },
+                fanned: { x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? -180 : -80, y: typeof window !== 'undefined' && window.innerWidth >= 1024 ? -80 : -40, rotate: -8, scale: 1 }
               }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute z-20 w-[220px] md:w-[260px] bg-gradient-to-b from-white/[0.06] to-transparent backdrop-blur-xl p-2 md:p-3 rounded-2xl border border-white/[0.08] shadow-[0_30px_60px_rgba(0,0,0,0.6)]"
+              className="absolute z-20 w-[220px] md:w-[260px] lg:w-[320px] bg-gradient-to-b from-white/[0.06] to-transparent backdrop-blur-xl p-2 md:p-3 lg:p-4 rounded-2xl lg:rounded-[2rem] border border-white/[0.08] shadow-[0_30px_60px_rgba(0,0,0,0.6)]"
             >
               <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4">
-                <img src="/assets/creator_1.png" alt="Creator Profile" className="w-full h-full object-cover grayscale-[30%] contrast-110" />
+                <img src="/assets/creator_1.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[30%] contrast-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-90" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                  <div>
-                    <h4 className="text-white font-bold text-sm tracking-wide">Julian R.</h4>
-                    <p className="text-gray-300 text-[9px] uppercase tracking-widest mt-1">Fashion / Tech</p>
-                  </div>
+
                   <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
                 </div>
               </div>
               <div className="px-2 pb-2 flex items-center justify-between">
                 <div className="flex flex-col">
-                  <span className="text-[8px] text-gray-400 uppercase tracking-widest font-semibold mb-0.5">Engagement</span>
-                  <span className="text-white text-xs font-bold font-montserrat">9.8%</span>
+                  <span className="text-[8px] text-gray-400 uppercase tracking-widest font-semibold mb-0.5">Views</span>
+                  <span className="text-white text-xs font-bold font-montserrat">106M</span>
                 </div>
                 <div className="h-6 w-px bg-white/10" />
                 <div className="flex flex-col items-end">
-                  <span className="text-[8px] text-gray-400 uppercase tracking-widest font-semibold mb-0.5">Reach</span>
-                  <span className="text-white text-xs font-bold font-montserrat">1.2M</span>
+                  <span className="text-[8px] text-gray-400 uppercase tracking-widest font-semibold mb-0.5">Campaign</span>
+                  <span className="text-white text-xs font-bold font-montserrat">View Grab</span>
                 </div>
               </div>
             </motion.div>
@@ -163,25 +160,25 @@ export default function About() {
             {/* Profile Card 2 (Female) - Middle Layer */}
             <motion.div
               variants={{
-                stacked: { x: 5, y: 5, rotate: 2, scale: 0.95 },
-                fanned: { x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 160 : 120, y: -40, rotate: 8, scale: 1 }
+                stacked: { x: 5, y: 5, rotate: 4, scale: 0.95 },
+                fanned: { x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 180 : 80, y: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 40 : 10, rotate: 8, scale: 1 }
               }}
               transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute z-30 w-[180px] md:w-[220px] bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-xl p-2 rounded-2xl border border-white/[0.1] shadow-[0_20px_40px_rgba(0,0,0,0.7)]"
+              className="absolute z-30 w-[180px] md:w-[220px] lg:w-[280px] bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-xl p-2 lg:p-3 rounded-2xl lg:rounded-3xl border border-white/[0.1] shadow-[0_20px_40px_rgba(0,0,0,0.7)]"
             >
               <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden">
-                <img src="/assets/creator_2.png" alt="Creator Profile" className="w-full h-full object-cover grayscale-[10%] contrast-[1.15]" />
+                <img src="/assets/creator_2.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[10%] contrast-[1.15]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-80 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-4 left-4">
-                  <h4 className="text-white font-bold text-sm tracking-wide">Elena M.</h4>
-                  <p className="text-primary text-[9px] font-bold uppercase tracking-widest mt-1">2.4M Followers</p>
+                  <h4 className="text-white font-bold text-sm tracking-wide">1000+</h4>
+                  <p className="text-primary text-[9px] font-bold uppercase tracking-widest mt-1">Verified creators</p>
                 </div>
               </div>
             </motion.div>
 
             {/* Performance Dashboard - Front Bottom Layer */}
-            <motion.div
+            {/* <motion.div
               variants={{
                 stacked: { x: 0, y: 20, rotate: -1, scale: 0.95 },
                 fanned: { x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 80 : 40, y: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 140 : 100, rotate: -6, scale: 1 }
@@ -214,13 +211,13 @@ export default function About() {
                 <span className="text-[8px] text-gray-400 uppercase tracking-[0.2em] font-bold">Q2</span>
                 <span className="text-[8px] text-primary uppercase tracking-[0.2em] font-bold">Now</span>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Floating Metric Badge */}
             <motion.div
               variants={{
-                stacked: { x: -20, y: -10, rotate: 4, scale: 0.95 },
-                fanned: { x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? -140 : -100, y: 60, rotate: 4, scale: 1 }
+                stacked: { x: 0, y: 10, rotate: -2, scale: 0.95 },
+                fanned: { x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? -100 : -40, y: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 180 : 100, rotate: -6, scale: 1 }
               }}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
               className="absolute z-50 bg-[#0a0a0a]/80 backdrop-blur-xl px-4 py-3 rounded-xl border border-white/[0.08] shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex items-center gap-3"
