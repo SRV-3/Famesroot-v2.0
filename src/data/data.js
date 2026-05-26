@@ -107,3 +107,38 @@ export const CASE_STUDIES = [
         themeColor: "rgba(224, 185, 179, 0.4)" // Fenty Rose Gold glow
     }
 ];
+
+export const TESTIMONIALS = [
+    {
+        id: 1,
+        quote: "Famesroot didn't just find us influencers; they engineered a cultural moment. Their creator intelligence network is unmatched in the industry.",
+        brandName: "Nike",
+        designation: "Global Head of Digital Marketing",
+        logoImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80",
+        accentColor: "rgba(255, 60, 0, 0.3)" // Orange/Red
+    },
+    {
+        id: 2,
+        quote: "The level of premium storytelling and cinematic execution they bring to campaign strategy completely elevated our brand perception.",
+        brandName: "Spotify",
+        designation: "VP of Creator Partnerships",
+        logoImage: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&q=80",
+        accentColor: "rgba(30, 215, 96, 0.3)" // Green
+    },
+    {
+        id: 3,
+        quote: "A remarkably art-directed approach to creator marketing. They understand aesthetics and performance better than any agency we've worked with.",
+        brandName: "PlayStation",
+        designation: "Director of Global Campaigns",
+        logoImage: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&q=80",
+        accentColor: "rgba(0, 112, 209, 0.3)" // Blue
+    },
+    {
+        id: 4,
+        quote: "They delivered an Awwwards-level campaign experience that resonated deeply with our Gen-Z audience. Pure creative brilliance.",
+        brandName: "Fenty Beauty",
+        designation: "Chief Marketing Officer",
+        logoImage: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?auto=format&fit=crop&q=80",
+        accentColor: "rgba(224, 185, 179, 0.3)" // Rose Gold
+    }
+];

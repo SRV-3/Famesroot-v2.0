@@ -7,6 +7,7 @@ import Network from './sections/Network'
 import Service from './sections/Service'
 import Process from './sections/Process'
 import CaseStudy from './sections/CaseStudy'
+import Testimonials from './sections/Testimonials'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <Banner />
       <Network />
       <CaseStudy />
+      <Testimonials />
     </main>
   )
 }
