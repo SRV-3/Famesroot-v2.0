@@ -58,4 +58,9 @@
   .text-mask {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   }
+
+  .mask-radial-faded {
+    mask-image: radial-gradient(circle at center, black 30%, transparent 65%);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 65%);
+  }
 }
