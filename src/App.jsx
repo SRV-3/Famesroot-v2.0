@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 import Hero from './sections/Hero'
+import Brand from './sections/Brand'
 import Banner from './sections/Banner'
 import About from './sections/About'
 import Network from './sections/Network'
@@ -32,18 +33,21 @@ function App() {
   }, [])
 
   return (
-    <main className="bg-background min-h-screen text-white font-inter">
+    <div className="bg-[#030303] min-h-screen text-white font-inter selection:bg-primary/30 selection:text-white">
       <Navbar />
-      <Hero />
-      <About />
-      <Service />
-      <Process />
-      <Banner />
-      <Network />
-      <CaseStudy />
-      <Testimonials />
-      <Contact />
-    </main>
+      <main>
+        <Hero />
+        <Brand />
+        <About />
+        <Service />
+        <Process />
+        <Banner />
+        <Network />
+        <CaseStudy />
+        <Testimonials />
+        <Contact />
+      </main>
+    </div>
   )
 }
 
