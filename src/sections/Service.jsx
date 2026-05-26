@@ -40,13 +40,13 @@ const ServiceCard = ({ service, variants, transition }) => {
         const rect = ref.current.getBoundingClientRect();
         const width = rect.width;
         const height = rect.height;
-        
+
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
-        
+
         const xPct = mouseX / width - 0.5;
         const yPct = mouseY / height - 0.5;
-        
+
         x.set(xPct);
         y.set(yPct);
     };
@@ -77,7 +77,7 @@ const ServiceCard = ({ service, variants, transition }) => {
 
             {/* Content Container (Pushed forward in 3D space) */}
             <div style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }} className="relative z-10 flex flex-col justify-between h-full pointer-events-none">
-                
+
                 {/* Top Content */}
                 <div>
                     <div className="flex justify-between items-start mb-12">
@@ -90,7 +90,7 @@ const ServiceCard = ({ service, variants, transition }) => {
                             </svg>
                         </div>
                     </div>
-                    
+
                     <h3 style={{ transform: "translateZ(30px)" }} className="text-2xl lg:text-3xl font-black text-white tracking-wide mb-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500">
                         {service.title}
                     </h3>
@@ -136,7 +136,7 @@ export default function Service() {
 
     return (
         <section id="services" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-32 overflow-hidden border-t border-white/[0.03] perspective-[1200px]">
-            
+
             {/* Background Atmosphere - Z-0 */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                 <div className="service-glow absolute w-[60vw] h-[60vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-30 translate-y-[10%]" />
@@ -145,7 +145,7 @@ export default function Service() {
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
-                
+
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
@@ -191,9 +191,9 @@ export default function Service() {
                     className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 perspective-[1000px]"
                 >
                     {SERVICES.map((service, idx) => (
-                        <ServiceCard 
-                            key={idx} 
-                            service={service} 
+                        <ServiceCard
+                            key={idx}
+                            service={service}
                             variants={{
                                 hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
                                 show: { opacity: 1, y: 0, filter: "blur(0px)" }

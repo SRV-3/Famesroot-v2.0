@@ -12,7 +12,7 @@ const CaseCard = ({ campaign, index }) => {
             className="group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
         >
             {/* Dynamic Hover Glow based on themeColor */}
-            <div 
+            <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 mix-blend-screen pointer-events-none z-0"
                 style={{
                     background: `radial-gradient(circle at 50% 0%, ${campaign.themeColor}, transparent 70%)`
@@ -25,12 +25,12 @@ const CaseCard = ({ campaign, index }) => {
             {/* Top Brand Logo Area */}
             <div className="relative h-48 lg:h-56 w-full overflow-hidden z-10 border-b border-white/[0.05]">
                 <div className="absolute inset-0 bg-[#000] opacity-40 z-10 group-hover:opacity-20 transition-opacity duration-700" />
-                <img 
-                    src={campaign.brandLogo} 
-                    alt={campaign.brandName} 
+                <img
+                    src={campaign.brandLogo}
+                    alt={campaign.brandName}
                     className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
                 />
-                
+
                 {/* Simulated Logo overlay using Text for now (user will replace) */}
                 <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                     <h3 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-widest opacity-80 drop-shadow-2xl">
@@ -41,7 +41,7 @@ const CaseCard = ({ campaign, index }) => {
 
             {/* Content Area */}
             <div className="relative z-10 p-8 lg:p-10 flex flex-col grow">
-                
+
                 {/* Stats & Tags Row */}
                 <div className="flex flex-wrap items-center gap-3 mb-6">
                     <div className="px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 flex items-center gap-2 shadow-[0_0_10px_rgba(255,255,255,0.05)]">
@@ -58,7 +58,7 @@ const CaseCard = ({ campaign, index }) => {
                 <h4 className="text-3xl lg:text-4xl font-black text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-500">
                     {campaign.title}
                 </h4>
-                
+
                 <p className="text-gray-400 leading-[1.8] font-medium mb-10 group-hover:text-gray-300 transition-colors duration-500 grow">
                     {campaign.description}
                 </p>
@@ -81,7 +81,7 @@ const CaseCard = ({ campaign, index }) => {
 export default function CaseStudy() {
     return (
         <section id="work" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
-            
+
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                 <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
@@ -90,11 +90,11 @@ export default function CaseStudy() {
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
-                
+
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <motion.div 
+                        <motion.div
                             initial={{ y: "100%", opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             viewport={{ once: true }}
@@ -106,16 +106,16 @@ export default function CaseStudy() {
                             <span className="w-12 h-[1px] bg-primary/80" />
                         </motion.div>
                     </div>
-                    
+
                     <div className="overflow-hidden pb-4">
-                        <motion.h2 
+                        <motion.h2
                             initial={{ y: "100%", opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                             className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                         >
-                            Work That Moved <br/>
+                            Work That Moved <br />
                             <span className="text-primary">Audiences.</span>
                         </motion.h2>
                     </div>
@@ -128,17 +128,67 @@ export default function CaseStudy() {
                     ))}
                 </div>
 
-                {/* View All Button */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                {/* Music Marketing Dedicated Highlight */}
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.4 }}
-                    className="mt-20 flex justify-center"
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#0a0a0a] to-[#030303] border border-white/[0.05] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
                 >
-                    <button className="px-10 py-5 rounded-full bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-500 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                        View Full Portfolio
-                    </button>
+                    {/* Atmospheric Glowing Background */}
+                    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[40px]">
+                        <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-cyan-500/10 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
+                        <div className="absolute bottom-0 left-0 w-[60vw] lg:w-[30vw] h-[60vw] lg:h-[30vw] bg-blue-600/5 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 mix-blend-screen" />
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_100%)] opacity-80" />
+                        <div className="noise-overlay opacity-[0.05]" />
+                    </div>
+
+                    {/* Content Left */}
+                    <div className="relative z-10 w-full lg:w-1/2 flex flex-col gap-6">
+                        <div className="inline-flex items-center gap-3">
+                            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)] animate-pulse" />
+                            <span className="text-cyan-400 font-bold tracking-[0.2em] text-xs uppercase drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                                Featured Capability
+                            </span>
+                        </div>
+                        
+                        <h3 className="text-4xl lg:text-5xl xl:text-6xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            Music Marketing —<br />
+                            <span className="text-cyan-400 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                                A Vertical We've Built from Scratch
+                            </span>
+                        </h3>
+                        
+                        <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-4">
+                            Creator-led song distribution across Instagram Reels and YouTube Shorts. We’ve run campaigns for <span className="text-white font-bold">‘Tere Ishk Mein’</span>, <span className="text-white font-bold">‘Usey Kehna’</span>, and <span className="text-white font-bold">‘Born Rich’</span> — turning tracks into cultural moments through authentic creator storytelling.
+                        </p>
+                    </div>
+
+                    {/* Stats Right */}
+                    <div className="relative z-10 w-full lg:w-5/12 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+                        {[
+                            { value: "6M+", label: "Song Streams" },
+                            { value: "218.6K", label: "Engagements" },
+                            { value: "3+", label: "Songs Launched" }
+                        ].map((stat, i) => (
+                            <motion.div 
+                                key={stat.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: 0.2 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
+                                className={`flex flex-col gap-2 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl hover:bg-white/[0.04] transition-colors duration-500 ${i === 2 ? 'sm:col-span-2' : ''}`}
+                            >
+                                <span className="text-4xl lg:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                                    {stat.value}
+                                </span>
+                                <span className="text-cyan-400 text-sm font-bold uppercase tracking-widest">
+                                    {stat.label}
+                                </span>
+                            </motion.div>
+                        ))}
+                    </div>
                 </motion.div>
 
             </div>

@@ -12,7 +12,7 @@ const TestimonialCard = ({ testimonial, index }) => {
             className="group relative flex flex-col justify-between p-10 lg:p-12 min-h-[400px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
         >
             {/* Dynamic Hover Glow */}
-            <div 
+            <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 mix-blend-screen pointer-events-none z-0"
                 style={{
                     background: `radial-gradient(circle at top left, ${testimonial.accentColor}, transparent 60%)`
@@ -24,7 +24,7 @@ const TestimonialCard = ({ testimonial, index }) => {
 
             {/* Content Container */}
             <div className="relative z-10 flex flex-col h-full">
-                
+
                 {/* Quote Icon */}
                 <div className="mb-8">
                     <svg className="w-10 h-10 text-primary/80 drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] group-hover:text-primary transition-colors duration-500" viewBox="0 0 24 24" fill="currentColor">
@@ -41,13 +41,13 @@ const TestimonialCard = ({ testimonial, index }) => {
                 <div className="flex items-center gap-6 pt-8 border-t border-white/[0.05]">
                     {/* Brand Logo / Avatar */}
                     <div className="w-16 h-16 rounded-full overflow-hidden border border-white/10 shrink-0 bg-black">
-                        <img 
-                            src={testimonial.logoImage} 
-                            alt={testimonial.brandName} 
+                        <img
+                            src={testimonial.logoImage}
+                            alt={testimonial.brandName}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                         />
                     </div>
-                    
+
                     <div className="flex flex-col">
                         <h4 className="text-xl font-bold text-white mb-1 tracking-wide">{testimonial.brandName}</h4>
                         <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">{testimonial.designation}</span>
@@ -62,7 +62,7 @@ const TestimonialCard = ({ testimonial, index }) => {
 export default function Testimonials() {
     return (
         <section id="testimonials" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
-            
+
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                 <div className="absolute w-[90vw] h-[90vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
@@ -71,11 +71,11 @@ export default function Testimonials() {
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
-                
+
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <motion.div 
+                        <motion.div
                             initial={{ y: "100%", opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             viewport={{ once: true }}
@@ -87,16 +87,16 @@ export default function Testimonials() {
                             <span className="w-12 h-[1px] bg-primary/80" />
                         </motion.div>
                     </div>
-                    
+
                     <div className="overflow-hidden pb-4">
-                        <motion.h2 
+                        <motion.h2
                             initial={{ y: "100%", opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                             className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                         >
-                            What Brands <br/>
+                            What Brands <br />
                             <span className="text-primary">Say.</span>
                         </motion.h2>
                     </div>

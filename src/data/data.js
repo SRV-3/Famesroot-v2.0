@@ -1,144 +1,225 @@
 export const CREATORS = [
     {
         id: 1,
-        name: "Elena Rodriguez",
-        followers: "2.4M",
+        name: "Aryanshi Sharma",
+        followers: "4.9M",
         category: "Fashion & Lifestyle",
         verified: true,
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80"
+        image: "/assets/creators/aryanshi.jpeg"
     },
     {
         id: 2,
-        name: "Marcus Chen",
-        followers: "1.8M",
-        category: "Tech & Innovation",
+        name: "Subhas Lyf",
+        followers: "782K",
+        category: "Lifestyle",
         verified: true,
-        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80"
+        image: "/assets/creators/subhas.jpeg"
     },
     {
         id: 3,
-        name: "Sarah Jenkins",
-        followers: "850K",
-        category: "Fitness & Health",
+        name: "Tushar Silawat",
+        followers: "4.9M",
+        category: "Vlogger & Lifestyle",
         verified: true,
-        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80"
+        image: "/assets/creators/tushar.jpeg"
     },
     {
         id: 4,
-        name: "David Kim",
-        followers: "3.2M",
-        category: "Gaming & Esports",
+        name: "Deepak Joshi",
+        followers: "6.3M",
+        category: "Fashion & Lifestyle",
         verified: true,
-        image: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&q=80"
+        image: "/assets/creators/deepak.jpeg"
     },
     {
         id: 5,
-        name: "Amira Hassan",
-        followers: "1.1M",
-        category: "Beauty & Makeup",
+        name: "Vishu",
+        followers: "1.5M",
+        category: "Lifestyle",
         verified: true,
-        image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80"
+        image: "/assets/creators/vishu.jpeg"
     },
-    {
-        id: 6,
-        name: "James Wilson",
-        followers: "5.5M",
-        category: "Comedy & Entertainment",
-        verified: true,
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80"
-    }
+
 ];
 
 export const CASE_STUDIES = [
     {
         id: 1,
-        brandName: "Nike",
-        brandLogo: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80", 
-        title: "Air Max Day 2026 Global Drop",
-        description: "A coordinated global creator campaign combining 3D AR filters and high-energy streetwear culture to launch the new Air Max.",
-        tags: ["Footwear", "AR Filter", "Global"],
+        brandName: "",
+        brandLogo:
+            "https://i.pinimg.com/1200x/73/28/43/732843c9b9d7c71ad3e7f0058811ddbf.jpg",
+
+        title: "OnePlus — 3M Views, Zero Paid Reach",
+
+        description:
+            "India's largest organic influencer campaign for OnePlus. Multi-creator lifestyle reels that went viral with zero paid distribution. Pure creator power, pure performance.",
+
+        tags: ["Tech", "Lifestyle", "Instagram"],
+
         stats: [
-            { label: "Reach", value: "45M" },
-            { label: "Engagement", value: "8.2%" }
+            { label: "Views", value: "3M+" },
+            { label: "Engagements", value: "80K+" },
         ],
-        metricsHighlight: "Sold out in 14 minutes",
-        themeColor: "rgba(255, 60, 0, 0.4)" // Orange/Red glow
+
+        metricsHighlight: "₹0 Paid Media",
+
+        themeColor: "rgba(255, 45, 45, 0.18)",
     },
+
     {
         id: 2,
-        brandName: "Spotify",
-        brandLogo: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&q=80",
-        title: "Wrapped Creator Edition",
-        description: "Transforming Spotify Wrapped into an interactive social movement by empowering top music creators to share their year in review.",
-        tags: ["Music", "App Install", "Viral"],
+        brandName: "",
+        brandLogo:
+            "https://i.pinimg.com/736x/0d/1f/2d/0d1f2dcca634b9afc9e1bc46f448ac06.jpg",
+
+        title: "Grab — 106M Views, Organic Only",
+
+        description:
+            "POV-style reels showcasing fast urban mobility experiences through creator storytelling. Massive organic traction achieved with zero paid amplification.",
+
+        tags: ["Urban Mobility", "POV Reels", "Lifestyle"],
+
         stats: [
-            { label: "Impressions", value: "112M" },
-            { label: "UGC Created", value: "450K" }
+            { label: "Views", value: "106M+" },
+            { label: "Paid Ads", value: "0" },
         ],
-        metricsHighlight: "#1 App Store Ranking",
-        themeColor: "rgba(30, 215, 96, 0.4)" // Spotify Green glow
+
+        metricsHighlight: "Zero Paid Reach",
+
+        themeColor: "rgba(0, 255, 140, 0.18)",
     },
+
     {
         id: 3,
-        brandName: "PlayStation",
-        brandLogo: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&q=80",
-        title: "PSVR2 Launch Experience",
-        description: "Immersive mixed-reality content series showing the true power of VR gaming through the eyes of elite gaming creators.",
-        tags: ["Gaming", "Hardware", "Twitch"],
+
+        brandName: "",
+
+        brandLogo:
+            "https://i.pinimg.com/1200x/9b/69/11/9b691112d68201cb572b3ef19a4f299f.jpg",
+
+        title: "Filmora — Authentic Product Demo Campaign",
+
+        description:
+            "Creator-led product demo reels designed to increase trust, feature awareness and creator adoption through authentic storytelling and educational short-form content.",
+
+        tags: ["Tech", "Creative Tools", "Product Demo"],
+
         stats: [
-            { label: "Live Viewers", value: "2.1M" },
-            { label: "Hours Watched", value: "4.5M" }
+            { label: "Creators", value: "3+" },
+            { label: "Organic Reach", value: "High" },
         ],
-        metricsHighlight: "Record Pre-orders",
-        themeColor: "rgba(0, 112, 209, 0.4)" // PlayStation Blue glow
+
+        metricsHighlight: "Authentic Demo Reels",
+
+        themeColor: "rgba(0, 140, 255, 0.18)",
     },
+
     {
         id: 4,
-        brandName: "Fenty Beauty",
-        brandLogo: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?auto=format&fit=crop&q=80",
-        title: "Gloss Bomb Universal Challenge",
-        description: "A massive TikTok challenge celebrating inclusive beauty, featuring a diverse roster of beauty and lifestyle creators.",
-        tags: ["Beauty", "TikTok", "Challenge"],
+
+        brandName: "",
+
+        brandLogo:
+            "https://i.pinimg.com/736x/90/6a/22/906a22acabd6d38268105048a751d808.jpg",
+
+        title: "KukuFM — Strategic Brand Presence",
+
+        description:
+            "Multi-creator influencer activation focused on strategic visibility, long-term audience trust and entertainment-first storytelling across platforms.",
+
+        tags: ["Audio App", "D2C", "Brand Awareness"],
+
         stats: [
-            { label: "Views", value: "250M" },
-            { label: "Conversions", value: "+145%" }
+            { label: "Platforms", value: "Multi" },
+            { label: "Brand Lift", value: "Strong" },
         ],
-        metricsHighlight: "Viral TikTok Trend",
-        themeColor: "rgba(224, 185, 179, 0.4)" // Fenty Rose Gold glow
-    }
+
+        metricsHighlight: "Recognised By Marketing Team",
+
+        themeColor: "rgba(255, 120, 0, 0.18)",
+    },
+
+    {
+        id: 5,
+
+        brandName: "",
+
+        brandLogo:
+            "https://i.pinimg.com/1200x/66/44/06/664406ba37c69f89bd310c2ab3b255d5.jpg",
+
+        title: "Mogu Mogu — Lifestyle Creator Campaign",
+
+        description:
+            "Lifestyle-first creator campaign built around authentic audience engagement instead of hard-selling. Strong organic traction through relatable creator content.",
+
+        tags: ["Beverage", "Lifestyle", "Brand Campaign"],
+
+        stats: [
+            { label: "Engagements", value: "32.56K+" },
+            { label: "Views", value: "800K+" },
+        ],
+
+        metricsHighlight: "Zero Paid Ads",
+
+        themeColor: "rgba(0, 200, 255, 0.18)",
+    },
+
+    {
+        id: 6,
+
+        brandName: "",
+
+        brandLogo:
+            "https://i.pinimg.com/736x/1f/96/17/1f961724d1c573fc48633a6b9ad36832.jpg",
+
+        title: "Mamaearth — Creator-Led Growth Strategy",
+
+        description:
+            "Innovative influencer strategy that drove remarkable engagement and audience growth through beauty and lifestyle creators aligned with the brand’s identity.",
+
+        tags: ["Beauty", "D2C", "Lifestyle"],
+
+        stats: [
+            { label: "Growth", value: "High" },
+            { label: "Engagement", value: "Strong" },
+        ],
+
+        metricsHighlight: "Audience Alignment",
+
+        themeColor: "rgba(90, 200, 140, 0.18)",
+    },
 ];
 
 export const TESTIMONIALS = [
     {
         id: 1,
-        quote: "Famesroot didn't just find us influencers; they engineered a cultural moment. Their creator intelligence network is unmatched in the industry.",
-        brandName: "Nike",
-        designation: "Global Head of Digital Marketing",
-        logoImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80",
-        accentColor: "rgba(255, 60, 0, 0.3)" // Orange/Red
+
+        quote:
+            "Famesroot's strategic approach and the influencer campaigns they executed significantly boosted our brand presence. Their team understands what works in today's creator economy.",
+
+        brandName: "KukuFM",
+
+        designation: "Marketing Team",
+
+        logoImage:
+            "https://i.pinimg.com/736x/d2/25/95/d22595fe949bba1ea9e7e6142026af43.jpg",
+
+        accentColor: "rgba(255, 120, 0, 0.18)",
     },
+
     {
         id: 2,
-        quote: "The level of premium storytelling and cinematic execution they bring to campaign strategy completely elevated our brand perception.",
-        brandName: "Spotify",
-        designation: "VP of Creator Partnerships",
-        logoImage: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&q=80",
-        accentColor: "rgba(30, 215, 96, 0.3)" // Green
+
+        quote:
+            "Mamaearth's team was highly impressed with Famesroot's innovative influencer strategies that drove remarkable engagement and brand growth across platforms.",
+
+        brandName: "Mamaearth",
+
+        designation: "Digital Brand Team",
+
+        logoImage:
+            "https://i.pinimg.com/736x/45/6c/0e/456c0eb2ba13c9ae42bf503e67c59eb2.jpg",
+
+        accentColor: "rgba(90, 200, 140, 0.18)",
     },
-    {
-        id: 3,
-        quote: "A remarkably art-directed approach to creator marketing. They understand aesthetics and performance better than any agency we've worked with.",
-        brandName: "PlayStation",
-        designation: "Director of Global Campaigns",
-        logoImage: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&q=80",
-        accentColor: "rgba(0, 112, 209, 0.3)" // Blue
-    },
-    {
-        id: 4,
-        quote: "They delivered an Awwwards-level campaign experience that resonated deeply with our Gen-Z audience. Pure creative brilliance.",
-        brandName: "Fenty Beauty",
-        designation: "Chief Marketing Officer",
-        logoImage: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?auto=format&fit=crop&q=80",
-        accentColor: "rgba(224, 185, 179, 0.3)" // Rose Gold
-    }
 ];

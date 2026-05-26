@@ -2,7 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 
-const NAV_LINKS = ['About', 'Services', 'Creators', 'Work', 'Contact'];
+const NAV_LINKS = [
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Creators', href: '#network' },
+  { name: 'Work', href: '#work' },
+  { name: 'Contact', href: '#contact' }
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,11 +63,11 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-10">
             {NAV_LINKS.map((link) => (
               <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
+                key={link.name}
+                href={link.href}
                 className="relative text-sm font-medium tracking-widest uppercase text-gray-300 hover:text-white transition-colors group"
               >
-                {link}
+                {link.name}
                 <span className="absolute left-0 bottom-[-4px] w-full h-[1px] bg-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
               </a>
             ))}
@@ -70,7 +76,8 @@ export default function Navbar() {
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-4">
             {/* Magnetic CTA (Desktop) */}
-            <motion.button
+            <motion.a
+              href="#contact"
               ref={buttonRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -80,7 +87,7 @@ export default function Navbar() {
             >
               <span className="relative z-10 group-hover:text-white transition-colors duration-500">Start a Campaign</span>
               <div className="absolute inset-0 h-full w-full bg-primary translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] z-0"></div>
-            </motion.button>
+            </motion.a>
 
             {/* Mobile Hamburger */}
             <button
@@ -125,8 +132,8 @@ export default function Navbar() {
             >
               {NAV_LINKS.map((link) => (
                 <motion.a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+                  key={link.name}
+                  href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   variants={{
                     open: { y: 0, opacity: 1, filter: "blur(0px)" },
@@ -135,11 +142,13 @@ export default function Navbar() {
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="text-4xl font-black font-montserrat uppercase tracking-tighter text-white hover:text-primary transition-colors"
                 >
-                  {link}
+                  {link.name}
                 </motion.a>
               ))}
 
-              <motion.button
+              <motion.a
+                href="#contact"
+                onClick={() => setIsMobileMenuOpen(false)}
                 variants={{
                   open: { y: 0, opacity: 1, scale: 1 },
                   closed: { y: 40, opacity: 0, scale: 0.9 }
@@ -148,7 +157,7 @@ export default function Navbar() {
                 className="mt-8 px-10 py-5 bg-primary text-white font-bold uppercase tracking-widest text-sm rounded-sm shadow-[0_0_40px_rgba(255,0,0,0.4)]"
               >
                 Start a Campaign
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         )}

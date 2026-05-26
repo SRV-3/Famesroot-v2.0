@@ -146,18 +146,18 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-6 items-start mb-8 lg:mb-0"
           >
-            <button className="relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] pointer-events-auto">
+            <a href="#contact" className="inline-block relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] pointer-events-auto">
               <span className="relative z-10 group-hover:text-white transition-colors duration-500">Start a Campaign</span>
               <div className="absolute inset-0 h-full w-full bg-primary translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] z-0"></div>
-            </button>
-            <button className="relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 glass text-white font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:bg-white/5 border border-white/10 hover:border-white/30 pointer-events-auto">
+            </a>
+            <a href="#work" className="inline-block relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 glass text-white font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:bg-white/5 border border-white/10 hover:border-white/30 pointer-events-auto">
               <span className="relative z-10 flex items-center gap-4">
                 See Our Work
                 <svg className="w-3 h-3 group-hover:translate-x-1.5 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </span>
-            </button>
+            </a>
           </motion.div>
 
         </motion.div>

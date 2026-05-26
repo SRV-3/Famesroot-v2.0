@@ -6,12 +6,12 @@ function Counter({ from = 0, to, suffix = "", duration = 2 }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
     const count = useMotionValue(from);
-    
+
     // Animate value when element comes into view
     useEffect(() => {
         if (isInView) {
-            animate(count, to, { 
-                duration, 
+            animate(count, to, {
+                duration,
                 ease: [0.16, 1, 0.3, 1] // smooth custom ease out
             });
         }
@@ -51,16 +51,16 @@ export default function Banner() {
     }, []);
 
     return (
-        <section 
-            id="statistics" 
-            ref={containerRef} 
+        <section
+            id="statistics"
+            ref={containerRef}
             className="relative w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-b border-white/[0.05]"
         >
             {/* Cinematic Background Layer */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 {/* CSS Grid Pattern */}
-                <div 
-                    className="absolute inset-0 opacity-[0.15]" 
+                <div
+                    className="absolute inset-0 opacity-[0.15]"
                     style={{
                         backgroundImage: `
                             linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -69,21 +69,21 @@ export default function Banner() {
                         backgroundSize: '60px 60px'
                     }}
                 />
-                
+
                 {/* Radial gradients for depth masking */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_100%)] opacity-90" />
-                
+
                 {/* Animated Red Glow */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/10 blur-[100px] mix-blend-screen banner-glow" />
-                
+
                 {/* Subtle Grain Noise */}
                 <div className="noise-overlay opacity-[0.05]" />
             </div>
 
             {/* Content Container */}
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
-                
-                <motion.div 
+
+                <motion.div
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: "-100px" }}
@@ -97,7 +97,7 @@ export default function Banner() {
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-0"
                 >
                     {STATS.map((stat, idx) => (
-                        <motion.div 
+                        <motion.div
                             key={idx}
                             variants={{
                                 hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
@@ -119,14 +119,14 @@ export default function Banner() {
                             <h3 className="text-5xl lg:text-6xl xl:text-7xl font-black text-white font-montserrat tracking-tighter mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:scale-105 group-hover:text-primary transition-all duration-500">
                                 <Counter to={stat.value} suffix={stat.suffix} />
                             </h3>
-                            
+
                             <p className="text-gray-400 text-sm md:text-base font-medium tracking-wide uppercase group-hover:text-gray-200 transition-colors duration-500">
                                 {stat.label}
                             </p>
                         </motion.div>
                     ))}
                 </motion.div>
-                
+
             </div>
         </section>
     );

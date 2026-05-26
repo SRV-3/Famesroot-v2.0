@@ -47,19 +47,19 @@ const SwipeCard = ({ creator, index, setCards }) => {
         >
             <img src={creator.image} alt={creator.name} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/30 to-transparent pointer-events-none opacity-90" />
-            
-            <div className="absolute bottom-0 left-0 w-full p-8 pointer-events-none">
-                <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-3xl font-black text-white drop-shadow-lg">{creator.name}</h3>
+
+            <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 pointer-events-none">
+                <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-xl font-semibold text-white drop-shadow-lg">{creator.name}</h3>
                     {creator.verified && (
-                        <svg className="w-6 h-6 text-primary drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]" viewBox="0 0 24 24" fill="currentColor">
+                        <svg className="w-5 h-5 text-primary drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z" />
                         </svg>
                     )}
                 </div>
-                <p className="text-gray-300 font-medium mb-4">{creator.category}</p>
-                <div className="inline-block px-4 py-2 rounded-full bg-white/[0.05] backdrop-blur-md border border-white/10">
-                    <span className="text-sm font-bold text-white tracking-wide">{creator.followers} Followers</span>
+                <p className="text-gray-300 text-sm font-medium mb-3">{creator.category}</p>
+                <div className="inline-block px-3 py-1.5 rounded-full bg-white/[0.05] backdrop-blur-md border border-white/10">
+                    <span className="text-xs font-bold text-white tracking-wide">{creator.followers} Followers</span>
                 </div>
             </div>
         </motion.div>
@@ -80,10 +80,10 @@ const CreatorCard = ({ creator, featured = false, delay = 0 }) => (
 
         {/* Image with zoom effect */}
         <div className="absolute inset-0 overflow-hidden">
-            <img 
-                src={creator.image} 
-                alt={creator.name} 
-                className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]" 
+            <img
+                src={creator.image}
+                alt={creator.name}
+                className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
             />
         </div>
 
@@ -92,29 +92,29 @@ const CreatorCard = ({ creator, featured = false, delay = 0 }) => (
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#030303] opacity-60 z-10" />
 
         {/* Content */}
-        <div className="absolute bottom-0 left-0 w-full p-8 z-20 flex flex-col justify-end">
-            <div className="flex items-center gap-2 mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                <h3 className={`${featured ? 'text-4xl' : 'text-2xl'} font-black text-white`}>
+        <div className="absolute bottom-0 left-0 w-full p-6 z-20 flex flex-col justify-end">
+            <div className="flex items-center gap-2 mb-1 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                <h3 className={`${featured ? 'text-2xl' : 'text-xl'} font-semibold text-white`}>
                     {creator.name}
                 </h3>
                 {creator.verified && (
-                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z" />
                     </svg>
                 )}
             </div>
-            <p className="text-primary font-bold mb-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100 ease-[cubic-bezier(0.16,1,0.3,1)]">
+            <p className="text-primary text-sm font-bold mb-3 transition-all duration-500 delay-100 ease-[cubic-bezier(0.16,1,0.3,1)]">
                 {creator.category}
             </p>
-            
-            <div className="flex justify-between items-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                <div className="px-4 py-2 rounded-full bg-white/[0.05] backdrop-blur-md border border-white/10">
-                    <span className="text-sm font-bold text-white tracking-wide">{creator.followers}</span>
+
+            <div className="flex justify-between items-center transition-all duration-500 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                <div className="px-3 py-1.5 rounded-full bg-white/[0.05] backdrop-blur-md border border-white/10">
+                    <span className="text-xs font-bold text-white tracking-wide">{creator.followers}</span>
                 </div>
-                
+
                 {/* Arrow Icon */}
-                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center -rotate-45 group-hover:rotate-0 transition-transform duration-500">
-                    <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center -rotate-45 group-hover:rotate-0 transition-transform duration-500">
+                    <svg className="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                 </div>
@@ -131,7 +131,7 @@ export default function Network() {
 
     return (
         <section id="network" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
-            
+
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                 <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
@@ -140,12 +140,12 @@ export default function Network() {
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
-                
+
                 {/* Section Header */}
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 lg:mb-24 gap-6">
                     <div className="flex flex-col">
                         <div className="overflow-hidden mb-4">
-                            <motion.div 
+                            <motion.div
                                 initial={{ y: "100%", opacity: 0 }}
                                 whileInView={{ y: 0, opacity: 1 }}
                                 viewport={{ once: true }}
@@ -156,21 +156,21 @@ export default function Network() {
                                 Our Creator Network
                             </motion.div>
                         </div>
-                        
+
                         <div className="overflow-hidden pb-4">
-                            <motion.h2 
+                            <motion.h2
                                 initial={{ y: "100%", opacity: 0 }}
                                 whileInView={{ y: 0, opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                             >
-                                1,000+ Creators.<br/>
+                                1,000+ Creators.<br />
                                 <span className="text-primary">All Verified. All Ready.</span>
                             </motion.h2>
                         </div>
                     </div>
-                    
+
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -178,24 +178,24 @@ export default function Network() {
                         transition={{ duration: 1, delay: 0.4 }}
                         className="hidden lg:block"
                     >
-                        <button className="px-8 py-4 rounded-full bg-white text-black font-bold uppercase tracking-wider text-sm hover:bg-gray-200 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        <a href="#contact" className="inline-block px-8 py-4 rounded-full bg-white text-black font-bold uppercase tracking-wider text-sm hover:bg-gray-200 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                             Join Network
-                        </button>
+                        </a>
                     </motion.div>
                 </div>
 
                 {/* Mobile: Swipe Carousel */}
-                <div className="block lg:hidden relative h-[550px] flex items-center justify-center overflow-visible">
-                    <p className="absolute -top-6 text-gray-500 text-xs font-bold uppercase tracking-widest text-center w-full">
+                <div className="block lg:hidden relative h-[80vh] flex items-center justify-center overflow-visible mt-8">
+                    <p className="absolute top-0 text-gray-500 text-xs font-bold uppercase tracking-widest text-center w-full z-20">
                         ← Swipe to explore →
                     </p>
-                    <div className="relative w-full max-w-[360px] h-[450px] flex justify-center">
+                    <div className="relative w-full max-w-[360px] h-[65vh] flex justify-center mt-12">
                         {mobileCards.map((creator, index) => (
-                            <SwipeCard 
-                                key={creator.id} 
-                                creator={creator} 
-                                index={index} 
-                                setCards={setMobileCards} 
+                            <SwipeCard
+                                key={creator.id}
+                                creator={creator}
+                                index={index}
+                                setCards={setMobileCards}
                             />
                         ))}
                     </div>
@@ -211,10 +211,10 @@ export default function Network() {
                     {/* Right Nested Grid (Spans 7 cols) */}
                     <div className="col-span-7 grid grid-cols-2 gap-8 h-[650px]">
                         {gridCreators.map((creator, idx) => (
-                            <CreatorCard 
-                                key={creator.id} 
-                                creator={creator} 
-                                delay={0.4 + (idx * 0.1)} 
+                            <CreatorCard
+                                key={creator.id}
+                                creator={creator}
+                                delay={0.4 + (idx * 0.1)}
                             />
                         ))}
                     </div>
