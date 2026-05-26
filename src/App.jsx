@@ -8,6 +8,7 @@ import Service from './sections/Service'
 import Process from './sections/Process'
 import CaseStudy from './sections/CaseStudy'
 import Testimonials from './sections/Testimonials'
+import Contact from './sections/Contact'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <Network />
       <CaseStudy />
       <Testimonials />
+      <Contact />
     </main>
   )
 }
