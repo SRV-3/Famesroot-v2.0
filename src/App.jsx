@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 import Hero from './sections/Hero'
+import Banner from './sections/Banner'
 import About from './sections/About'
 import Service from './sections/Service'
 import Process from './sections/Process'
@@ -20,7 +21,7 @@ function App() {
     }
 
     requestAnimationFrame(raf)
-    
+
     return () => {
       lenis.destroy()
     }
@@ -33,6 +34,7 @@ function App() {
       <About />
       <Service />
       <Process />
+      <Banner />
     </main>
   )
 }
