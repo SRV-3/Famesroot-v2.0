@@ -6,6 +6,7 @@ import About from './sections/About'
 import Network from './sections/Network'
 import Service from './sections/Service'
 import Process from './sections/Process'
+import CaseStudy from './sections/CaseStudy'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       <Process />
       <Banner />
       <Network />
+      <CaseStudy />
     </main>
   )
 }

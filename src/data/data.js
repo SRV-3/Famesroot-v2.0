@@ -48,3 +48,62 @@ export const CREATORS = [
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80"
     }
 ];
+
+export const CASE_STUDIES = [
+    {
+        id: 1,
+        brandName: "Nike",
+        brandLogo: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80", 
+        title: "Air Max Day 2026 Global Drop",
+        description: "A coordinated global creator campaign combining 3D AR filters and high-energy streetwear culture to launch the new Air Max.",
+        tags: ["Footwear", "AR Filter", "Global"],
+        stats: [
+            { label: "Reach", value: "45M" },
+            { label: "Engagement", value: "8.2%" }
+        ],
+        metricsHighlight: "Sold out in 14 minutes",
+        themeColor: "rgba(255, 60, 0, 0.4)" // Orange/Red glow
+    },
+    {
+        id: 2,
+        brandName: "Spotify",
+        brandLogo: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&q=80",
+        title: "Wrapped Creator Edition",
+        description: "Transforming Spotify Wrapped into an interactive social movement by empowering top music creators to share their year in review.",
+        tags: ["Music", "App Install", "Viral"],
+        stats: [
+            { label: "Impressions", value: "112M" },
+            { label: "UGC Created", value: "450K" }
+        ],
+        metricsHighlight: "#1 App Store Ranking",
+        themeColor: "rgba(30, 215, 96, 0.4)" // Spotify Green glow
+    },
+    {
+        id: 3,
+        brandName: "PlayStation",
+        brandLogo: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&q=80",
+        title: "PSVR2 Launch Experience",
+        description: "Immersive mixed-reality content series showing the true power of VR gaming through the eyes of elite gaming creators.",
+        tags: ["Gaming", "Hardware", "Twitch"],
+        stats: [
+            { label: "Live Viewers", value: "2.1M" },
+            { label: "Hours Watched", value: "4.5M" }
+        ],
+        metricsHighlight: "Record Pre-orders",
+        themeColor: "rgba(0, 112, 209, 0.4)" // PlayStation Blue glow
+    },
+    {
+        id: 4,
+        brandName: "Fenty Beauty",
+        brandLogo: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?auto=format&fit=crop&q=80",
+        title: "Gloss Bomb Universal Challenge",
+        description: "A massive TikTok challenge celebrating inclusive beauty, featuring a diverse roster of beauty and lifestyle creators.",
+        tags: ["Beauty", "TikTok", "Challenge"],
+        stats: [
+            { label: "Views", value: "250M" },
+            { label: "Conversions", value: "+145%" }
+        ],
+        metricsHighlight: "Viral TikTok Trend",
+        themeColor: "rgba(224, 185, 179, 0.4)" // Fenty Rose Gold glow
+    }
+];

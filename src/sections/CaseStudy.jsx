@@ -1,0 +1,147 @@
+import { useRef } from 'react';
+import { motion } from 'motion/react';
+import { CASE_STUDIES } from '../data/data';
+
+const CaseCard = ({ campaign, index }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
+        >
+            {/* Dynamic Hover Glow based on themeColor */}
+            <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 mix-blend-screen pointer-events-none z-0"
+                style={{
+                    background: `radial-gradient(circle at 50% 0%, ${campaign.themeColor}, transparent 70%)`
+                }}
+            />
+
+            {/* Borders Hover Effect */}
+            <div className="absolute inset-0 rounded-[32px] border border-transparent group-hover:border-white/20 transition-colors duration-700 z-20 pointer-events-none" />
+
+            {/* Top Brand Logo Area */}
+            <div className="relative h-48 lg:h-56 w-full overflow-hidden z-10 border-b border-white/[0.05]">
+                <div className="absolute inset-0 bg-[#000] opacity-40 z-10 group-hover:opacity-20 transition-opacity duration-700" />
+                <img 
+                    src={campaign.brandLogo} 
+                    alt={campaign.brandName} 
+                    className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                />
+                
+                {/* Simulated Logo overlay using Text for now (user will replace) */}
+                <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                    <h3 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-widest opacity-80 drop-shadow-2xl">
+                        {campaign.brandName}
+                    </h3>
+                </div>
+            </div>
+
+            {/* Content Area */}
+            <div className="relative z-10 p-8 lg:p-10 flex flex-col grow">
+                
+                {/* Stats & Tags Row */}
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                    <div className="px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 flex items-center gap-2 shadow-[0_0_10px_rgba(255,255,255,0.05)]">
+                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                        <span className="text-xs font-bold text-white uppercase tracking-wider">{campaign.metricsHighlight}</span>
+                    </div>
+                    {campaign.tags.map((tag, tIdx) => (
+                        <span key={tIdx} className="text-xs font-medium text-gray-400 uppercase tracking-widest">
+                            {tag} {tIdx < campaign.tags.length - 1 && '•'}
+                        </span>
+                    ))}
+                </div>
+
+                <h4 className="text-3xl lg:text-4xl font-black text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-500">
+                    {campaign.title}
+                </h4>
+                
+                <p className="text-gray-400 leading-[1.8] font-medium mb-10 group-hover:text-gray-300 transition-colors duration-500 grow">
+                    {campaign.description}
+                </p>
+
+                {/* Bottom Metrics */}
+                <div className="flex items-center gap-8 pt-6 border-t border-white/[0.05]">
+                    {campaign.stats.map((stat, sIdx) => (
+                        <div key={sIdx} className="flex flex-col">
+                            <span className="text-3xl lg:text-4xl font-black text-white mb-1 group-hover:text-primary transition-colors duration-500">{stat.value}</span>
+                            <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">{stat.label}</span>
+                        </div>
+                    ))}
+                </div>
+
+            </div>
+        </motion.div>
+    );
+};
+
+export default function CaseStudy() {
+    return (
+        <section id="work" className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
+            
+            {/* Background Atmosphere */}
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
+                <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
+                <div className="cinematic-vignette opacity-80" />
+                <div className="noise-overlay opacity-[0.1]" />
+            </div>
+
+            <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
+                
+                {/* Section Header */}
+                <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
+                    <div className="overflow-hidden mb-6">
+                        <motion.div 
+                            initial={{ y: "100%", opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]"
+                        >
+                            <span className="w-12 h-[1px] bg-primary/80" />
+                            Selected Campaigns
+                            <span className="w-12 h-[1px] bg-primary/80" />
+                        </motion.div>
+                    </div>
+                    
+                    <div className="overflow-hidden pb-4">
+                        <motion.h2 
+                            initial={{ y: "100%", opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                            className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                        >
+                            Work That Moved <br/>
+                            <span className="text-primary">Audiences.</span>
+                        </motion.h2>
+                    </div>
+                </div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+                    {CASE_STUDIES.map((campaign, index) => (
+                        <CaseCard key={campaign.id} campaign={campaign} index={index} />
+                    ))}
+                </div>
+
+                {/* View All Button */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.4 }}
+                    className="mt-20 flex justify-center"
+                >
+                    <button className="px-10 py-5 rounded-full bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-500 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                        View Full Portfolio
+                    </button>
+                </motion.div>
+
+            </div>
+        </section>
+    );
+}
