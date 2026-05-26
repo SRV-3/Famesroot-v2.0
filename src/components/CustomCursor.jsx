@@ -116,13 +116,13 @@ export default function CustomCursor() {
       {/* Custom Cursor Ring */}
       <div
         ref={ringRef}
-        className="custom-cursor-element fixed top-0 left-0 w-8 h-8 rounded-full border border-white pointer-events-none z-[9999] mix-blend-difference"
+        className="custom-cursor-element fixed top-0 left-0 w-8 h-8 rounded-full border border-white pointer-events-none z-[100000] mix-blend-difference"
         style={{ willChange: 'transform' }}
       />
       {/* Custom Cursor Dot */}
       <div
         ref={dotRef}
-        className="custom-cursor-element fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-white pointer-events-none z-[10000] mix-blend-difference"
+        className="custom-cursor-element fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-white pointer-events-none z-[100001] mix-blend-difference"
         style={{ willChange: 'transform' }}
       />
     </>

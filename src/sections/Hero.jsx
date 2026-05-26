@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Typewriter from '../components/Typewriter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -143,17 +144,17 @@ export default function Hero() {
       {/* 4. Cinematic Vignette & Noise Overlay */}
       <div className="cinematic-vignette" />
       <div className="noise-overlay" />
-      
+
       {/* Floating Decorative Crosses */}
       <div className="absolute top-[15%] right-[10%] floating-cross pointer-events-none z-20">
-          <svg className="w-5 h-5 text-primary/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+        <svg className="w-5 h-5 text-primary/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
       </div>
       <div className="absolute bottom-[25%] left-[8%] floating-cross pointer-events-none z-20">
-          <svg className="w-3 h-3 text-white/8" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+        <svg className="w-3 h-3 text-white/8" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
       </div>
 
       {/* 5. Main Content Composition */}
-      <motion.div 
+      <motion.div
         style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}
         className="container relative z-30 mx-auto px-6 md:px-12 max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between pointer-events-none pt-32 lg:pt-0"
       >
@@ -181,8 +182,13 @@ export default function Hero() {
               </h1>
             </div>
             <div className="overflow-hidden pt-1">
-              <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-black uppercase leading-[0.85] tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-red-800 drop-shadow-[0_0_40px_rgba(255,0,0,0.3)] translate-y-[110%] hero-title-word">
-                Become Culture.
+              <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-black uppercase leading-[0.85] tracking-[-0.05em] text-white mix-blend-plus-lighter translate-y-[110%] hero-title-word flex flex-wrap items-center">
+                Become&nbsp;
+                <Typewriter
+                  words={["Culture.", "Viral.", "Iconic.", "Legendary."]}
+                  textClassName="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-red-800 drop-shadow-[0_0_40px_rgba(255,0,0,0.3)]"
+                  cursorClassName="bg-primary"
+                />
               </h1>
             </div>
           </div>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700;900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -8,6 +9,7 @@
   
   --font-inter: 'Inter', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
+  --font-oswald: 'Oswald', sans-serif;
 }
 
 @layer base {

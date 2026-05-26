@@ -1,7 +1,8 @@
 import { useRef, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from 'motion/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Typewriter from '../components/Typewriter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,11 +27,46 @@ const SERVICES = [
     }
 ];
 
+const getServiceIcon = (num) => {
+    switch (num) {
+        case "01":
+            return (
+                <svg className="w-10 h-10 text-white/30 group-hover:text-primary transition-colors duration-500 mb-6" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="24" cy="12" r="4" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="12" cy="32" r="4" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="36" cy="32" r="4" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M21 15L15 29M27 15L33 29M16 32H32" stroke="currentColor" strokeWidth="1.2" strokeDasharray="3 3" />
+                    <circle cx="24" cy="24" r="8" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
+                </svg>
+            );
+        case "02":
+            return (
+                <svg className="w-10 h-10 text-white/30 group-hover:text-primary transition-colors duration-500 mb-6" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M24 6L36 18L24 30L12 18Z" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M24 18L36 30L24 42L12 30Z" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3" />
+                    <circle cx="24" cy="24" r="2.5" fill="currentColor" className="text-white/30 group-hover:text-primary transition-colors duration-500" />
+                </svg>
+            );
+        case "03":
+            return (
+                <svg className="w-10 h-10 text-white/30 group-hover:text-primary transition-colors duration-500 mb-6" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M8 24H40" stroke="currentColor" strokeWidth="1.2" />
+                    <path d="M14 16V32M20 10V38M26 14V34M32 18V30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    <path d="M8 24C12 24 16 12 20 12C24 12 28 36 32 36C36 36 40 24 44 24" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.3" />
+                </svg>
+            );
+        default:
+            return null;
+    }
+};
+
 const ServiceCard = ({ service }) => {
     const ref = useRef(null);
 
     const x = useMotionValue(0);
     const y = useMotionValue(0);
+    const spotlightX = useMotionValue(0);
+    const spotlightY = useMotionValue(0);
 
     const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
     const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
@@ -52,6 +88,8 @@ const ServiceCard = ({ service }) => {
 
         x.set(xPct);
         y.set(yPct);
+        spotlightX.set(mouseX);
+        spotlightY.set(mouseY);
     };
 
     const handleMouseLeave = () => {
@@ -70,21 +108,36 @@ const ServiceCard = ({ service }) => {
                 transformStyle: "preserve-3d",
             }}
             whileHover={{ scale: 1.03, zIndex: 20 }}
-            className="service-card-item opacity-0 group relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-8 lg:p-10 cursor-pointer hover:border-primary/30 hover:shadow-[0_30px_80px_-15px_rgba(255,0,0,0.2)] transition-all duration-700"
+            className="service-card-item opacity-0 group relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-[#111111]/40 to-[#070707]/30 backdrop-blur-2xl border border-white/[0.06] rounded-3xl p-8 lg:p-10 cursor-pointer hover:border-primary/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(255,0,0,0.25)] transition-all duration-700"
         >
-            {/* Background Hover Details */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-[inset_0_0_60px_rgba(255,0,0,0.05)] rounded-2xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-b-2xl" />
+            {/* Spotlight Glow tracking mouse */}
+            <motion.div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none z-0"
+                style={{
+                    background: useMotionTemplate`radial-gradient(350px circle at ${spotlightX}px ${spotlightY}px, rgba(255, 0, 0, 0.08), transparent 80%)`
+                }}
+            />
+            {/* Corner Ambient Light leak */}
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(255,0,0,0.03),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none" />
+
+            {/* Huge Watermark Outline Number */}
+            <span 
+                style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.05)" }}
+                className="absolute top-6 right-8 text-[7.5rem] font-black font-montserrat tracking-tighter leading-none text-transparent select-none opacity-20 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700 pointer-events-none z-0"
+            >
+                {service.num}
+            </span>
 
             {/* Content Container (Pushed forward in 3D space) */}
             <div style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }} className="relative z-10 flex flex-col justify-between h-full pointer-events-none">
 
                 {/* Top Content */}
                 <div>
-                    <div className="flex justify-between items-start mb-12">
-                        <span style={{ transform: "translateZ(10px)" }} className="text-white/[0.1] group-hover:text-white/[0.2] font-black text-6xl lg:text-7xl leading-none transition-colors duration-700 select-none drop-shadow-sm">
-                            {service.num}
-                        </span>
+                    <div className="flex justify-between items-start mb-8">
+                        {/* Custom Service Icon */}
+                        <div style={{ transform: "translateZ(25px)" }} className="relative z-10 shrink-0">
+                            {getServiceIcon(service.num)}
+                        </div>
                         <div style={{ transform: "translateZ(20px)" }} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center -rotate-45 group-hover:rotate-0 group-hover:border-primary/50 group-hover:bg-primary/20 group-hover:shadow-[0_0_15px_rgba(255,0,0,0.3)] transition-all duration-500 shrink-0">
                             <svg className="w-4 h-4 text-white group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -95,17 +148,17 @@ const ServiceCard = ({ service }) => {
                     <h3 style={{ transform: "translateZ(30px)" }} className="text-2xl lg:text-3xl font-black text-white tracking-wide mb-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500">
                         {service.title}
                     </h3>
-                    <p style={{ transform: "translateZ(20px)" }} className="text-gray-300 text-sm md:text-base leading-[1.8] font-medium group-hover:text-white transition-colors duration-500">
+                    <p style={{ transform: "translateZ(20px)" }} className="text-gray-300/90 text-sm md:text-base leading-[1.8] font-medium group-hover:text-white transition-colors duration-500">
                         {service.desc}
                     </p>
                 </div>
 
                 {/* Bottom Content: Pill Tags */}
-                <div style={{ transform: "translateZ(30px)" }} className="flex flex-wrap gap-2 mt-8">
+                <div style={{ transform: "translateZ(30px)" }} className="flex flex-wrap gap-2 mt-8 z-10">
                     {service.tags.map((tag, tIdx) => (
                         <span
                             key={tIdx}
-                            className="px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-[9px] uppercase tracking-widest text-gray-300 font-bold group-hover:border-primary/40 group-hover:text-white group-hover:bg-primary/10 transition-all duration-500"
+                            className="px-3.5 py-1 text-[9px] uppercase tracking-[0.15em] font-semibold text-gray-400 border border-white/[0.05] rounded-full group-hover:border-primary/30 group-hover:text-white bg-black/20 transition-all duration-500"
                             style={{ transitionDelay: `${tIdx * 50}ms` }}
                         >
                             {tag}
@@ -228,13 +281,14 @@ export default function Service() {
                                 <span className="service-title-word inline-block translate-y-[110%]">That</span>
                             </span>
                             <br />
-                            <span className="text-primary scribble-underline service-scribble">
+                            <span className="text-primary scribble-underline service-scribble inline-flex items-center">
                                 <span className="inline-block overflow-hidden">
-                                    <span className="service-title-word inline-block translate-y-[110%]">Drive</span>
+                                    <span className="service-title-word inline-block translate-y-[110%]">Drive&nbsp;</span>
                                 </span>
-                                &nbsp;
                                 <span className="inline-block overflow-hidden">
-                                    <span className="service-title-word inline-block translate-y-[110%]">Impact.</span>
+                                    <span className="service-title-word inline-block translate-y-[110%]">
+                                        <Typewriter words={["Impact.", "Results.", "Growth.", "ROAS."]} textClassName="text-primary" cursorClassName="bg-primary" />
+                                    </span>
                                 </span>
                                 <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                     <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />

@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Typewriter from '../components/Typewriter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -205,9 +206,11 @@ export default function Contact() {
                                 <span className="contact-title-word inline-block translate-y-[110%] text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>People</span>
                             </span>
                             <br />
-                            <span className="text-primary scribble-underline contact-scribble">
+                            <span className="text-primary scribble-underline contact-scribble inline-flex items-center">
                                 <span className="inline-block overflow-hidden">
-                                    <span className="contact-title-word inline-block translate-y-[110%] drop-shadow-[0_0_40px_rgba(255,0,0,0.4)]">Remember.</span>
+                                    <span className="contact-title-word inline-block translate-y-[110%] drop-shadow-[0_0_40px_rgba(255,0,0,0.4)]">
+                                        <Typewriter words={["Remember.", "Share.", "Love.", "Watch."]} textClassName="text-primary" cursorClassName="bg-primary" />
+                                    </span>
                                 </span>
                                 <svg viewBox="0 0 200 10" preserveAspectRatio="none">
                                     <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
