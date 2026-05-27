@@ -16,12 +16,13 @@ const SwipeCard = ({ creator, index, setCards }) => {
             // Animate completely off screen
             const direction = info.offset.x > 0 ? 1 : -1;
             animate(x, direction * 400, { duration: 0.3 }).then(() => {
+                // Instantly reset position before state updates to prevent flicker
+                x.set(0);
                 setCards(prev => {
                     const next = [...prev];
                     const top = next.shift();
                     next.push(top);
                     return next;
-                    x.set(0); // reset position for when it cycles back
                 });
             });
         } else {
@@ -47,9 +48,14 @@ const SwipeCard = ({ creator, index, setCards }) => {
             drag={isFront ? "x" : false}
             dragConstraints={{ left: 0, right: 0 }}
             onDragEnd={handleDragEnd}
+            onClick={() => {
+                if (isFront && creator.profileUrl) {
+                    window.open(creator.profileUrl, '_blank', 'noopener,noreferrer');
+                }
+            }}
             className="absolute top-0 w-[85vw] max-w-[360px] aspect-[4/5] rounded-[32px] overflow-hidden cursor-grab active:cursor-grabbing border border-white/[0.08] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]"
         >
-            <img src={creator.image} alt={creator.name} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+            <img src={creator.image} alt={creator.name} className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/30 to-transparent pointer-events-none opacity-90" />
 
             <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 pointer-events-none">
@@ -72,8 +78,11 @@ const SwipeCard = ({ creator, index, setCards }) => {
 
 // --- Desktop Grid Component ---
 const CreatorCard = ({ creator, featured = false }) => (
-    <div
-        className={`creator-card opacity-0 group relative rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] hover:border-primary/30 transition-colors duration-700 bg-[#0B132B] ${featured ? 'h-[650px]' : 'h-full min-h-[300px]'}`}
+    <a
+        href={creator.profileUrl || '#'}
+        target={creator.profileUrl ? "_blank" : undefined}
+        rel={creator.profileUrl ? "noopener noreferrer" : undefined}
+        className={`block creator-card opacity-0 group relative rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] hover:border-primary/30 transition-colors duration-700 bg-[#0B132B] ${featured ? 'h-[400px] md:h-[500px] lg:h-[650px]' : 'h-full min-h-[250px] lg:min-h-[300px]'}`}
     >
         {/* Hover Glow */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-[inset_0_0_80px_rgba(212,175,55,0.15)] pointer-events-none z-10" />
@@ -83,7 +92,7 @@ const CreatorCard = ({ creator, featured = false }) => (
             <img
                 src={creator.image}
                 alt={creator.name}
-                className="creator-card-image w-full h-[120%] object-cover scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                className="creator-card-image w-full h-[120%] object-cover object-top scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
             />
         </div>
 
@@ -120,7 +129,7 @@ const CreatorCard = ({ creator, featured = false }) => (
                 </div>
             </div>
         </div>
-    </div>
+    </a>
 );
 
 
@@ -276,8 +285,8 @@ export default function Network() {
                     </div>
                 </div>
 
-                {/* Mobile: Swipe Carousel */}
-                <div className="block lg:hidden relative h-[80vh] flex items-center justify-center overflow-visible mt-8">
+                {/* Mobile: Swipe Carousel (< 768px) */}
+                <div className="block md:hidden relative h-[80vh] flex items-center justify-center overflow-visible mt-8">
                     <p className="absolute top-0 text-gray-500 text-xs font-bold uppercase tracking-widest text-center w-full z-20">
                         ← Swipe to explore →
                     </p>
@@ -293,15 +302,15 @@ export default function Network() {
                     </div>
                 </div>
 
-                {/* Desktop: Asymmetrical Grid */}
-                <div className="network-grid-container hidden lg:grid grid-cols-12 gap-8">
-                    {/* Left Featured (Spans 5 cols) */}
-                    <div className="col-span-5">
+                {/* Tablet & Desktop Grid (>= 768px) */}
+                <div className="network-grid-container hidden md:grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                    {/* Featured Item */}
+                    <div className="col-span-1 lg:col-span-5">
                         <CreatorCard creator={featuredCreator} featured={true} />
                     </div>
 
-                    {/* Right Nested Grid (Spans 7 cols) */}
-                    <div className="col-span-7 grid grid-cols-2 gap-8 h-[650px]">
+                    {/* Secondary Items Grid */}
+                    <div className="col-span-1 lg:col-span-7 grid grid-cols-2 gap-4 lg:gap-8 lg:h-[650px]">
                         {gridCreators.map((creator) => (
                             <CreatorCard
                                 key={creator.id}

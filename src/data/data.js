@@ -2,34 +2,38 @@ export const CREATORS = [
     {
         id: 1,
         name: "Aryanshi Sharma",
-        followers: "4.9M",
+        followers: "4.6M",
         category: "Fashion & Lifestyle",
         verified: true,
-        image: "/assets/creators/aryanshi.jpeg"
+        image: "/assets/creators/aryanshi.jpeg",
+        profileUrl: "https://www.instagram.com/aryanshii09?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
     },
     {
         id: 2,
         name: "Subhas Lyf",
-        followers: "782K",
+        followers: "1.1M",
         category: "Lifestyle",
         verified: true,
-        image: "/assets/creators/subhas.jpeg"
+        image: "/assets/creators/subhas.jpeg",
+        profileUrl: "https://www.instagram.com/subhaslyf/"
     },
     {
         id: 3,
         name: "Tushar Silawat",
-        followers: "4.9M",
+        followers: "4.4M",
         category: "Vlogger & Lifestyle",
         verified: true,
-        image: "/assets/creators/tushar.jpeg"
+        image: "/assets/creators/tushar.jpeg",
+        profileUrl: "https://www.instagram.com/tusharsilawat/"
     },
     {
         id: 4,
         name: "Deepak Joshi",
-        followers: "6.3M",
+        followers: "6.2M",
         category: "Fashion & Lifestyle",
         verified: true,
-        image: "/assets/creators/deepak.jpeg"
+        image: "/assets/creators/deepak.jpeg",
+        profileUrl: "https://www.instagram.com/deepakjoshi.102/"
     },
     {
         id: 5,
@@ -37,7 +41,8 @@ export const CREATORS = [
         followers: "1.5M",
         category: "Lifestyle",
         verified: true,
-        image: "/assets/creators/vishu.jpeg"
+        image: "/assets/creators/vishu.jpeg",
+        profileUrl: "https://www.instagram.com/vishhu_xx/"
     },
 
 ];
@@ -45,7 +50,9 @@ export const CREATORS = [
 export const CASE_STUDIES = [
     {
         id: 1,
+
         brandName: "",
+
         brandLogo:
             "https://i.pinimg.com/1200x/73/28/43/732843c9b9d7c71ad3e7f0058811ddbf.jpg",
 
@@ -64,11 +71,15 @@ export const CASE_STUDIES = [
         metricsHighlight: "₹0 Paid Media",
 
         themeColor: "rgba(255, 45, 45, 0.18)",
+
+        profileUrl: "https://www.instagram.com/oneplus_india/"
     },
 
     {
         id: 2,
+
         brandName: "",
+
         brandLogo:
             "https://i.pinimg.com/736x/0d/1f/2d/0d1f2dcca634b9afc9e1bc46f448ac06.jpg",
 
@@ -87,6 +98,8 @@ export const CASE_STUDIES = [
         metricsHighlight: "Zero Paid Reach",
 
         themeColor: "rgba(0, 255, 140, 0.18)",
+
+        profileUrl: "https://www.instagram.com/grab_sg/"
     },
 
     {
@@ -112,6 +125,8 @@ export const CASE_STUDIES = [
         metricsHighlight: "Authentic Demo Reels",
 
         themeColor: "rgba(0, 140, 255, 0.18)",
+
+        profileUrl: "https://www.instagram.com/filmora_india/"
     },
 
     {
@@ -137,12 +152,14 @@ export const CASE_STUDIES = [
         metricsHighlight: "Recognised By Marketing Team",
 
         themeColor: "rgba(255, 120, 0, 0.18)",
+
+        profileUrl: "https://www.instagram.com/kukufm/"
     },
 
     {
         id: 5,
 
-        brandName: "",
+        brandName: " ",
 
         brandLogo:
             "https://i.pinimg.com/1200x/66/44/06/664406ba37c69f89bd310c2ab3b255d5.jpg",
@@ -162,6 +179,8 @@ export const CASE_STUDIES = [
         metricsHighlight: "Zero Paid Ads",
 
         themeColor: "rgba(0, 200, 255, 0.18)",
+
+        profileUrl: "https://www.instagram.com/mogumoguindia/"
     },
 
     {
@@ -187,6 +206,8 @@ export const CASE_STUDIES = [
         metricsHighlight: "Audience Alignment",
 
         themeColor: "rgba(90, 200, 140, 0.18)",
+
+        profileUrl: "https://www.instagram.com/mamaearth.in/"
     },
 ];
 

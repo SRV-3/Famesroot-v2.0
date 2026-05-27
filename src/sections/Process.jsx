@@ -54,10 +54,10 @@ const ProcessCard = ({ step }) => {
         <div
             ref={ref}
             onMouseMove={handleMouseMove}
-            className="process-step-item opacity-0 group relative flex flex-col lg:w-[320px] shrink-0 pl-16 lg:pl-0"
+            className="process-step-item opacity-0 group relative flex flex-col w-full lg:w-[320px] shrink-0 pl-[80px] lg:pl-0"
         >
             {/* Node Indicator */}
-            <div className="absolute left-[-2px] lg:left-0 lg:top-[-40px] w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#030712] border border-white/10 flex items-center justify-center -translate-x-1/2 lg:translate-x-0 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(255,0,0,0.3)] transition-all duration-700 z-10 overflow-hidden">
+            <div className="absolute left-[25px] lg:left-0 lg:top-[-40px] w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#030712] border border-white/10 flex items-center justify-center -translate-x-1/2 lg:translate-x-0 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-700 z-10 overflow-hidden">
                 <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <svg className="w-5 h-5 lg:w-6 lg:h-6 text-gray-500 group-hover:text-white transition-colors duration-500 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={step.icon} />
@@ -65,7 +65,7 @@ const ProcessCard = ({ step }) => {
             </div>
 
             {/* Content Card */}
-            <div className="relative bg-gradient-to-b from-[#112240]/40 to-[#060B14]/30 backdrop-blur-xl border border-white/[0.06] p-8 lg:p-10 rounded-3xl group-hover:border-primary/30 group-hover:bg-[#060B14]/60 hover:shadow-[0_20px_50px_rgba(255,0,0,0.15)] transition-all duration-700 mt-2 lg:mt-16 overflow-hidden">
+            <div className="relative w-full bg-gradient-to-b from-[#112240]/40 to-[#060B14]/30 backdrop-blur-xl border border-white/[0.06] p-8 lg:p-10 rounded-3xl group-hover:border-primary/30 group-hover:bg-[#060B14]/60 hover:shadow-[0_20px_50px_rgba(212,175,55,0.15)] transition-all duration-700 mt-2 lg:mt-16 overflow-hidden">
                 {/* Spotlight Glow tracking mouse */}
                 <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none z-0"
@@ -243,9 +243,9 @@ export default function Process() {
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                 <div className="process-ambient absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-[#D4AF37]/5 blur-[150px] mix-blend-screen opacity-30" />
-                
 
-                
+
+
                 {/* Floating Rotating Dotted Rings */}
                 <div className="absolute top-[10%] left-[5%] w-[350px] h-[350px] border border-dashed border-white/[0.02] rounded-full animate-spin-slow" />
                 <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] border border-dashed border-primary/[0.015] rounded-full animate-spin-reverse-slow" />
@@ -262,19 +262,19 @@ export default function Process() {
             </div>
 
             {/* Massive Parallax Backdrop Watermark */}
-            <div className="process-watermark absolute bottom-[8%] left-[20vw] text-[13vw] font-black font-montserrat tracking-tighter text-transparent select-none pointer-events-none z-0 whitespace-nowrap uppercase hidden lg:block" style={{ WebkitTextStroke: "1px rgba(212, 175, 55, 0.02)" }}>
+            <div className="process-watermark absolute bottom-[8%] left-[20vw] text-[13vw] font-black font-montserrat tracking-tighter text-transparent select-none pointer-events-none z-0 whitespace-nowrap uppercase hidden lg:block" style={{ WebkitTextStroke: "1px rgba(212, 175, 55, 0.3)" }}>
                 Methodology
             </div>
 
             {/* Desktop: Centered vertically. Mobile: standard padding */}
-            <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-stretch lg:h-full py-32 lg:py-0">
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-stretch lg:h-full py-32 lg:py-0 w-full">
 
-                <div ref={trackRef} className="flex flex-col lg:flex-row items-center lg:h-full lg:w-max px-6 md:px-12 lg:px-[10vw] gap-20 lg:gap-32">
+                <div ref={trackRef} className="flex flex-col lg:flex-row items-start lg:items-center lg:h-full lg:w-max px-6 md:px-12 lg:px-[10vw] gap-16 lg:gap-32 w-full lg:w-auto">
 
                     {/* Intro / Header Block */}
                     <div className="w-full lg:w-[450px] shrink-0 flex flex-col justify-center h-full">
                         <div className="overflow-hidden mb-6">
-                            <div className="process-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
+                            <div className="process-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
                                 <span className="w-12 h-[1px] bg-primary/80" />
                                 How We Scale Culture
                             </div>
@@ -309,7 +309,7 @@ export default function Process() {
                     </div>
 
                     {/* Timeline Track & Steps */}
-                    <div className="process-steps-container relative flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                    <div className="process-steps-container relative flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-24 w-full">
 
                         {/* Connecting Line */}
                         <div className="absolute left-[24px] lg:left-0 top-0 lg:top-1/2 w-[2px] lg:w-full h-full lg:h-[2px] bg-white/[0.05] -z-10 lg:-translate-y-1/2 rounded-full overflow-hidden">

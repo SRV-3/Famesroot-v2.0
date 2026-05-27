@@ -8,8 +8,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const CaseCard = ({ campaign }) => {
     return (
-        <div
-            className="case-card opacity-0 group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0B132B] to-[#030712] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
+        <a
+            href={campaign.profileUrl || '#'}
+            target={campaign.profileUrl ? "_blank" : undefined}
+            rel={campaign.profileUrl ? "noopener noreferrer" : undefined}
+            className="block case-card opacity-0 group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0B132B] to-[#030712] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
         >
             {/* Dynamic Hover Glow based on themeColor */}
             <div
@@ -74,7 +77,7 @@ const CaseCard = ({ campaign }) => {
                 </div>
 
             </div>
-        </div>
+        </a>
     );
 };
 
@@ -205,10 +208,10 @@ export default function CaseStudy() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-90" />
                 {/* Floating Decorative Crosses */}
                 <div className="absolute top-20 right-[15%] floating-cross">
-                    <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                    <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
                 </div>
                 <div className="absolute bottom-40 left-[6%] floating-cross">
-                    <svg className="w-3 h-3 text-white/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                    <svg className="w-3 h-3 text-white/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
                 </div>
             </div>
 
@@ -256,7 +259,7 @@ export default function CaseStudy() {
                 </div>
 
                 {/* Music Marketing Dedicated Highlight */}
-                <motion.div 
+                <motion.div
                     ref={musicRef}
                     onMouseMove={handleMouseMove}
                     className="music-marketing-box opacity-0 group w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#112240]/40 to-[#060B14]/30 border border-white/[0.06] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-primary/30 hover:bg-[#060B14]/60 hover:shadow-[0_25px_60px_-15px_rgba(212,175,55,0.25)]"
@@ -289,14 +292,14 @@ export default function CaseStudy() {
                                 Featured Capability
                             </span>
                         </div>
-                        
+
                         <h3 className="text-4xl lg:text-5xl xl:text-6xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                             Music Marketing —<br />
                             <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary via-red-500 to-red-800">
                                 A Vertical We've Built from Scratch
                             </span>
                         </h3>
-                        
+
                         <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-4">
                             Creator-led song distribution across Instagram Reels and YouTube Shorts. We’ve run campaigns for <span className="text-white font-bold">‘Tere Ishk Mein’</span>, <span className="text-white font-bold">‘Usey Kehna’</span>, and <span className="text-white font-bold">‘Born Rich’</span> — turning tracks into cultural moments through authentic creator storytelling.
                         </p>
@@ -309,7 +312,7 @@ export default function CaseStudy() {
                             { value: "218.6K", label: "Engagements" },
                             { value: "3+", label: "Songs Launched" }
                         ].map((stat, i) => (
-                            <div 
+                            <div
                                 key={stat.label}
                                 className={`music-stat-card opacity-0 relative flex flex-col gap-2 p-6 rounded-2xl bg-[#112240]/20 border border-white/[0.05] hover:border-primary/30 hover:bg-[#060B14]/60 transition-colors duration-500 z-10 overflow-hidden ${i === 2 ? 'sm:col-span-2' : ''}`}
                             >
