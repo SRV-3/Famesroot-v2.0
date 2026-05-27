@@ -243,4 +243,52 @@ export const TESTIMONIALS = [
 
         accentColor: "rgba(90, 200, 140, 0.18)",
     },
+
+    {
+        id: 3,
+
+        quote:
+            "The campaign execution felt extremely creator-first and authentic. Famesroot helped us generate organic traction without relying heavily on paid amplification.",
+
+        brandName: "Grab",
+
+        designation: "Brand Partnerships Team",
+
+        logoImage:
+            "https://i.pinimg.com/736x/0d/1f/2d/0d1f2dcca634b9afc9e1bc46f448ac06.jpg",
+
+        accentColor: "rgba(0, 255, 140, 0.18)",
+    },
+
+    {
+        id: 4,
+
+        quote:
+            "Famesroot delivered creator-led storytelling that felt natural, premium and highly engaging. Their understanding of youth culture and short-form content is exceptional.",
+
+        brandName: "Filmora",
+
+        designation: "India Marketing Team",
+
+        logoImage:
+            "https://i.pinimg.com/1200x/9b/69/11/9b691112d68201cb572b3ef19a4f299f.jpg",
+
+        accentColor: "rgba(0, 140, 255, 0.18)",
+    },
+
+    {
+        id: 5,
+
+        quote:
+            "The influencer strategy built around lifestyle storytelling helped Mogu Mogu connect naturally with Gen-Z audiences and drive strong organic engagement.",
+
+        brandName: "Mogu Mogu",
+
+        designation: "Campaign Team",
+
+        logoImage:
+            "https://i.pinimg.com/1200x/66/44/06/664406ba37c69f89bd310c2ab3b255d5.jpg",
+
+        accentColor: "rgba(0, 200, 255, 0.18)",
+    },
 ];

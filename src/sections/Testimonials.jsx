@@ -1,58 +1,130 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { motion, useMotionValue, useTransform, animate, useMotionTemplate } from 'motion/react';
 import { TESTIMONIALS } from '../data/data';
 import Typewriter from '../components/Typewriter';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TestimonialCard = ({ testimonial }) => {
+// --- Mobile Swipe Card (Framer Motion) ---
+const MobileSwipeCard = ({ testimonial, index, setCards }) => {
+    const x = useMotionValue(0);
+    const rotate = useTransform(x, [-200, 200], [-10, 10]);
+
+    const handleDragEnd = (e, info) => {
+        if (Math.abs(info.offset.x) > 100) {
+            const direction = info.offset.x > 0 ? 1 : -1;
+            animate(x, direction * 400, { duration: 0.3 }).then(() => {
+                x.set(0);
+                setCards(prev => {
+                    const next = [...prev];
+                    const top = next.shift();
+                    next.push(top);
+                    return next;
+                });
+            });
+        } else {
+            animate(x, 0, { type: "spring", stiffness: 300, damping: 20 });
+        }
+    };
+
+    const isFront = index === 0;
+    const yOffset = index * 20;
+    const scale = 1 - index * 0.05;
+    const zIndex = 50 - index;
+    const opacity = index > 2 ? 0 : 1 - index * 0.15;
+
+    return (
+        <motion.div
+            style={{ x, rotate, zIndex }}
+            animate={{ y: yOffset, scale, opacity }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            drag={isFront ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            onDragEnd={handleDragEnd}
+            className="absolute top-0 w-[85vw] max-w-[380px] min-h-[450px] p-8 md:p-10 rounded-[32px] overflow-hidden cursor-grab active:cursor-grabbing bg-white backdrop-blur-2xl border border-gray-200/60 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col justify-between"
+        >
+            {/* Soft internal glow based on accent color */}
+            <div 
+                className="absolute inset-0 opacity-20 pointer-events-none mix-blend-screen"
+                style={{ background: `radial-gradient(150px circle at top left, ${testimonial.accentColor || 'rgba(212,175,55,0.5)'}, transparent 80%)` }}
+            />
+
+            <div className="relative z-10 flex flex-col h-full">
+                <div className="mb-6">
+                    <svg className="w-8 h-8 text-primary/80 drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                    </svg>
+                </div>
+                
+                <p className="text-lg md:text-xl text-gray-800 font-medium italic leading-[1.7] grow mb-8">
+                    "{testimonial.quote}"
+                </p>
+
+                <div className="flex items-center gap-5 pt-6 border-t border-gray-100 relative z-10">
+                    <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-100 shrink-0 bg-white shadow-sm">
+                        <img src={testimonial.logoImage} alt={testimonial.brandName} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex flex-col">
+                        <h4 className="text-base font-bold text-gray-900 tracking-wide">{testimonial.brandName}</h4>
+                        <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{testimonial.designation}</span>
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+    );
+};
+
+// --- Desktop Stack Card (GSAP) ---
+const DesktopCard = ({ testimonial }) => {
+    const cardRef = useRef(null);
+    const spotlightX = useMotionValue(0);
+    const spotlightY = useMotionValue(0);
+
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        spotlightX.set(e.clientX - rect.left);
+        spotlightY.set(e.clientY - rect.top);
+    };
+
     return (
         <div
-            className="testimonial-card opacity-0 group relative flex flex-col justify-between p-10 lg:p-12 min-h-[400px] bg-gradient-to-b from-[#0B132B] to-[#030712] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            className="group desktop-testimonial-card absolute top-0 left-0 w-full h-full flex flex-col justify-between p-12 bg-white backdrop-blur-3xl border border-gray-200/60 rounded-[40px] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)]"
+            style={{ transformOrigin: "bottom center" }}
         >
-            {/* Dynamic Hover Glow */}
-            <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 mix-blend-screen pointer-events-none z-0"
+            <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.03),transparent_60%)] pointer-events-none" />
+            
+            <motion.div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[40px] pointer-events-none z-0 mix-blend-screen"
                 style={{
-                    background: `radial-gradient(circle at top left, ${testimonial.accentColor}, transparent 60%)`
+                    background: useMotionTemplate`radial-gradient(400px circle at ${spotlightX}px ${spotlightY}px, ${testimonial.accentColor || 'rgba(212, 175, 55, 0.15)'}, transparent 70%)`
                 }}
             />
 
-            {/* Borders Hover Effect */}
-            <div className="absolute inset-0 rounded-[32px] border border-transparent group-hover:border-white/20 transition-colors duration-700 z-20 pointer-events-none" />
-
-            {/* Content Container */}
             <div className="relative z-10 flex flex-col h-full">
-
-                <div className="mb-8">
-                    <svg className="w-10 h-10 text-primary/80 drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] group-hover:text-primary transition-colors duration-500" viewBox="0 0 24 24" fill="currentColor">
+                <div className="mb-10">
+                    <svg className="w-12 h-12 text-primary/80 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
                 </div>
 
-                {/* Testimonial Text */}
-                <p className="text-xl lg:text-2xl text-gray-300 font-medium italic leading-[1.8] mb-12 grow group-hover:text-white transition-colors duration-500">
+                <p className="text-2xl lg:text-3xl text-gray-800 font-medium italic leading-[1.6] mb-12 grow">
                     "{testimonial.quote}"
                 </p>
 
-                {/* Bottom Footer Info */}
-                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.05]">
-                    {/* Brand Logo / Avatar */}
-                    <div className="w-16 h-16 rounded-full overflow-hidden border border-white/10 shrink-0 bg-black">
-                        <img
-                            src={testimonial.logoImage}
-                            alt={testimonial.brandName}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                        />
+                <div className="flex items-center gap-6 pt-8 border-t border-gray-100">
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-100 shrink-0 bg-white shadow-sm">
+                        <img src={testimonial.logoImage} alt={testimonial.brandName} className="w-full h-full object-cover" />
                     </div>
-
                     <div className="flex flex-col">
-                        <h4 className="text-xl font-bold text-white mb-1 tracking-wide">{testimonial.brandName}</h4>
-                        <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">{testimonial.designation}</span>
+                        <h4 className="text-xl font-bold text-gray-900 tracking-wide">{testimonial.brandName}</h4>
+                        <span className="text-sm font-bold text-primary uppercase tracking-widest">{testimonial.designation}</span>
                     </div>
                 </div>
-
             </div>
         </div>
     );
@@ -60,130 +132,192 @@ const TestimonialCard = ({ testimonial }) => {
 
 export default function Testimonials() {
     const containerRef = useRef(null);
+    const [mobileCards, setMobileCards] = useState(TESTIMONIALS);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Subtitle
+        let ctx = gsap.context(() => {
+            let mm = gsap.matchMedia();
+
+            // Text Reveals
             gsap.fromTo(".testimonials-subtitle",
                 { y: "100%", opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "power4.out",
-                    scrollTrigger: {
-                        trigger: ".testimonials-subtitle",
-                        start: "top 90%",
-                    }
-                }
+                { y: 0, opacity: 1, duration: 0.8, ease: "power4.out", scrollTrigger: { trigger: containerRef.current, start: "top 80%" } }
             );
 
-            // Title Reveal
             gsap.fromTo(".testimonials-title-word",
                 { y: "110%" },
-                {
-                    y: "0%",
-                    duration: 1.2,
-                    ease: "power4.out",
-                    stagger: 0.1,
-                    scrollTrigger: {
-                        trigger: ".testimonials-title",
-                        start: "top 85%",
-                    }
-                }
+                { y: "0%", duration: 1.2, ease: "power4.out", stagger: 0.1, scrollTrigger: { trigger: containerRef.current, start: "top 75%" } }
             );
 
-            // Draw SVG scribble
-            gsap.fromTo(".testimonials-scribble path",
-                { strokeDashoffset: 600 },
-                {
-                    strokeDashoffset: 0,
-                    duration: 1.5,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: ".testimonials-title",
-                        start: "top 80%",
-                    }
-                }
-            );
+            // Desktop Scroll Stacking Logic
+            mm.add("(min-width: 1024px)", () => {
+                const cards = gsap.utils.toArray('.desktop-testimonial-card');
+                if (cards.length === 0) return;
+                
+                // Each card gets 80vh of scroll distance
+                const totalScroll = cards.length * window.innerHeight * 0.8;
 
-            // Testimonial Cards Stagger Reveal
-            gsap.fromTo(".testimonial-card",
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.2,
-                    ease: "power4.out",
-                    stagger: 0.2,
+                // Pin the entire section so user scrubs through the deck
+                const mainTl = gsap.timeline({
                     scrollTrigger: {
-                        trigger: ".testimonial-grid",
-                        start: "top 85%",
+                        trigger: containerRef.current,
+                        start: "top top",
+                        end: `+=${totalScroll}`,
+                        pin: true,
+                        scrub: 1,
                     }
-                }
-            );
+                });
+
+                // Background rotation
+                mainTl.to(".bg-atmosphere", {
+                    rotation: 180,
+                    ease: "none",
+                    duration: cards.length > 1 ? cards.length - 1 : 1
+                }, 0);
+
+                // 1. Initial State: Stack them nicely
+                cards.forEach((card, i) => {
+                    const yOffset = i * 40;
+                    const scale = 1 - (i * 0.05);
+                    const rotation = i === 0 ? 0 : (i % 2 === 0 ? 3 : -3) * i;
+                    
+                    gsap.set(card, { 
+                        y: yOffset, 
+                        scale: scale, 
+                        rotationZ: rotation, 
+                        opacity: 1 - (i * 0.15), 
+                        zIndex: 100 - i
+                    });
+                });
+
+                // 2. Scroll Animations
+                cards.forEach((card, i) => {
+                    // Skip animating the very last card flying off
+                    if (i === cards.length - 1) return;
+
+                    const stepStartTime = i; // 1 second duration per step on timeline
+
+                    // Active card flies UP and fades out
+                    mainTl.to(card, {
+                        y: -window.innerHeight * 0.8,
+                        opacity: 0,
+                        rotationZ: (i % 2 === 0 ? -15 : 15),
+                        scale: 1.05,
+                        ease: "power2.inOut",
+                        duration: 1
+                    }, stepStartTime);
+
+                    // Remaining cards below shift UP to take its place
+                    cards.slice(i + 1).forEach((nextCard, j) => {
+                        const targetY = j * 40;
+                        const targetScale = 1 - (j * 0.05);
+                        const targetRot = j === 0 ? 0 : (j % 2 === 0 ? 3 : -3) * j;
+                        const targetOp = 1 - (j * 0.15);
+
+                        mainTl.to(nextCard, {
+                            y: targetY,
+                            scale: targetScale,
+                            rotationZ: targetRot,
+                            opacity: targetOp,
+                            ease: "power2.inOut",
+                            duration: 1
+                        }, stepStartTime);
+                    });
+                });
+            });
 
         }, containerRef);
         return () => ctx.revert();
     }, []);
 
     return (
-        <section id="testimonials" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
-
-            {/* Background Atmosphere */}
-            <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="absolute w-[90vw] h-[90vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#D4AF37]/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
-                {/* Floating Decorative Crosses */}
-                <div className="absolute top-32 left-[8%] floating-cross">
-                    <svg className="w-3 h-3 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
-                </div>
-                <div className="absolute bottom-20 right-[12%] floating-cross">
-                    <svg className="w-4 h-4 text-white/8" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
-                </div>
-            </div>
-
-            <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
-
-                {/* Section Header */}
-                <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
-                    <div className="overflow-hidden mb-6">
-                        <span className="testimonials-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
-                            <span className="w-12 h-[1px] bg-primary/80" />
-                            Client Love
-                            <span className="w-12 h-[1px] bg-primary/80" />
-                        </span>
+        <section id="testimonials" ref={containerRef} className="relative w-full bg-[#030712] border-t border-white/[0.03]">
+            {/* Container will be pinned on Desktop, standard scroll on mobile */}
+            <div className="relative min-h-screen flex flex-col justify-center overflow-hidden py-24 lg:py-0">
+                
+                {/* Background Atmosphere */}
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
+                    <div className="bg-atmosphere absolute w-[100vw] h-[100vw] lg:w-[60vw] lg:h-[60vw] rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.06)_0%,transparent_70%)] mix-blend-screen opacity-60 pointer-events-none" />
+                    
+                    {/* Floating Decorative Crosses */}
+                    <div className="absolute top-1/4 left-[10%] floating-cross hidden md:block">
+                        <svg className="w-4 h-4 text-primary/20" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
+                    </div>
+                    <div className="absolute bottom-1/4 right-[12%] floating-cross">
+                        <svg className="w-3 h-3 text-white/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
                     </div>
 
-                    <div className="testimonials-title overflow-hidden pb-4">
-                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                            <span className="inline-block overflow-hidden mr-3">
-                                <span className="testimonials-title-word inline-block translate-y-[110%]">What</span>
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
+                </div>
+
+                <div className="container mx-auto px-6 md:px-12 max-w-[1400px] relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-20 h-full">
+
+                    {/* Left: Section Titles */}
+                    <div className="w-full lg:w-5/12 flex flex-col justify-center items-center lg:items-start text-center lg:text-left pt-10 lg:pt-0">
+                        <div className="overflow-hidden mb-6">
+                            <span className="testimonials-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
+                                <span className="w-12 h-[1px] bg-primary/80 hidden lg:block" />
+                                Client Love
+                                <span className="w-12 h-[1px] bg-primary/80 lg:hidden" />
                             </span>
-                            <span className="inline-block overflow-hidden mr-3">
-                                <span className="testimonials-title-word inline-block translate-y-[110%]">Brands</span>
-                            </span>
-                            <br />
-                            <span className="text-primary scribble-underline testimonials-scribble inline-flex items-center">
-                                <span className="inline-block overflow-hidden">
-                                    <span className="testimonials-title-word inline-block translate-y-[110%]">
-                                        <Typewriter words={["Say.", "Think.", "Achieve.", "Scale."]} textClassName="text-primary" cursorClassName="bg-primary" />
-                                    </span>
+                        </div>
+
+                        <div className="testimonials-title overflow-hidden pb-4">
+                            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                <span className="inline-block overflow-hidden mr-3">
+                                    <span className="testimonials-title-word inline-block translate-y-[110%]">What</span>
                                 </span>
-                                <svg viewBox="0 0 200 10" preserveAspectRatio="none">
-                                    <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
-                                </svg>
-                            </span>
-                        </h2>
+                                <span className="inline-block overflow-hidden mr-3">
+                                    <span className="testimonials-title-word inline-block translate-y-[110%]">Brands</span>
+                                </span>
+                                <br />
+                                <span className="text-primary scribble-underline testimonials-scribble inline-flex items-center">
+                                    <span className="inline-block overflow-hidden">
+                                        <span className="testimonials-title-word inline-block translate-y-[110%]">
+                                            <Typewriter words={["Say.", "Think.", "Achieve.", "Scale."]} textClassName="text-primary" cursorClassName="bg-primary" />
+                                        </span>
+                                    </span>
+                                    <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                                        <path d="M0,5 Q25,0 50,5 T100,5 T150,5 T200,5" />
+                                    </svg>
+                                </span>
+                            </h2>
+                        </div>
+                        
+                        <p className="text-gray-400 font-medium leading-[1.8] mt-6 max-w-md hidden lg:block">
+                            Real partnerships. Real creator impact. Real business growth. Scroll to see what industry leaders are saying about Famesroot.
+                        </p>
+                    </div>
+
+                    {/* Right: Interactive Card Stack */}
+                    <div className="relative w-full lg:w-6/12 xl:w-5/12 h-[500px] lg:h-[600px] flex items-center justify-center lg:justify-end">
+                        
+                        {/* Desktop Scrub Stack (>= 1024px) */}
+                        <div className="hidden lg:block relative w-full h-full">
+                            {TESTIMONIALS.map((testimonial, i) => (
+                                <DesktopCard key={testimonial.id} testimonial={testimonial} />
+                            ))}
+                        </div>
+
+                        {/* Mobile Swipe Stack (< 1024px) */}
+                        <div className="block lg:hidden relative w-full h-[450px] flex justify-center items-center">
+                            <p className="absolute -top-10 text-gray-500 text-[10px] font-bold uppercase tracking-widest text-center w-full z-20">
+                                ← Swipe cards →
+                            </p>
+                            <div className="relative w-full max-w-[380px] h-full flex justify-center mt-8">
+                                {mobileCards.map((testimonial, index) => (
+                                    <MobileSwipeCard 
+                                        key={testimonial.id} 
+                                        testimonial={testimonial} 
+                                        index={index} 
+                                        setCards={setMobileCards} 
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                {/* Grid */}
-                <div className="testimonial-grid grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-                    {TESTIMONIALS.map((testimonial) => (
-                        <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-                    ))}
-                </div>
-
             </div>
         </section>
     );
