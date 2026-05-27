@@ -253,7 +253,7 @@ export default function Service() {
     }, []);
 
     return (
-        <section id="services" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-32 overflow-hidden perspective-[1200px]">
+        <section id="services" ref={containerRef} className="relative min-h-screen w-full bg-transparent pt-24 pb-32 lg:py-40 overflow-hidden perspective-[1200px]">
             {/* Cinematic Fade Transition from previous section */}
             <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#030712] via-[#030712]/50 to-transparent pointer-events-none z-10" />
 
@@ -309,7 +309,7 @@ export default function Service() {
                 </div>
 
                 {/* Services Grid */}
-                <div className="services-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 perspective-[1000px]">
+                <div className="services-grid grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 perspective-[1000px] pb-12 lg:pb-0">
                     {SERVICES.map((service, idx) => (
                         <ServiceCard
                             key={idx}

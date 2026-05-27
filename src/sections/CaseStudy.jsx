@@ -26,7 +26,7 @@ const DesktopCaseCard = ({ campaign }) => {
             rel={campaign.profileUrl ? "noopener noreferrer" : undefined}
             ref={cardRef}
             onMouseMove={handleMouseMove}
-            className="desktop-case-card group absolute top-1/2 left-1/2 w-[380px] h-[520px] -ml-[190px] -mt-[260px] flex flex-col justify-between bg-gradient-to-b from-[#0A192F]/95 to-[#030712]/95 backdrop-blur-3xl border border-white/[0.08] rounded-[28px] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] cursor-pointer"
+            className="desktop-case-card group absolute top-1/2 left-1/2 w-[320px] h-[460px] md:w-[380px] md:h-[520px] -ml-[160px] -mt-[230px] md:-ml-[190px] md:-mt-[260px] flex flex-col justify-between bg-gradient-to-b from-[#0A192F]/95 to-[#030712]/95 backdrop-blur-3xl border border-white/[0.08] rounded-[28px] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] cursor-pointer"
             style={{ transformStyle: "preserve-3d" }}
         >
             {/* Ambient Background Glow based on theme color */}
@@ -44,7 +44,7 @@ const DesktopCaseCard = ({ campaign }) => {
                     background: useMotionTemplate`radial-gradient(400px circle at ${spotlightX}px ${spotlightY}px, rgba(255, 255, 255, 0.05), transparent 70%)`
                 }}
             />
-            
+
             {/* Inner Border Glow */}
             <div className="absolute inset-0 rounded-[28px] border border-transparent group-hover:border-white/20 transition-colors duration-700 z-20 pointer-events-none" />
 
@@ -57,7 +57,7 @@ const DesktopCaseCard = ({ campaign }) => {
                     className="w-full h-[120%] object-cover scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)]"
                 />
                 <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-                    <h3 className="text-4xl font-black text-white uppercase tracking-widest opacity-80 drop-shadow-2xl">
+                    <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-widest opacity-80 drop-shadow-2xl">
                         {campaign.brandName}
                     </h3>
                 </div>
@@ -73,7 +73,7 @@ const DesktopCaseCard = ({ campaign }) => {
                     </div>
                 </div>
 
-                <h4 className="text-3xl font-black text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-500">
+                <h4 className="text-2xl md:text-3xl font-black text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-500">
                     {campaign.title}
                 </h4>
 
@@ -85,7 +85,7 @@ const DesktopCaseCard = ({ campaign }) => {
                 <div className="flex items-center gap-6 pt-5 border-t border-white/[0.05]">
                     {campaign.stats.map((stat, sIdx) => (
                         <div key={sIdx} className="flex flex-col">
-                            <span className="text-2xl font-black text-white group-hover:text-primary transition-colors duration-500">{stat.value}</span>
+                            <span className="text-xl md:text-2xl font-black text-white group-hover:text-primary transition-colors duration-500">{stat.value}</span>
                             <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{stat.label}</span>
                         </div>
                     ))}
@@ -168,14 +168,14 @@ export default function CaseStudy() {
                 // Build the timeline steps
                 for (let step = 0; step < numSteps; step++) {
                     const nextActive = step + 1;
-                    
+
                     cards.forEach((card, i) => {
                         const diff = i - nextActive;
                         const targetState = getCardState(diff);
-                        
+
                         mainTl.to(card, {
                             ...targetState,
-                            ease: "power2.inOut",
+                            ease: "none",
                             duration: 1
                         }, step);
                     });
@@ -261,13 +261,13 @@ export default function CaseStudy() {
                 </div>
 
                 {/* 3D Cinematic Carousel Container */}
-                <div 
-                    ref={carouselRef} 
+                <div
+                    ref={carouselRef}
                     className="relative w-full h-[600px] lg:h-screen lg:max-h-[800px] flex items-center justify-center overflow-hidden lg:overflow-visible"
                     style={{ perspective: "1500px" }}
                 >
                     {/* Carousel Stack (GSAP applied on all screens) */}
-                    <div className="relative w-full h-full max-w-[380px] lg:max-w-7xl mx-auto" style={{ transformStyle: "preserve-3d" }}>
+                    <div className="relative w-full h-full max-w-[320px] md:max-w-[380px] lg:max-w-7xl mx-auto" style={{ transformStyle: "preserve-3d" }}>
                         {CASE_STUDIES.map((campaign) => (
                             <DesktopCaseCard key={campaign.id} campaign={campaign} />
                         ))}
