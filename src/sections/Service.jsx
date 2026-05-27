@@ -98,75 +98,77 @@ const ServiceCard = ({ service }) => {
     };
 
     return (
-        <motion.div
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-            }}
-            whileHover={{ scale: 1.03, zIndex: 20 }}
-            className="service-card-item opacity-0 group relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-[#111111]/40 to-[#070707]/30 backdrop-blur-2xl border border-white/[0.06] rounded-3xl p-8 lg:p-10 cursor-pointer hover:border-[#D4AF37]/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(212,175,55,0.25)] transition-all duration-700"
-        >
-            {/* Spotlight Glow tracking mouse */}
+        <div className="service-card-item opacity-0 group perspective-[1000px]">
             <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none z-0"
+                ref={ref}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
                 style={{
-                    background: useMotionTemplate`radial-gradient(350px circle at ${spotlightX}px ${spotlightY}px, rgba(212, 175, 55, 0.08), transparent 80%)`
+                    rotateX,
+                    rotateY,
+                    transformStyle: "preserve-3d",
                 }}
-            />
-            {/* Corner Ambient Light leak */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(212,175,55,0.03),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none" />
-
-            {/* Huge Watermark Outline Number */}
-            <span 
-                style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.05)" }}
-                className="absolute top-6 right-8 text-[7.5rem] font-black font-montserrat tracking-tighter leading-none text-transparent select-none opacity-20 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700 pointer-events-none z-0"
+                whileHover={{ scale: 1.02, zIndex: 20 }}
+                className="relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-[#112240]/40 to-[#060B14]/30 backdrop-blur-3xl border border-white/[0.06] rounded-3xl p-8 lg:p-10 cursor-pointer hover:border-[#D4AF37]/30 hover:bg-[#060B14]/60 hover:shadow-[0_40px_100px_-20px_rgba(212,175,55,0.25)] transition-all duration-500"
             >
-                {service.num}
-            </span>
+                {/* Spotlight Glow tracking mouse (Cinematic Bloom) */}
+                <motion.div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none z-0 mix-blend-screen"
+                    style={{
+                        background: useMotionTemplate`radial-gradient(400px circle at ${spotlightX}px ${spotlightY}px, rgba(212, 175, 55, 0.15), transparent 70%)`
+                    }}
+                />
+                {/* Corner Ambient Light leak */}
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(212,175,55,0.06),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none mix-blend-screen" />
 
-            {/* Content Container (Pushed forward in 3D space) */}
-            <div style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }} className="relative z-10 flex flex-col justify-between h-full pointer-events-none">
+                {/* Huge Watermark Outline Number */}
+                <span 
+                    style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.05)" }}
+                    className="absolute top-6 right-8 text-[7.5rem] font-black font-montserrat tracking-tighter leading-none text-transparent select-none opacity-20 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700 pointer-events-none z-0"
+                >
+                    {service.num}
+                </span>
 
-                {/* Top Content */}
-                <div>
-                    <div className="flex justify-between items-start mb-8">
-                        {/* Custom Service Icon */}
-                        <div style={{ transform: "translateZ(25px)" }} className="relative z-10 shrink-0">
-                            {getServiceIcon(service.num)}
+                {/* Content Container (Pushed forward in 3D space) */}
+                <div style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }} className="relative z-10 flex flex-col justify-between h-full pointer-events-none">
+
+                    {/* Top Content */}
+                    <div>
+                        <div className="flex justify-between items-start mb-8">
+                            {/* Custom Service Icon */}
+                            <div style={{ transform: "translateZ(25px)" }} className="relative z-10 shrink-0">
+                                {getServiceIcon(service.num)}
+                            </div>
+                            <div style={{ transform: "translateZ(20px)" }} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center -rotate-45 group-hover:rotate-0 group-hover:border-primary/50 group-hover:bg-primary/20 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-500 shrink-0">
+                                <svg className="w-4 h-4 text-white group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </div>
                         </div>
-                        <div style={{ transform: "translateZ(20px)" }} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center -rotate-45 group-hover:rotate-0 group-hover:border-primary/50 group-hover:bg-primary/20 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-500 shrink-0">
-                            <svg className="w-4 h-4 text-white group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </div>
+
+                        <h3 style={{ transform: "translateZ(30px)" }} className="text-2xl lg:text-3xl font-black text-white tracking-wide mb-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500">
+                            {service.title}
+                        </h3>
+                        <p style={{ transform: "translateZ(20px)" }} className="text-gray-300/90 text-sm md:text-base leading-[1.8] font-medium group-hover:text-white transition-colors duration-500">
+                            {service.desc}
+                        </p>
                     </div>
 
-                    <h3 style={{ transform: "translateZ(30px)" }} className="text-2xl lg:text-3xl font-black text-white tracking-wide mb-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500">
-                        {service.title}
-                    </h3>
-                    <p style={{ transform: "translateZ(20px)" }} className="text-gray-300/90 text-sm md:text-base leading-[1.8] font-medium group-hover:text-white transition-colors duration-500">
-                        {service.desc}
-                    </p>
+                    {/* Bottom Content: Pill Tags */}
+                    <div style={{ transform: "translateZ(30px)" }} className="flex flex-wrap gap-2 mt-8 z-10">
+                        {service.tags.map((tag, tIdx) => (
+                            <span
+                                key={tIdx}
+                                className="px-3.5 py-1 text-[9px] uppercase tracking-[0.15em] font-semibold text-gray-400 border border-white/[0.05] rounded-full group-hover:border-primary/30 group-hover:text-white bg-black/20 transition-all duration-500"
+                                style={{ transitionDelay: `${tIdx * 50}ms` }}
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
                 </div>
-
-                {/* Bottom Content: Pill Tags */}
-                <div style={{ transform: "translateZ(30px)" }} className="flex flex-wrap gap-2 mt-8 z-10">
-                    {service.tags.map((tag, tIdx) => (
-                        <span
-                            key={tIdx}
-                            className="px-3.5 py-1 text-[9px] uppercase tracking-[0.15em] font-semibold text-gray-400 border border-white/[0.05] rounded-full group-hover:border-primary/30 group-hover:text-white bg-black/20 transition-all duration-500"
-                            style={{ transitionDelay: `${tIdx * 50}ms` }}
-                        >
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-            </div>
-        </motion.div>
+            </motion.div>
+        </div>
     );
 };
 
@@ -251,11 +253,13 @@ export default function Service() {
     }, []);
 
     return (
-        <section id="services" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-32 overflow-hidden border-t border-white/[0.03] perspective-[1200px]">
+        <section id="services" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-32 overflow-hidden perspective-[1200px]">
+            {/* Cinematic Fade Transition from previous section */}
+            <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#030712] via-[#030712]/50 to-transparent pointer-events-none z-10" />
 
             {/* Background Atmosphere - Z-0 */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="service-glow absolute w-[60vw] h-[60vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#600000]/5 blur-[120px] mix-blend-screen opacity-30 translate-y-[10%]" />
+                <div className="service-glow absolute w-[60vw] h-[60vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#0A192F]/5 blur-[120px] mix-blend-screen opacity-30 translate-y-[10%]" />
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">

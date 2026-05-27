@@ -93,7 +93,7 @@ export default function Banner() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-90" />
 
                 {/* Animated Red Glow */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#600000]/20 blur-[100px] mix-blend-screen banner-glow" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#0A192F]/20 blur-[100px] mix-blend-screen banner-glow" />
             </div>
 
             {/* Content Container */}

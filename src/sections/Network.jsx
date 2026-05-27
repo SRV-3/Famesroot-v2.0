@@ -50,7 +50,7 @@ const SwipeCard = ({ creator, index, setCards }) => {
             className="absolute top-0 w-[85vw] max-w-[360px] aspect-[4/5] rounded-[32px] overflow-hidden cursor-grab active:cursor-grabbing border border-white/[0.08] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]"
         >
             <img src={creator.image} alt={creator.name} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/30 to-transparent pointer-events-none opacity-90" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/30 to-transparent pointer-events-none opacity-90" />
 
             <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 pointer-events-none">
                 <div className="flex items-center gap-2 mb-1">
@@ -73,7 +73,7 @@ const SwipeCard = ({ creator, index, setCards }) => {
 // --- Desktop Grid Component ---
 const CreatorCard = ({ creator, featured = false }) => (
     <div
-        className={`creator-card opacity-0 group relative rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] hover:border-primary/30 transition-colors duration-700 bg-[#0a0a0a] ${featured ? 'h-[650px]' : 'h-full min-h-[300px]'}`}
+        className={`creator-card opacity-0 group relative rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] hover:border-primary/30 transition-colors duration-700 bg-[#0B132B] ${featured ? 'h-[650px]' : 'h-full min-h-[300px]'}`}
     >
         {/* Hover Glow */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-[inset_0_0_80px_rgba(212,175,55,0.15)] pointer-events-none z-10" />
@@ -88,8 +88,8 @@ const CreatorCard = ({ creator, featured = false }) => (
         </div>
 
         {/* Cinematic Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/40 to-transparent opacity-90 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#030303] opacity-60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/40 to-transparent opacity-90 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#030712] opacity-60 z-10" />
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 w-full p-6 z-20 flex flex-col justify-end">
@@ -218,7 +218,7 @@ export default function Network() {
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-[#600000]/10 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
+                <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-[#0A192F]/10 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
                 <div className="absolute top-16 left-[12%] floating-cross">
                     <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
                 </div>

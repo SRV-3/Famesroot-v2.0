@@ -14,6 +14,8 @@ import Contact from './sections/Contact'
 import Navbar from './components/Navbar'
 import CustomCursor from './components/CustomCursor'
 import Loader from './components/Loader'
+import Starfield from './components/Starfield'
+import DustParticles from './components/DustParticles'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -55,10 +57,12 @@ function App() {
   }, [isLoading])
 
   return (
-    <div className="bg-[#030303] min-h-screen text-white font-inter selection:bg-primary/30 selection:text-white">
-      {/* Global Atmospheric Layers */}
+    <div className="bg-[#030712] min-h-screen text-white font-inter selection:bg-primary/30 selection:text-white relative">
+      {/* Cinematic Global Atmosphere */}
+      <Starfield />
+      <DustParticles />
       <div className="mesh-gradient-bg" />
-      <div className="grid-overlay" />
+      <div className="grid-overlay opacity-10" />
       <div className="cinematic-vignette" />
       <div className="noise-overlay" />
 

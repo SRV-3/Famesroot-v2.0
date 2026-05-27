@@ -162,7 +162,7 @@ export default function About() {
       {/* 1. Ultra-Subtle Background Atmosphere */}
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
         <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-[#D4AF37]/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
-        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-[#600000]/10 blur-[150px] mix-blend-screen opacity-50" />
+        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-[#0A192F]/10 blur-[150px] mix-blend-screen opacity-50" />
         {/* Floating Decorative Crosses */}
         <div className="absolute top-24 right-[18%] floating-cross">
           <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
@@ -237,7 +237,7 @@ export default function About() {
             <div className="about-card-1 absolute z-20 w-[220px] md:w-[260px] lg:w-[320px] bg-gradient-to-b from-white/[0.06] to-transparent backdrop-blur-xl p-2 md:p-3 lg:p-4 rounded-2xl lg:rounded-[2rem] border border-white/[0.08] shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
               <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4 img-parallax-hover group">
                 <img src="/assets/creator_1.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[30%] contrast-110 img-parallax-hover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-90" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                   <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
                 </div>
@@ -260,7 +260,7 @@ export default function About() {
               <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden img-parallax-hover group">
                 <img src="/assets/creator_2.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[10%] contrast-[1.15] img-parallax-hover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-80 mix-blend-multiply" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-4 left-4">
                   <h4 className="text-white font-bold text-sm tracking-wide">1000+</h4>
                   <p className="text-primary text-[9px] font-bold uppercase tracking-widest mt-1">Verified creators</p>
@@ -269,7 +269,7 @@ export default function About() {
             </div>
 
             {/* Floating Metric Badge */}
-            <div className="about-badge absolute z-50 bg-[#0a0a0a]/80 backdrop-blur-xl px-4 py-3 rounded-xl border border-white/[0.08] shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex items-center gap-3">
+            <div className="about-badge absolute z-50 bg-[#0B132B]/80 backdrop-blur-xl px-4 py-3 rounded-xl border border-white/[0.08] shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex items-center gap-3">
               <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20">
                 <ShieldCheck className="w-3.5 h-3.5 text-primary" />
               </div>

@@ -74,8 +74,8 @@ export default function Brand() {
             <div className="brand-track-wrapper relative w-full overflow-hidden flex z-10 group opacity-0">
 
                 {/* Fade Masks for edges */}
-                <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-[#030303] to-transparent z-20 pointer-events-none" />
-                <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-l from-[#030303] to-transparent z-20 pointer-events-none" />
+                <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-[#030712] to-transparent z-20 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-l from-[#030712] to-transparent z-20 pointer-events-none" />
 
                 {/* Scrolling Track */}
                 <div className="animate-marquee gap-8 md:gap-12 px-4 md:px-6">

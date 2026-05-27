@@ -57,7 +57,7 @@ const ProcessCard = ({ step }) => {
             className="process-step-item opacity-0 group relative flex flex-col lg:w-[320px] shrink-0 pl-16 lg:pl-0"
         >
             {/* Node Indicator */}
-            <div className="absolute left-[-2px] lg:left-0 lg:top-[-40px] w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#030303] border border-white/10 flex items-center justify-center -translate-x-1/2 lg:translate-x-0 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(255,0,0,0.3)] transition-all duration-700 z-10 overflow-hidden">
+            <div className="absolute left-[-2px] lg:left-0 lg:top-[-40px] w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#030712] border border-white/10 flex items-center justify-center -translate-x-1/2 lg:translate-x-0 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(255,0,0,0.3)] transition-all duration-700 z-10 overflow-hidden">
                 <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <svg className="w-5 h-5 lg:w-6 lg:h-6 text-gray-500 group-hover:text-white transition-colors duration-500 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={step.icon} />
@@ -65,7 +65,7 @@ const ProcessCard = ({ step }) => {
             </div>
 
             {/* Content Card */}
-            <div className="relative bg-gradient-to-b from-[#111111]/40 to-[#070707]/30 backdrop-blur-xl border border-white/[0.06] p-8 lg:p-10 rounded-3xl group-hover:border-primary/30 group-hover:bg-[#070707]/60 hover:shadow-[0_20px_50px_rgba(255,0,0,0.15)] transition-all duration-700 mt-2 lg:mt-16 overflow-hidden">
+            <div className="relative bg-gradient-to-b from-[#112240]/40 to-[#060B14]/30 backdrop-blur-xl border border-white/[0.06] p-8 lg:p-10 rounded-3xl group-hover:border-primary/30 group-hover:bg-[#060B14]/60 hover:shadow-[0_20px_50px_rgba(255,0,0,0.15)] transition-all duration-700 mt-2 lg:mt-16 overflow-hidden">
                 {/* Spotlight Glow tracking mouse */}
                 <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none z-0"

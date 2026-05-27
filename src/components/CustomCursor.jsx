@@ -138,7 +138,7 @@ export default function CustomCursor() {
         ref={glowRef}
         className="custom-cursor-element fixed top-0 left-0 w-[40vw] h-[40vw] rounded-full pointer-events-none z-[0] mix-blend-screen opacity-50"
         style={{ 
-          background: 'radial-gradient(circle, rgba(96,0,0,0.15) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(10,25,47,0.15) 0%, transparent 60%)',
           willChange: 'transform' 
         }}
       />

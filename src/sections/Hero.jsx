@@ -125,7 +125,7 @@ export default function Hero() {
   }, [mouseX, mouseY]);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen w-full flex items-center overflow-hidden pt-20 bg-gradient-to-b from-transparent to-[#0a0a0a]/50">
+    <section ref={heroRef} className="relative min-h-screen w-full flex items-center overflow-hidden pt-20 bg-gradient-to-b from-transparent to-[#030712] z-10">
 
       {/* 1. Base Atmospheric Layers */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -137,12 +137,14 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover opacity-60 z-0 mix-blend-screen"
         >
           <source
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
+            src="./assets/hero.mp4"
             type="video/mp4"
           />
         </video>
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#D4AF37]/10 to-transparent opacity-30 z-20" />
+        {/* Cinematic Fog Overlay */}
+        <div className="absolute bottom-0 left-0 w-full h-[40vh] bg-gradient-to-t from-[#030712] via-[#030712]/50 to-transparent z-30 pointer-events-none" />
       </div>
 
       {/* 2. Mouse Reactive Glows (Fog) */}
@@ -150,8 +152,8 @@ export default function Hero() {
         className="absolute inset-0 z-10 opacity-60 mix-blend-screen pointer-events-none"
         style={{ x: glowX, y: glowY }}
       >
-        <div className="fog-layer absolute top-[20%] left-[20%] w-[40vw] h-[40vw] rounded-full bg-[#600000]/20 blur-[120px]" />
-        <div className="fog-layer absolute bottom-[10%] right-[10%] w-[50vw] h-[50vw] rounded-full bg-[#D4AF37]/10 blur-[150px]" />
+        <div className="fog-layer absolute top-[20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-[#0A192F]/40 blur-[150px]" />
+        <div className="fog-layer absolute bottom-[10%] right-[10%] w-[60vw] h-[60vw] rounded-full bg-[#D4AF37]/15 blur-[180px]" />
       </motion.div>
 
 
@@ -178,8 +180,8 @@ export default function Hero() {
           {/* Subheading */}
           <div className="overflow-hidden mb-10">
             <div className="hero-badge">
-              <span className="inline-flex items-center gap-3 py-1 px-3 glass rounded-full text-[10px] md:text-xs font-semibold tracking-[0.3em] text-gray-300 uppercase shadow-[0_0_20px_rgba(255,0,0,0.1)] border border-white/5">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(255,0,0,0.8)]" />
+              <span className="inline-flex items-center gap-3 py-1 px-3 glass rounded-full text-[10px] md:text-xs font-semibold tracking-[0.3em] text-gray-300 uppercase shadow-[0_0_20px_rgba(212,175,55,0.1)] border border-white/5">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
                 India's #1 Performance-First Agency
               </span>
             </div>
@@ -196,7 +198,7 @@ export default function Hero() {
               <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-black uppercase leading-[0.85] tracking-[-0.05em] text-white mix-blend-plus-lighter translate-y-[110%] hero-title-word flex flex-wrap items-center">
                 Become&nbsp;
                 <Typewriter
-                  words={["Culture.", "Viral.", "Iconic.", "Legendary."]}
+                  words={["Culture.", "Viral.", "Iconic."]}
                   textClassName="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#fff] to-[#D4AF37] drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
                   cursorClassName="bg-[#D4AF37]"
                 />

@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CaseCard = ({ campaign }) => {
     return (
         <div
-            className="case-card opacity-0 group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
+            className="case-card opacity-0 group relative flex flex-col justify-between min-h-[500px] lg:min-h-[600px] bg-gradient-to-b from-[#0B132B] to-[#030712] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
         >
             {/* Dynamic Hover Glow based on themeColor */}
             <div
@@ -199,7 +199,7 @@ export default function CaseStudy() {
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#600000]/10 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
+                    <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#0A192F]/10 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
                 </div>
                 {/* Subtle Grid */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-90" />
@@ -259,7 +259,7 @@ export default function CaseStudy() {
                 <motion.div 
                     ref={musicRef}
                     onMouseMove={handleMouseMove}
-                    className="music-marketing-box opacity-0 group w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#111111]/40 to-[#070707]/30 border border-white/[0.06] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-primary/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(212,175,55,0.25)]"
+                    className="music-marketing-box opacity-0 group w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#112240]/40 to-[#060B14]/30 border border-white/[0.06] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-primary/30 hover:bg-[#060B14]/60 hover:shadow-[0_25px_60px_-15px_rgba(212,175,55,0.25)]"
                 >
                     {/* Spotlight Glow */}
                     <motion.div
@@ -271,7 +271,7 @@ export default function CaseStudy() {
 
                     {/* Atmospheric Glowing Background */}
                     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[40px]">
-                        <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-[#600000]/20 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
+                        <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-[#0A192F]/20 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
                         <div className="absolute bottom-0 left-0 w-[60vw] lg:w-[30vw] h-[60vw] lg:h-[30vw] bg-[#D4AF37]/10 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 mix-blend-screen" />
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-80" />
                     </div>
@@ -311,7 +311,7 @@ export default function CaseStudy() {
                         ].map((stat, i) => (
                             <div 
                                 key={stat.label}
-                                className={`music-stat-card opacity-0 relative flex flex-col gap-2 p-6 rounded-2xl bg-[#111111]/20 border border-white/[0.05] hover:border-primary/30 hover:bg-[#070707]/60 transition-colors duration-500 z-10 overflow-hidden ${i === 2 ? 'sm:col-span-2' : ''}`}
+                                className={`music-stat-card opacity-0 relative flex flex-col gap-2 p-6 rounded-2xl bg-[#112240]/20 border border-white/[0.05] hover:border-primary/30 hover:bg-[#060B14]/60 transition-colors duration-500 z-10 overflow-hidden ${i === 2 ? 'sm:col-span-2' : ''}`}
                             >
                                 <span className="text-4xl lg:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors duration-500">
                                     {stat.value}

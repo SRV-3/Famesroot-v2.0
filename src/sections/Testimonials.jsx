@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const TestimonialCard = ({ testimonial }) => {
     return (
         <div
-            className="testimonial-card opacity-0 group relative flex flex-col justify-between p-10 lg:p-12 min-h-[400px] bg-gradient-to-b from-[#0a0a0a] to-[#030303] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
+            className="testimonial-card opacity-0 group relative flex flex-col justify-between p-10 lg:p-12 min-h-[400px] bg-gradient-to-b from-[#0B132B] to-[#030712] backdrop-blur-2xl border border-white/[0.05] rounded-[32px] overflow-hidden cursor-pointer transition-transform duration-700 hover:-translate-y-2"
         >
             {/* Dynamic Hover Glow */}
             <div

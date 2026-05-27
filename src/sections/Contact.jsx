@@ -61,9 +61,9 @@ const FormInput = ({ label, type = "text", placeholder, textarea = false, option
                     className="w-full bg-white/[0.03] border-b border-white/[0.1] px-4 py-3 text-white focus:outline-none focus:border-primary focus:bg-white/[0.05] transition-all duration-300 rounded-t-lg appearance-none cursor-pointer"
                     defaultValue=""
                 >
-                    <option value="" disabled className="bg-[#0a0a0a] text-gray-500">{placeholder}</option>
+                    <option value="" disabled className="bg-[#0B132B] text-gray-500">{placeholder}</option>
                     {options.map((opt, i) => (
-                        <option key={i} value={opt} className="bg-[#0a0a0a] text-white py-2">{opt}</option>
+                        <option key={i} value={opt} className="bg-[#0B132B] text-white py-2">{opt}</option>
                     ))}
                 </select>
             ) : (
@@ -165,7 +165,7 @@ export default function Contact() {
         <section id="contact" ref={containerRef} className="relative min-h-screen w-full bg-transparent pt-32 lg:pt-40 pb-10 overflow-hidden border-t border-white/[0.03]">
 
             {/* Massive Bottom Glow */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120vw] h-[60vw] rounded-[100%] bg-[#600000]/20 blur-[150px] mix-blend-screen pointer-events-none z-0" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120vw] h-[60vw] rounded-[100%] bg-[#0A192F]/20 blur-[150px] mix-blend-screen pointer-events-none z-0" />
             {/* Subtle Grid */}
             <div
                 className="absolute inset-0 opacity-[0.02] pointer-events-none z-0"
@@ -174,7 +174,7 @@ export default function Contact() {
                     backgroundSize: '80px 80px'
                 }}
             />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,transparent_0%,#030303_80%)] opacity-90 pointer-events-none z-0" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,transparent_0%,#030712_80%)] opacity-90 pointer-events-none z-0" />
             {/* Floating Decorative Crosses */}
             <div className="absolute top-32 left-[8%] floating-cross pointer-events-none z-0">
                 <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
@@ -225,7 +225,7 @@ export default function Contact() {
 
                 {/* --- MIDDLE: MAGNETIC BUTTONS --- */}
                 <div className="contact-buttons-container flex flex-wrap justify-center gap-4 mb-24 lg:mb-32 opacity-0">
-                    <MagneticButton className="px-8 py-4 rounded-full bg-primary text-[#030303] font-black uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] transition-shadow duration-300">
+                    <MagneticButton className="px-8 py-4 rounded-full bg-primary text-[#030712] font-black uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] transition-shadow duration-300">
                         Start a Campaign
                     </MagneticButton>
                     <MagneticButton className="px-8 py-4 rounded-full bg-white text-black font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-shadow duration-300">
