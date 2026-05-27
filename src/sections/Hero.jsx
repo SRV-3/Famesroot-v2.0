@@ -128,8 +128,21 @@ export default function Hero() {
     <section ref={heroRef} className="relative min-h-screen w-full flex items-center overflow-hidden pt-20 bg-gradient-to-b from-transparent to-[#0a0a0a]/50">
 
       {/* 1. Base Atmospheric Layers */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#D4AF37]/5 to-transparent opacity-30" />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-60 z-0 mix-blend-screen"
+        >
+          <source
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-black/40 z-10" />
+        <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#D4AF37]/10 to-transparent opacity-30 z-20" />
       </div>
 
       {/* 2. Mouse Reactive Glows (Fog) */}
