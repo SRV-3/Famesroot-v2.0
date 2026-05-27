@@ -37,23 +37,23 @@ const DesktopCard = ({ testimonial }) => {
             />
 
             <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-10">
-                    <svg className="w-12 h-12 text-primary/80 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]" viewBox="0 0 24 24" fill="currentColor">
+                <div className="mb-4 lg:mb-10">
+                    <svg className="w-8 h-8 lg:w-12 lg:h-12 text-primary/80 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
                 </div>
 
-                <p className="text-xl lg:text-3xl text-gray-800 font-medium italic leading-[1.6] mb-8 lg:mb-12 grow">
+                <p className="text-base md:text-lg lg:text-3xl text-gray-800 font-medium italic leading-[1.6] mb-4 lg:mb-12 grow overflow-hidden">
                     "{testimonial.quote}"
                 </p>
 
-                <div className="flex items-center gap-4 lg:gap-6 pt-6 lg:pt-8 border-t border-gray-100">
-                    <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-full overflow-hidden border-2 border-gray-100 shrink-0 bg-white shadow-sm">
+                <div className="flex items-center gap-4 lg:gap-6 pt-4 lg:pt-8 border-t border-gray-100">
+                    <div className="w-10 h-10 lg:w-16 lg:h-16 rounded-full overflow-hidden border-2 border-gray-100 shrink-0 bg-white shadow-sm">
                         <img src={testimonial.logoImage} alt={testimonial.brandName} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex flex-col">
-                        <h4 className="text-xl font-bold text-gray-900 tracking-wide">{testimonial.brandName}</h4>
-                        <span className="text-sm font-bold text-primary uppercase tracking-widest">{testimonial.designation}</span>
+                        <h4 className="text-base lg:text-xl font-bold text-gray-900 tracking-wide">{testimonial.brandName}</h4>
+                        <span className="text-[10px] lg:text-sm font-bold text-primary uppercase tracking-widest">{testimonial.designation}</span>
                     </div>
                 </div>
             </div>
@@ -219,10 +219,10 @@ export default function Testimonials() {
                     </div>
 
                     {/* Right: Interactive Card Stack */}
-                    <div className="relative w-full lg:w-6/12 xl:w-5/12 h-[400px] lg:h-[600px] flex items-center justify-center lg:justify-end">
+                    <div className="relative w-full lg:w-6/12 xl:w-5/12 h-[450px] lg:h-[600px] flex items-center justify-center lg:justify-end">
 
                         {/* Stack (GSAP applied on all screens) */}
-                        <div className="relative w-full max-w-[340px] md:max-w-[380px] lg:max-w-none h-[400px] lg:h-full mt-6 lg:mt-0">
+                        <div className="relative w-full max-w-[340px] md:max-w-[380px] lg:max-w-none h-[450px] lg:h-full mt-6 lg:mt-0">
                             {TESTIMONIALS.map((testimonial, i) => (
                                 <DesktopCard key={testimonial.id} testimonial={testimonial} />
                             ))}
