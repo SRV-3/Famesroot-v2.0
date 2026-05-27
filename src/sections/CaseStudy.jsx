@@ -191,13 +191,13 @@ export default function CaseStudy() {
             });
 
             musicTl.fromTo(".music-marketing-box",
-                { opacity: 0, y: 50 },
-                { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }
+                { opacity: 0, y: 50, filter: "blur(10px)" },
+                { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.2, ease: "power4.out" }
             );
 
             musicTl.fromTo(".music-stat-card",
-                { opacity: 0, y: 30 },
-                { opacity: 1, y: 0, duration: 1, ease: "power4.out", stagger: 0.1 },
+                { opacity: 0, y: 30, filter: "blur(8px)" },
+                { opacity: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power4.out", stagger: 0.15 },
                 "-=0.8"
             );
 
@@ -275,74 +275,66 @@ export default function CaseStudy() {
                 </div>
 
                 {/* Music Marketing Dedicated Highlight */}
-                <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-                    <motion.div
+                <div className="container mx-auto px-6 md:px-12 max-w-[1200px]">
+                    <div
                         ref={musicRef}
-                        onMouseMove={handleMouseMove}
-                        className="music-marketing-box opacity-0 group w-full mt-24 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#112240]/40 to-[#060B14]/30 border border-white/[0.06] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-primary/30 hover:bg-[#060B14]/60 hover:shadow-[0_25px_60px_-15px_rgba(212,175,55,0.25)]"
+                        className="music-marketing-box opacity-0 group w-full mt-20 lg:mt-32 relative rounded-[32px] overflow-hidden bg-white/[0.02] backdrop-blur-2xl border border-white/[0.05] p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-16 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-700 hover:border-white/10 hover:bg-white/[0.04]"
                     >
-                        {/* Spotlight Glow */}
-                        <motion.div
-                            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[40px] pointer-events-none z-0"
-                            style={{
-                                background: useMotionTemplate`radial-gradient(450px circle at ${spotlightX}px ${spotlightY}px, rgba(212, 175, 55, 0.08), transparent 80%)`
-                            }}
-                        />
-
-                        {/* Atmospheric Glowing Background */}
-                        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[40px]">
-                            <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-[#0A192F]/20 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
-                            <div className="absolute bottom-0 left-0 w-[60vw] lg:w-[30vw] h-[60vw] lg:h-[30vw] bg-[#D4AF37]/10 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 mix-blend-screen" />
-                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-80" />
+                        {/* Soft Vignette & Grid */}
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(3,7,18,0.6)_100%)] z-0 pointer-events-none" />
+                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04] mix-blend-overlay pointer-events-none z-0" />
+                        
+                        {/* Subtle Radial Lighting */}
+                        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+                            <div className="absolute top-[-30%] left-[-10%] w-[60%] h-[60%] bg-blue-500/10 blur-[100px] rounded-full mix-blend-screen" />
+                            <div className="absolute bottom-[-30%] right-[-10%] w-[60%] h-[60%] bg-[#D4AF37]/10 blur-[100px] rounded-full mix-blend-screen" />
                         </div>
 
                         {/* Content Left */}
-                        <div className="relative z-10 w-full lg:w-1/2 flex flex-col gap-6">
+                        <div className="relative z-10 w-full lg:w-1/2 flex flex-col gap-5 lg:pr-8">
                             <div className="inline-flex items-center gap-3">
-                                {/* Dynamic jumping audio waves */}
-                                <div className="flex items-end gap-[3px] h-3.5 shrink-0">
-                                    <span className="w-[2px] bg-primary rounded-full h-2 animate-pulse" />
-                                    <span className="w-[2px] bg-primary rounded-full h-3.5 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                                    <span className="w-[2px] bg-primary rounded-full h-2.5 animate-pulse" style={{ animationDelay: '0.4s' }} />
-                                </div>
-                                <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase drop-shadow-[0_0_8px_rgba(255,0,0,0.5)]">
+                                {/* Elegant minimal dot */}
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary/80 animate-pulse shadow-[0_0_8px_rgba(212,175,55,0.6)]" />
+                                <span className="text-gray-400 font-medium tracking-[0.2em] text-[10px] md:text-xs uppercase">
                                     Featured Capability
                                 </span>
                             </div>
 
-                            <h3 className="text-4xl lg:text-5xl xl:text-6xl font-black font-montserrat uppercase leading-[1.1] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                                Music Marketing —<br />
-                                <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary via-red-500 to-red-800">
-                                    A Vertical We've Built from Scratch
-                                </span>
+                            <h3 className="text-3xl md:text-4xl lg:text-5xl font-medium font-montserrat leading-[1.2] tracking-tight text-white mt-2">
+                                Music Marketing<br />
+                                Built Through<br />
+                                <span className="text-[#D4AF37] italic font-light">Creator Culture.</span>
                             </h3>
 
-                            <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-4">
-                                Creator-led song distribution across Instagram Reels and YouTube Shorts. We’ve run campaigns for <span className="text-white font-bold">‘Tere Ishk Mein’</span>, <span className="text-white font-bold">‘Usey Kehna’</span>, and <span className="text-white font-bold">‘Born Rich’</span> — turning tracks into cultural moments through authentic creator storytelling.
+                            <p className="text-gray-400 text-sm md:text-base font-light leading-relaxed max-w-md mt-2">
+                                Creator-led song distribution across Instagram Reels and YouTube Shorts. We’ve run campaigns for <span className="text-white font-medium">‘Tere Ishk Mein’</span>, <span className="text-white font-medium">‘Usey Kehna’</span>, and <span className="text-white font-medium">‘Born Rich’</span> — turning tracks into cultural moments through authentic storytelling.
                             </p>
                         </div>
 
                         {/* Stats Right */}
-                        <div className="relative z-10 w-full lg:w-5/12 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+                        <div className="relative z-10 w-full lg:w-5/12 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                             {[
                                 { value: "6M+", label: "Song Streams" },
                                 { value: "218.6K", label: "Engagements" },
-                                { value: "3+", label: "Songs Launched" }
+                                { value: "3+", label: "Songs Launched", colSpan: true }
                             ].map((stat, i) => (
                                 <div
                                     key={stat.label}
-                                    className={`music-stat-card opacity-0 relative flex flex-col gap-2 p-6 rounded-2xl bg-[#112240]/20 border border-white/[0.05] hover:border-primary/30 hover:bg-[#060B14]/60 transition-colors duration-500 z-10 overflow-hidden ${i === 2 ? 'sm:col-span-2' : ''}`}
+                                    className={`music-stat-card opacity-0 group/card relative flex flex-col justify-center p-6 lg:p-8 rounded-[24px] bg-white/[0.02] backdrop-blur-md border border-white/[0.04] transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] hover:bg-white/[0.04] hover:border-white/10 hover:shadow-[0_10px_40px_-10px_rgba(212,175,55,0.1)] overflow-hidden z-10 ${stat.colSpan ? 'sm:col-span-2' : ''}`}
                                 >
-                                    <span className="text-4xl lg:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors duration-500">
+                                    {/* Ultra soft inner glow on hover */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
+                                    
+                                    <span className="relative z-10 text-3xl lg:text-4xl font-light text-white tracking-tight mb-2">
                                         {stat.value}
                                     </span>
-                                    <span className="text-primary text-xs font-bold uppercase tracking-widest">
+                                    <span className="relative z-10 text-gray-500 text-[10px] md:text-xs font-semibold uppercase tracking-widest group-hover/card:text-[#D4AF37] transition-colors duration-500">
                                         {stat.label}
                                     </span>
                                 </div>
                             ))}
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>
