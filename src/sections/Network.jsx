@@ -56,7 +56,7 @@ const SwipeCard = ({ creator, index, setCards }) => {
                 <div className="flex items-center gap-2 mb-1">
                     <h3 className="text-xl font-semibold text-white drop-shadow-lg">{creator.name}</h3>
                     {creator.verified && (
-                        <svg className="w-5 h-5 text-primary drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]" viewBox="0 0 24 24" fill="currentColor">
+                        <svg className="w-5 h-5 text-primary drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z" />
                         </svg>
                     )}
@@ -76,7 +76,7 @@ const CreatorCard = ({ creator, featured = false }) => (
         className={`creator-card opacity-0 group relative rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] hover:border-primary/30 transition-colors duration-700 bg-[#0a0a0a] ${featured ? 'h-[650px]' : 'h-full min-h-[300px]'}`}
     >
         {/* Hover Glow */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-[inset_0_0_80px_rgba(255,0,0,0.15)] pointer-events-none z-10" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-[inset_0_0_80px_rgba(212,175,55,0.15)] pointer-events-none z-10" />
 
         {/* Image with parallax effect wrapper */}
         <div className="absolute inset-0 overflow-hidden">
@@ -214,13 +214,11 @@ export default function Network() {
     }, []);
 
     return (
-        <section id="network" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
+        <section id="network" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
-                <div className="cinematic-vignette opacity-90" />
-                <div className="noise-overlay opacity-[0.1]" />
+                <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-[#600000]/10 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
                 <div className="absolute top-16 left-[12%] floating-cross">
                     <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
                 </div>
@@ -235,7 +233,7 @@ export default function Network() {
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 lg:mb-24 gap-6">
                     <div className="flex flex-col">
                         <div className="overflow-hidden mb-4">
-                            <span className="network-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
+                            <span className="network-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
                                 <span className="w-12 h-[1px] bg-primary/80" />
                                 Our Creator Network
                             </span>

@@ -157,14 +157,12 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-24 md:py-32 overflow-hidden border-t border-white/[0.03]">
+    <section id="about" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-24 md:py-32 overflow-hidden border-t border-white/[0.03]">
 
       {/* 1. Ultra-Subtle Background Atmosphere */}
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
-        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-red-900/10 blur-[150px] mix-blend-screen opacity-50" />
-        <div className="cinematic-vignette opacity-80" />
-        <div className="noise-overlay opacity-[0.15]" />
+        <div className="absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-[#D4AF37]/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
+        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-[#600000]/10 blur-[150px] mix-blend-screen opacity-50" />
         {/* Floating Decorative Crosses */}
         <div className="absolute top-24 right-[18%] floating-cross">
           <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
@@ -182,7 +180,7 @@ export default function About() {
 
             <div className="mb-10">
               <div className="overflow-hidden mb-4">
-                <span className="about-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
+                <span className="about-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
                   <span className="w-8 h-[1px] bg-primary/80" />
                   Creator Ecosystem
                 </span>
@@ -237,8 +235,8 @@ export default function About() {
 
             {/* Main Profile Card (Male) - Back Left Layer */}
             <div className="about-card-1 absolute z-20 w-[220px] md:w-[260px] lg:w-[320px] bg-gradient-to-b from-white/[0.06] to-transparent backdrop-blur-xl p-2 md:p-3 lg:p-4 rounded-2xl lg:rounded-[2rem] border border-white/[0.08] shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
-              <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4">
-                <img src="/assets/creator_1.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[30%] contrast-110" />
+              <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4 img-parallax-hover group">
+                <img src="/assets/creator_1.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[30%] contrast-110 img-parallax-hover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-90" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                   <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
@@ -259,8 +257,8 @@ export default function About() {
 
             {/* Profile Card 2 (Female) - Middle Layer */}
             <div className="about-card-2 absolute z-30 w-[180px] md:w-[220px] lg:w-[280px] bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-xl p-2 lg:p-3 rounded-2xl lg:rounded-3xl border border-white/[0.1] shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
-              <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden">
-                <img src="/assets/creator_2.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[10%] contrast-[1.15]" />
+              <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden img-parallax-hover group">
+                <img src="/assets/creator_2.jpeg" alt="Creator Profile" className="w-full h-full object-cover grayscale-[10%] contrast-[1.15] img-parallax-hover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-80 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-4 left-4">

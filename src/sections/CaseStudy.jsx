@@ -194,24 +194,15 @@ export default function CaseStudy() {
     }, []);
 
     return (
-        <section id="work" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
+        <section id="work" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
+                    <div className="absolute w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#600000]/10 blur-[150px] mix-blend-screen opacity-30 -translate-y-[20%]" />
                 </div>
                 {/* Subtle Grid */}
-                <div
-                    className="absolute inset-0 opacity-[0.03]"
-                    style={{
-                        backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                        backgroundSize: '80px 80px'
-                    }}
-                />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_100%)] opacity-90" />
-                <div className="cinematic-vignette opacity-80" />
-                <div className="noise-overlay opacity-[0.1]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-90" />
                 {/* Floating Decorative Crosses */}
                 <div className="absolute top-20 right-[15%] floating-cross">
                     <svg className="w-4 h-4 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
@@ -226,7 +217,7 @@ export default function CaseStudy() {
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <span className="case-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
+                        <span className="case-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
                             <span className="w-12 h-[1px] bg-primary/80" />
                             Selected Campaigns
                             <span className="w-12 h-[1px] bg-primary/80" />
@@ -268,22 +259,21 @@ export default function CaseStudy() {
                 <motion.div 
                     ref={musicRef}
                     onMouseMove={handleMouseMove}
-                    className="music-marketing-box opacity-0 group w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#111111]/40 to-[#070707]/30 border border-white/[0.06] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-primary/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(255,0,0,0.25)]"
+                    className="music-marketing-box opacity-0 group w-full mt-20 lg:mt-32 relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#111111]/40 to-[#070707]/30 border border-white/[0.06] p-10 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-primary/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(212,175,55,0.25)]"
                 >
                     {/* Spotlight Glow */}
                     <motion.div
                         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[40px] pointer-events-none z-0"
                         style={{
-                            background: useMotionTemplate`radial-gradient(450px circle at ${spotlightX}px ${spotlightY}px, rgba(255, 0, 0, 0.08), transparent 80%)`
+                            background: useMotionTemplate`radial-gradient(450px circle at ${spotlightX}px ${spotlightY}px, rgba(212, 175, 55, 0.08), transparent 80%)`
                         }}
                     />
 
                     {/* Atmospheric Glowing Background */}
                     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[40px]">
-                        <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-primary/10 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
-                        <div className="absolute bottom-0 left-0 w-[60vw] lg:w-[30vw] h-[60vw] lg:h-[30vw] bg-primary/5 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 mix-blend-screen" />
-                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_100%)] opacity-80" />
-                        <div className="noise-overlay opacity-[0.05]" />
+                        <div className="absolute top-0 right-0 w-[80vw] lg:w-[40vw] h-[80vw] lg:h-[40vw] bg-[#600000]/20 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 mix-blend-screen" />
+                        <div className="absolute bottom-0 left-0 w-[60vw] lg:w-[30vw] h-[60vw] lg:h-[30vw] bg-[#D4AF37]/10 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 mix-blend-screen" />
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-80" />
                     </div>
 
                     {/* Content Left */}

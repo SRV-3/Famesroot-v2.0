@@ -25,9 +25,8 @@ const TestimonialCard = ({ testimonial }) => {
             {/* Content Container */}
             <div className="relative z-10 flex flex-col h-full">
 
-                {/* Quote Icon */}
                 <div className="mb-8">
-                    <svg className="w-10 h-10 text-primary/80 drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] group-hover:text-primary transition-colors duration-500" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-10 h-10 text-primary/80 drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] group-hover:text-primary transition-colors duration-500" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
                 </div>
@@ -129,13 +128,11 @@ export default function Testimonials() {
     }, []);
 
     return (
-        <section id="testimonials" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
+        <section id="testimonials" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-24 lg:py-32 overflow-hidden border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="absolute w-[90vw] h-[90vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
-                <div className="cinematic-vignette opacity-80" />
-                <div className="noise-overlay opacity-[0.1]" />
+                <div className="absolute w-[90vw] h-[90vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#D4AF37]/5 blur-[120px] mix-blend-screen opacity-40 translate-x-[20%]" />
                 {/* Floating Decorative Crosses */}
                 <div className="absolute top-32 left-[8%] floating-cross">
                     <svg className="w-3 h-3 text-primary/15" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16"/><rect x="0" y="7" width="16" height="2"/></svg>
@@ -150,7 +147,7 @@ export default function Testimonials() {
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <span className="testimonials-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
+                        <span className="testimonials-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
                             <span className="w-12 h-[1px] bg-primary/80" />
                             Client Love
                             <span className="w-12 h-[1px] bg-primary/80" />

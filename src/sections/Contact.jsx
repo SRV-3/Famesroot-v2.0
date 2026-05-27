@@ -162,11 +162,10 @@ export default function Contact() {
     }, []);
 
     return (
-        <section id="contact" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] pt-32 lg:pt-40 pb-10 overflow-hidden border-t border-white/[0.03]">
+        <section id="contact" ref={containerRef} className="relative min-h-screen w-full bg-transparent pt-32 lg:pt-40 pb-10 overflow-hidden border-t border-white/[0.03]">
 
             {/* Massive Bottom Glow */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120vw] h-[60vw] rounded-[100%] bg-primary/10 blur-[150px] mix-blend-screen pointer-events-none z-0" />
-            <div className="noise-overlay opacity-[0.05]" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120vw] h-[60vw] rounded-[100%] bg-[#600000]/20 blur-[150px] mix-blend-screen pointer-events-none z-0" />
             {/* Subtle Grid */}
             <div
                 className="absolute inset-0 opacity-[0.02] pointer-events-none z-0"
@@ -208,7 +207,7 @@ export default function Contact() {
                             <br />
                             <span className="text-primary scribble-underline contact-scribble inline-flex items-center">
                                 <span className="inline-block overflow-hidden">
-                                    <span className="contact-title-word inline-block translate-y-[110%] drop-shadow-[0_0_40px_rgba(255,0,0,0.4)]">
+                                    <span className="contact-title-word inline-block translate-y-[110%] drop-shadow-[0_0_40px_rgba(212,175,55,0.4)]">
                                         <Typewriter words={["Remember.", "Share.", "Love.", "Watch."]} textClassName="text-primary" cursorClassName="bg-primary" />
                                     </span>
                                 </span>
@@ -226,7 +225,7 @@ export default function Contact() {
 
                 {/* --- MIDDLE: MAGNETIC BUTTONS --- */}
                 <div className="contact-buttons-container flex flex-wrap justify-center gap-4 mb-24 lg:mb-32 opacity-0">
-                    <MagneticButton className="px-8 py-4 rounded-full bg-primary text-white font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(255,0,0,0.2)] hover:shadow-[0_0_40px_rgba(255,0,0,0.5)] transition-shadow duration-300">
+                    <MagneticButton className="px-8 py-4 rounded-full bg-primary text-[#030303] font-black uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] transition-shadow duration-300">
                         Start a Campaign
                     </MagneticButton>
                     <MagneticButton className="px-8 py-4 rounded-full bg-white text-black font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-shadow duration-300">
@@ -243,7 +242,7 @@ export default function Contact() {
                     {/* LEFT: FORM (7 cols) */}
                     <div className="contact-bottom-item opacity-0 col-span-1 lg:col-span-7 bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] rounded-[32px] p-8 lg:p-12 relative overflow-hidden">
                         {/* Inner form glow */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/10 rounded-full blur-[80px] pointer-events-none" />
 
                         <h3 className="text-3xl font-black text-white mb-8 relative z-10">Ready to Scale?</h3>
 

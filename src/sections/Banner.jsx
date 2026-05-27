@@ -73,7 +73,7 @@ export default function Banner() {
         <section
             id="statistics"
             ref={containerRef}
-            className="relative w-full bg-[#030303] py-24 lg:py-32 overflow-hidden border-t border-b border-white/[0.05]"
+            className="relative w-full bg-transparent py-24 lg:py-32 overflow-hidden border-t border-b border-white/[0.05]"
         >
             {/* Cinematic Background Layer */}
             <div className="absolute inset-0 pointer-events-none z-0">
@@ -90,13 +90,10 @@ export default function Banner() {
                 />
 
                 {/* Radial gradients for depth masking */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_100%)] opacity-90" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,10,0.8)_100%)] opacity-90" />
 
                 {/* Animated Red Glow */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/10 blur-[100px] mix-blend-screen banner-glow" />
-
-                {/* Subtle Grain Noise */}
-                <div className="noise-overlay opacity-[0.05]" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#600000]/20 blur-[100px] mix-blend-screen banner-glow" />
             </div>
 
             {/* Content Container */}

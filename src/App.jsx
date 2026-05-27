@@ -56,6 +56,12 @@ function App() {
 
   return (
     <div className="bg-[#030303] min-h-screen text-white font-inter selection:bg-primary/30 selection:text-white">
+      {/* Global Atmospheric Layers */}
+      <div className="mesh-gradient-bg" />
+      <div className="grid-overlay" />
+      <div className="cinematic-vignette" />
+      <div className="noise-overlay" />
+
       {/* Loader */}
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
 

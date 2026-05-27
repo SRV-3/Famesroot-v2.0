@@ -125,11 +125,11 @@ export default function Hero() {
   }, [mouseX, mouseY]);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen w-full flex items-center overflow-hidden bg-[#030303] pt-20">
+    <section ref={heroRef} className="relative min-h-screen w-full flex items-center overflow-hidden pt-20 bg-gradient-to-b from-transparent to-[#0a0a0a]/50">
 
       {/* 1. Base Atmospheric Layers */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-primary/10 to-transparent opacity-30" />
+        <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#D4AF37]/5 to-transparent opacity-30" />
       </div>
 
       {/* 2. Mouse Reactive Glows (Fog) */}
@@ -137,13 +137,11 @@ export default function Hero() {
         className="absolute inset-0 z-10 opacity-60 mix-blend-screen pointer-events-none"
         style={{ x: glowX, y: glowY }}
       >
-        <div className="fog-layer absolute top-[20%] left-[20%] w-[40vw] h-[40vw] rounded-full bg-red-600/10 blur-[120px]" />
-        <div className="fog-layer absolute bottom-[10%] right-[10%] w-[50vw] h-[50vw] rounded-full bg-primary/20 blur-[150px]" />
+        <div className="fog-layer absolute top-[20%] left-[20%] w-[40vw] h-[40vw] rounded-full bg-[#600000]/20 blur-[120px]" />
+        <div className="fog-layer absolute bottom-[10%] right-[10%] w-[50vw] h-[50vw] rounded-full bg-[#D4AF37]/10 blur-[150px]" />
       </motion.div>
 
-      {/* 4. Cinematic Vignette & Noise Overlay */}
-      <div className="cinematic-vignette" />
-      <div className="noise-overlay" />
+
 
       {/* Floating Decorative Crosses */}
       <div className="absolute top-[15%] right-[10%] floating-cross pointer-events-none z-20">
@@ -186,8 +184,8 @@ export default function Hero() {
                 Become&nbsp;
                 <Typewriter
                   words={["Culture.", "Viral.", "Iconic.", "Legendary."]}
-                  textClassName="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-red-800 drop-shadow-[0_0_40px_rgba(255,0,0,0.3)]"
-                  cursorClassName="bg-primary"
+                  textClassName="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#fff] to-[#D4AF37] drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+                  cursorClassName="bg-[#D4AF37]"
                 />
               </h1>
             </div>

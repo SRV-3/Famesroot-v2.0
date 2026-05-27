@@ -108,17 +108,17 @@ const ServiceCard = ({ service }) => {
                 transformStyle: "preserve-3d",
             }}
             whileHover={{ scale: 1.03, zIndex: 20 }}
-            className="service-card-item opacity-0 group relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-[#111111]/40 to-[#070707]/30 backdrop-blur-2xl border border-white/[0.06] rounded-3xl p-8 lg:p-10 cursor-pointer hover:border-primary/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(255,0,0,0.25)] transition-all duration-700"
+            className="service-card-item opacity-0 group relative flex flex-col justify-between h-[400px] lg:h-[480px] bg-gradient-to-b from-[#111111]/40 to-[#070707]/30 backdrop-blur-2xl border border-white/[0.06] rounded-3xl p-8 lg:p-10 cursor-pointer hover:border-[#D4AF37]/30 hover:bg-[#070707]/60 hover:shadow-[0_25px_60px_-15px_rgba(212,175,55,0.25)] transition-all duration-700"
         >
             {/* Spotlight Glow tracking mouse */}
             <motion.div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none z-0"
                 style={{
-                    background: useMotionTemplate`radial-gradient(350px circle at ${spotlightX}px ${spotlightY}px, rgba(255, 0, 0, 0.08), transparent 80%)`
+                    background: useMotionTemplate`radial-gradient(350px circle at ${spotlightX}px ${spotlightY}px, rgba(212, 175, 55, 0.08), transparent 80%)`
                 }}
             />
             {/* Corner Ambient Light leak */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(255,0,0,0.03),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(212,175,55,0.03),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none" />
 
             {/* Huge Watermark Outline Number */}
             <span 
@@ -138,7 +138,7 @@ const ServiceCard = ({ service }) => {
                         <div style={{ transform: "translateZ(25px)" }} className="relative z-10 shrink-0">
                             {getServiceIcon(service.num)}
                         </div>
-                        <div style={{ transform: "translateZ(20px)" }} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center -rotate-45 group-hover:rotate-0 group-hover:border-primary/50 group-hover:bg-primary/20 group-hover:shadow-[0_0_15px_rgba(255,0,0,0.3)] transition-all duration-500 shrink-0">
+                        <div style={{ transform: "translateZ(20px)" }} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center -rotate-45 group-hover:rotate-0 group-hover:border-primary/50 group-hover:bg-primary/20 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-500 shrink-0">
                             <svg className="w-4 h-4 text-white group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
@@ -251,13 +251,11 @@ export default function Service() {
     }, []);
 
     return (
-        <section id="services" ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-32 overflow-hidden border-t border-white/[0.03] perspective-[1200px]">
+        <section id="services" ref={containerRef} className="relative min-h-screen w-full bg-transparent py-32 overflow-hidden border-t border-white/[0.03] perspective-[1200px]">
 
             {/* Background Atmosphere - Z-0 */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="service-glow absolute w-[60vw] h-[60vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-primary/5 blur-[120px] mix-blend-screen opacity-30 translate-y-[10%]" />
-                <div className="cinematic-vignette opacity-70" />
-                <div className="noise-overlay opacity-[0.1]" />
+                <div className="service-glow absolute w-[60vw] h-[60vw] lg:w-[40vw] lg:h-[40vw] rounded-full bg-[#600000]/5 blur-[120px] mix-blend-screen opacity-30 translate-y-[10%]" />
             </div>
 
             <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
@@ -265,7 +263,7 @@ export default function Service() {
                 {/* Section Header */}
                 <div className="flex flex-col items-center justify-center text-center mb-20 lg:mb-28">
                     <div className="overflow-hidden mb-6">
-                        <span className="service-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] opacity-0">
+                        <span className="service-subtitle inline-flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] opacity-0">
                             <span className="w-12 h-[1px] bg-primary/80" />
                             What We Do
                             <span className="w-12 h-[1px] bg-primary/80" />

@@ -70,7 +70,7 @@ const ProcessCard = ({ step }) => {
                 <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none z-0"
                     style={{
-                        background: useMotionTemplate`radial-gradient(250px circle at ${spotlightX}px ${spotlightY}px, rgba(255, 0, 0, 0.06), transparent 80%)`
+                        background: useMotionTemplate`radial-gradient(250px circle at ${spotlightX}px ${spotlightY}px, rgba(212, 175, 55, 0.06), transparent 80%)`
                     }}
                 />
 
@@ -238,15 +238,13 @@ export default function Process() {
     }, []);
 
     return (
-        <section id="process" ref={containerRef} className="relative bg-[#030303] overflow-hidden lg:h-screen w-full border-t border-white/[0.03]">
+        <section id="process" ref={containerRef} className="relative bg-transparent overflow-hidden lg:h-screen w-full border-t border-white/[0.03]">
 
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                <div className="process-ambient absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-primary/5 blur-[150px] mix-blend-screen opacity-30" />
-                <div className="cinematic-vignette opacity-80" />
+                <div className="process-ambient absolute w-[80vw] h-[80vw] lg:w-[50vw] lg:h-[50vw] rounded-full bg-[#D4AF37]/5 blur-[150px] mix-blend-screen opacity-30" />
                 
-                {/* Tech Blueprint Grid */}
-                <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:32px_32px] opacity-80" />
+
                 
                 {/* Floating Rotating Dotted Rings */}
                 <div className="absolute top-[10%] left-[5%] w-[350px] h-[350px] border border-dashed border-white/[0.02] rounded-full animate-spin-slow" />
@@ -264,7 +262,7 @@ export default function Process() {
             </div>
 
             {/* Massive Parallax Backdrop Watermark */}
-            <div className="process-watermark absolute bottom-[8%] left-[20vw] text-[13vw] font-black font-montserrat tracking-tighter text-transparent select-none pointer-events-none z-0 whitespace-nowrap uppercase hidden lg:block" style={{ WebkitTextStroke: "1.2px rgba(255, 0, 0, 0.015)" }}>
+            <div className="process-watermark absolute bottom-[8%] left-[20vw] text-[13vw] font-black font-montserrat tracking-tighter text-transparent select-none pointer-events-none z-0 whitespace-nowrap uppercase hidden lg:block" style={{ WebkitTextStroke: "1px rgba(212, 175, 55, 0.02)" }}>
                 Methodology
             </div>
 
