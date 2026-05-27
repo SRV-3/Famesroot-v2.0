@@ -155,7 +155,7 @@ export default function Loader({ onComplete }) {
 
         {/* Text Mask SVG */}
         <div className="loader-svg-content w-full h-auto opacity-0 z-10">
-          <svg viewBox="0 0 1000 300" className="w-full h-auto drop-shadow-[0_0_35px_rgba(255,0,0,0.15)]">
+          <svg viewBox="0 0 1000 300" className="w-full h-auto drop-shadow-[0_0_35px_rgba(212,175,55,0.2)]">
             <defs>
               {/* Text Mask definition for clipping the waves */}
               <clipPath id="loader-text-clip">
@@ -194,18 +194,18 @@ export default function Loader({ onComplete }) {
 
             {/* Filled text layer, clipped by letters */}
             <g clipPath="url(#loader-text-clip)">
-              {/* Back Wave: darker crimson red */}
+              {/* Back Wave: subtle gold shadow */}
               <path
                 id="back-wave"
                 d="M-1000,150 C-750,185 -750,115 -500,150 C-250,185 -250,115 0,150 C250,185 250,115 500,150 C750,185 750,115 1000,150 C1250,185 1250,115 1500,150 C1770,185 1750,115 2000,150 L2000,450 L-1000,450 Z"
-                fill="rgba(168, 8, 8, 0.5)"
+                fill="rgba(212, 175, 55, 0.4)"
               />
 
-              {/* Front Wave: rich primary deep red */}
+              {/* Front Wave: rich primary gold */}
               <path
                 id="front-wave"
                 d="M-1000,150 C-750,115 -750,185 -500,150 C-250,115 -250,185 0,150 C250,115 250,185 500,150 C750,115 750,185 1000,150 C1250,115 1250,185 1500,150 C1750,115 1750,185 2000,150 L2000,450 L-1000,450 Z"
-                fill="#d90429"
+                fill="#D4AF37"
               />
             </g>
           </svg>

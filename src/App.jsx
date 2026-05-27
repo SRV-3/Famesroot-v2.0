@@ -10,6 +10,7 @@ import Service from './sections/Service'
 import Process from './sections/Process'
 import CaseStudy from './sections/CaseStudy'
 import Testimonials from './sections/Testimonials'
+import PastTalent from './sections/PastTalent'
 import Contact from './sections/Contact'
 import Navbar from './components/Navbar'
 import CustomCursor from './components/CustomCursor'
@@ -84,6 +85,7 @@ function App() {
         <Process />
         <Banner />
         <Network />
+        <PastTalent />
         <CaseStudy />
         <Testimonials />
         <Contact />
