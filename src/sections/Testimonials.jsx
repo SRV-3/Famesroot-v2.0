@@ -7,75 +7,6 @@ import Typewriter from '../components/Typewriter';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Mobile Swipe Card (Framer Motion) ---
-const MobileSwipeCard = ({ testimonial, index, setCards }) => {
-    const x = useMotionValue(0);
-    const rotate = useTransform(x, [-200, 200], [-10, 10]);
-
-    const handleDragEnd = (e, info) => {
-        if (Math.abs(info.offset.x) > 100) {
-            const direction = info.offset.x > 0 ? 1 : -1;
-            animate(x, direction * 400, { duration: 0.3 }).then(() => {
-                x.set(0);
-                setCards(prev => {
-                    const next = [...prev];
-                    const top = next.shift();
-                    next.push(top);
-                    return next;
-                });
-            });
-        } else {
-            animate(x, 0, { type: "spring", stiffness: 300, damping: 20 });
-        }
-    };
-
-    const isFront = index === 0;
-    const yOffset = index * 20;
-    const scale = 1 - index * 0.05;
-    const zIndex = 50 - index;
-    const opacity = index > 2 ? 0 : 1 - index * 0.15;
-
-    return (
-        <motion.div
-            style={{ x, rotate, zIndex }}
-            animate={{ y: yOffset, scale, opacity }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            drag={isFront ? "x" : false}
-            dragConstraints={{ left: 0, right: 0 }}
-            onDragEnd={handleDragEnd}
-            className="absolute top-0 w-[85vw] max-w-[380px] min-h-[450px] p-8 md:p-10 rounded-[32px] overflow-hidden cursor-grab active:cursor-grabbing bg-white backdrop-blur-2xl border border-gray-200/60 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col justify-between"
-        >
-            {/* Soft internal glow based on accent color */}
-            <div 
-                className="absolute inset-0 opacity-20 pointer-events-none mix-blend-screen"
-                style={{ background: `radial-gradient(150px circle at top left, ${testimonial.accentColor || 'rgba(212,175,55,0.5)'}, transparent 80%)` }}
-            />
-
-            <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-6">
-                    <svg className="w-8 h-8 text-primary/80 drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                    </svg>
-                </div>
-                
-                <p className="text-lg md:text-xl text-gray-800 font-medium italic leading-[1.7] grow mb-8">
-                    "{testimonial.quote}"
-                </p>
-
-                <div className="flex items-center gap-5 pt-6 border-t border-gray-100 relative z-10">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-100 shrink-0 bg-white shadow-sm">
-                        <img src={testimonial.logoImage} alt={testimonial.brandName} className="w-full h-full object-cover" />
-                    </div>
-                    <div className="flex flex-col">
-                        <h4 className="text-base font-bold text-gray-900 tracking-wide">{testimonial.brandName}</h4>
-                        <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{testimonial.designation}</span>
-                    </div>
-                </div>
-            </div>
-        </motion.div>
-    );
-};
-
 // --- Desktop Stack Card (GSAP) ---
 const DesktopCard = ({ testimonial }) => {
     const cardRef = useRef(null);
@@ -132,11 +63,9 @@ const DesktopCard = ({ testimonial }) => {
 
 export default function Testimonials() {
     const containerRef = useRef(null);
-    const [mobileCards, setMobileCards] = useState(TESTIMONIALS);
 
     useEffect(() => {
         let ctx = gsap.context(() => {
-            let mm = gsap.matchMedia();
 
             // Text Reveals
             gsap.fromTo(".testimonials-subtitle",
@@ -149,13 +78,12 @@ export default function Testimonials() {
                 { y: "0%", duration: 1.2, ease: "power4.out", stagger: 0.1, scrollTrigger: { trigger: containerRef.current, start: "top 75%" } }
             );
 
-            // Desktop Scroll Stacking Logic
-            mm.add("(min-width: 1024px)", () => {
-                const cards = gsap.utils.toArray('.desktop-testimonial-card');
-                if (cards.length === 0) return;
+            // Scroll Stacking Logic
+            const cards = gsap.utils.toArray('.desktop-testimonial-card');
+            if (cards.length > 0) {
                 
                 // Each card gets 80vh of scroll distance
-                const totalScroll = cards.length * window.innerHeight * 0.8;
+                const totalScroll = (cards.length > 1 ? cards.length - 1 : 1) * window.innerHeight * 0.8;
 
                 // Pin the entire section so user scrubs through the deck
                 const mainTl = gsap.timeline({
@@ -164,7 +92,8 @@ export default function Testimonials() {
                         start: "top top",
                         end: `+=${totalScroll}`,
                         pin: true,
-                        scrub: 1,
+                        scrub: 1.5,
+                        anticipatePin: 1,
                     }
                 });
 
@@ -224,7 +153,7 @@ export default function Testimonials() {
                         }, stepStartTime);
                     });
                 });
-            });
+            }
 
         }, containerRef);
         return () => ctx.revert();
@@ -292,28 +221,11 @@ export default function Testimonials() {
                     {/* Right: Interactive Card Stack */}
                     <div className="relative w-full lg:w-6/12 xl:w-5/12 h-[500px] lg:h-[600px] flex items-center justify-center lg:justify-end">
                         
-                        {/* Desktop Scrub Stack (>= 1024px) */}
-                        <div className="hidden lg:block relative w-full h-full">
+                        {/* Stack (GSAP applied on all screens) */}
+                        <div className="relative w-full max-w-[380px] lg:max-w-none h-[450px] lg:h-full mt-8 lg:mt-0">
                             {TESTIMONIALS.map((testimonial, i) => (
                                 <DesktopCard key={testimonial.id} testimonial={testimonial} />
                             ))}
-                        </div>
-
-                        {/* Mobile Swipe Stack (< 1024px) */}
-                        <div className="block lg:hidden relative w-full h-[450px] flex justify-center items-center">
-                            <p className="absolute -top-10 text-gray-500 text-[10px] font-bold uppercase tracking-widest text-center w-full z-20">
-                                ← Swipe cards →
-                            </p>
-                            <div className="relative w-full max-w-[380px] h-full flex justify-center mt-8">
-                                {mobileCards.map((testimonial, index) => (
-                                    <MobileSwipeCard 
-                                        key={testimonial.id} 
-                                        testimonial={testimonial} 
-                                        index={index} 
-                                        setCards={setMobileCards} 
-                                    />
-                                ))}
-                            </div>
                         </div>
 
                     </div>
