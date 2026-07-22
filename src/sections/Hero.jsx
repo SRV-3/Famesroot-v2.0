@@ -195,7 +195,7 @@ export default function Hero() {
         {/* Left-Aligned Layout */}
         <motion.div
           style={{ x: textX, y: textY }}
-          className="-mt-35 sm:mt-0  max-w-3xl flex flex-col pointer-events-auto w-full lg:w-auto "
+          className="-mt-32 sm:mt-0  max-w-3xl flex flex-col pointer-events-auto w-full lg:w-auto "
         >
           {/* Subheading */}
           <div className="overflow-hidden mb-10">
