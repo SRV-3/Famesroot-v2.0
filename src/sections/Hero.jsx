@@ -1,8 +1,14 @@
-import { useEffect, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import Typewriter from '../components/Typewriter';
+import { useEffect, useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useScroll,
+} from "motion/react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import Typewriter from "../components/Typewriter";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +18,7 @@ export default function Hero() {
   // Scroll-linked parallax fade-out
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 0.8], [0, -100]);
@@ -59,11 +65,12 @@ export default function Hero() {
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
-        stagger: 3
+        stagger: 3,
       });
 
       // Reveal headline words
-      gsap.fromTo(".hero-title-word",
+      gsap.fromTo(
+        ".hero-title-word",
         { y: "110%", rotate: 2 },
         {
           y: "0%",
@@ -71,49 +78,52 @@ export default function Hero() {
           duration: 1.4,
           ease: "power4.out",
           stagger: 0.15,
-          delay: 0.2
-        }
+          delay: 0.2,
+        },
       );
 
       // Reveal subheadline / badge
-      gsap.fromTo(".hero-badge",
+      gsap.fromTo(
+        ".hero-badge",
         { y: "100%", opacity: 0 },
-        { y: "0%", opacity: 1, duration: 1.2, ease: "power4.out", delay: 0.1 }
+        { y: "0%", opacity: 1, duration: 1.2, ease: "power4.out", delay: 0.1 },
       );
 
       // Reveal CTAs
-      gsap.fromTo(".hero-ctas",
+      gsap.fromTo(
+        ".hero-ctas",
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.6 }
+        { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.6 },
       );
 
       // Parallax scroll on glowing fog layers
       gsap.to(".fog-layer", {
-        y: (i) => i ? -80 : 80,
+        y: (i) => (i ? -80 : 80),
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true
-        }
+          scrub: true,
+        },
       });
 
       // Stats counting animation
-      gsap.utils.toArray('.stat-number').forEach((el, index) => {
-        const target = parseFloat(el.getAttribute('data-target'));
-        gsap.fromTo(el,
+      gsap.utils.toArray(".stat-number").forEach((el, index) => {
+        const target = parseFloat(el.getAttribute("data-target"));
+        gsap.fromTo(
+          el,
           { innerHTML: 0 },
           {
             innerHTML: target,
-            duration: 2.5 + (index * 0.5),
+            duration: 2.5 + index * 0.5,
             ease: "power4.out",
             snap: { innerHTML: 1 },
             scrollTrigger: {
               trigger: el,
               start: "top 95%",
-            }
-          }
+            },
+          },
         );
       });
     }, heroRef);
@@ -125,8 +135,10 @@ export default function Hero() {
   }, [mouseX, mouseY]);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen w-full flex items-center overflow-hidden pt-20 bg-gradient-to-b from-transparent to-[#030712] z-10">
-
+    <section
+      ref={heroRef}
+      className="relative min-h-screen w-full flex items-center overflow-hidden pt-20 bg-gradient-to-b from-transparent to-[#030712] z-10"
+    >
       {/* 1. Base Atmospheric Layers */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
@@ -136,10 +148,7 @@ export default function Hero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-60 z-0 mix-blend-screen"
         >
-          <source
-            src="./assets/hero.mp4"
-            type="video/mp4"
-          />
+          <source src="./assets/hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#D4AF37]/10 to-transparent opacity-30 z-20" />
@@ -156,14 +165,26 @@ export default function Hero() {
         <div className="fog-layer absolute bottom-[10%] right-[10%] w-[60vw] h-[60vw] rounded-full bg-[#D4AF37]/15 blur-[180px]" />
       </motion.div>
 
-
-
       {/* Floating Decorative Crosses */}
       <div className="absolute top-[15%] right-[10%] floating-cross pointer-events-none z-20">
-        <svg className="w-5 h-5 text-primary/10" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
+        <svg
+          className="w-5 h-5 text-primary/10"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <rect x="7" y="0" width="2" height="16" />
+          <rect x="0" y="7" width="16" height="2" />
+        </svg>
       </div>
       <div className="absolute bottom-[25%] left-[8%] floating-cross pointer-events-none z-20">
-        <svg className="w-3 h-3 text-white/8" viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="0" width="2" height="16" /><rect x="0" y="7" width="16" height="2" /></svg>
+        <svg
+          className="w-3 h-3 text-white/8"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <rect x="7" y="0" width="2" height="16" />
+          <rect x="0" y="7" width="16" height="2" />
+        </svg>
       </div>
 
       {/* 5. Main Content Composition */}
@@ -174,9 +195,8 @@ export default function Hero() {
         {/* Left-Aligned Layout */}
         <motion.div
           style={{ x: textX, y: textY }}
-          className="max-w-3xl flex flex-col pointer-events-auto w-full lg:w-auto"
+          className="-mt-35 sm:mt-0  max-w-3xl flex flex-col pointer-events-auto w-full lg:w-auto "
         >
-
           {/* Subheading */}
           <div className="overflow-hidden mb-10">
             <div className="hero-badge">
@@ -208,20 +228,37 @@ export default function Hero() {
 
           {/* Premium CTAs */}
           <div className="hero-ctas flex flex-col sm:flex-row gap-6 items-start mb-8 lg:mb-0">
-            <a href="#contact" className="inline-block relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] pointer-events-auto">
-              <span className="relative z-10 group-hover:text-white transition-colors duration-500">Start a Campaign</span>
+            <a
+              href="#contact"
+              className="inline-block relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] pointer-events-auto"
+            >
+              <span className="relative z-10 group-hover:text-white transition-colors duration-500">
+                Start a Campaign
+              </span>
               <div className="absolute inset-0 h-full w-full bg-primary translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] z-0"></div>
             </a>
-            <a href="#work" className="inline-block relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 glass text-white font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:bg-white/5 border border-white/10 hover:border-white/30 pointer-events-auto">
+            <a
+              href="#work"
+              className="inline-block relative group overflow-hidden px-8 py-4 md:px-10 md:py-5 glass text-white font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs rounded-sm transition-all duration-700 hover:bg-white/5 border border-white/10 hover:border-white/30 pointer-events-auto"
+            >
               <span className="relative z-10 flex items-center gap-4">
                 See Our Work
-                <svg className="w-3 h-3 group-hover:translate-x-1.5 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <svg
+                  className="w-3 h-3 group-hover:translate-x-1.5 transition-transform duration-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="square"
+                    strokeLinejoin="miter"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
                 </svg>
               </span>
             </a>
           </div>
-
         </motion.div>
 
         {/* Cinematic Statistics (Right Side Desktop, Bottom Inline Mobile) */}
@@ -237,11 +274,19 @@ export default function Hero() {
           {/* Stat 1 */}
           <div className="flex flex-col items-center lg:items-start group w-1/3 lg:w-auto">
             <h3 className="text-2xl sm:text-4xl lg:text-6xl font-black font-montserrat text-white flex items-center gap-1 drop-shadow-md">
-              <span className="stat-number text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400" data-target="9">0</span>
-              <span className="text-primary text-xl sm:text-3xl lg:text-5xl">+</span>
+              <span
+                className="stat-number text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400"
+                data-target="9"
+              >
+                0
+              </span>
+              <span className="text-primary text-xl sm:text-3xl lg:text-5xl">
+                +
+              </span>
             </h3>
             <p className="text-[9px] sm:text-[11px] lg:text-sm text-gray-400 uppercase tracking-[0.1em] lg:tracking-[0.2em] mt-2 font-medium group-hover:text-gray-200 transition-colors text-center lg:text-left">
-              Years in<br className="hidden lg:block" /> Industry
+              Years in
+              <br className="hidden lg:block" /> Industry
             </p>
           </div>
 
@@ -250,11 +295,19 @@ export default function Hero() {
           {/* Stat 2 */}
           <div className="flex flex-col items-center lg:items-start group w-1/3 lg:w-auto">
             <h3 className="text-2xl sm:text-4xl lg:text-6xl font-black font-montserrat text-white flex items-center gap-1 drop-shadow-md">
-              <span className="stat-number text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400" data-target="1">0</span>
-              <span className="text-primary text-xl sm:text-3xl lg:text-5xl">K+</span>
+              <span
+                className="stat-number text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400"
+                data-target="1"
+              >
+                0
+              </span>
+              <span className="text-primary text-xl sm:text-3xl lg:text-5xl">
+                K+
+              </span>
             </h3>
             <p className="text-[9px] sm:text-[11px] lg:text-sm text-gray-400 uppercase tracking-[0.1em] lg:tracking-[0.2em] mt-2 font-medium group-hover:text-gray-200 transition-colors text-center lg:text-left">
-              Verified<br className="hidden lg:block" /> Creators
+              Verified
+              <br className="hidden lg:block" /> Creators
             </p>
           </div>
 
@@ -263,18 +316,23 @@ export default function Hero() {
           {/* Stat 3 */}
           <div className="flex flex-col items-center lg:items-start group w-1/3 lg:w-auto">
             <h3 className="text-2xl sm:text-4xl lg:text-6xl font-black font-montserrat text-white flex items-center gap-1 drop-shadow-md">
-              <span className="stat-number text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400" data-target="106">0</span>
-              <span className="text-primary text-xl sm:text-3xl lg:text-5xl">M+</span>
+              <span
+                className="stat-number text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400"
+                data-target="106"
+              >
+                0
+              </span>
+              <span className="text-primary text-xl sm:text-3xl lg:text-5xl">
+                M+
+              </span>
             </h3>
             <p className="text-[9px] sm:text-[11px] lg:text-sm text-gray-400 uppercase tracking-[0.1em] lg:tracking-[0.2em] mt-2 font-medium group-hover:text-gray-200 transition-colors text-center lg:text-left">
-              Campaign<br className="hidden lg:block" /> Views
+              Campaign
+              <br className="hidden lg:block" /> Views
             </p>
           </div>
-
         </motion.div>
-
       </motion.div>
-
     </section>
   );
 }
