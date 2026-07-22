@@ -6,6 +6,7 @@ import Typewriter from "../components/Typewriter";
 
 //calendy
 import { InlineWidget } from "react-calendly";
+import { PopupWidget } from "react-calendly";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -279,19 +280,7 @@ export default function Contact() {
             network to engineer your next cultural moment.
           </p>
         </div>
-
         {/* --- MIDDLE: MAGNETIC BUTTONS --- */}
-        <div className="contact-buttons-container flex flex-wrap justify-center gap-4 mb-24 lg:mb-32 opacity-0">
-          <MagneticButton className="px-8 py-4 rounded-full bg-primary text-[#030712] font-black uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] transition-shadow duration-300">
-            Start a Campaign
-          </MagneticButton>
-          <MagneticButton className="px-8 py-4 rounded-full bg-white text-black font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-shadow duration-300">
-            Book Strategy Call
-          </MagneticButton>
-          <MagneticButton className="px-8 py-4 rounded-full bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-white/[0.05] transition-colors duration-300">
-            Follow Us
-          </MagneticButton>
-        </div>
 
         {/* --- BOTTOM: FORM & INFO --- */}
         <div className="contact-bottom-grid w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
@@ -317,11 +306,7 @@ export default function Contact() {
                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
                   Location
                 </h4>
-                <p className="text-xl text-white font-medium">
-                  Uttar Pradesh
-                  <br />
-                  India
-                </p>
+                <p className="text-xl text-white font-medium">Noida, India</p>
               </div>
               <div>
                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
@@ -343,7 +328,7 @@ export default function Contact() {
             </div>
 
             {/* Social Links Block */}
-            <div className="bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] rounded-[32px] p-8 lg:p-10 flex flex-col justify-center grow">
+            <div className="bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] rounded-[32px] p-8 lg:p-10 flex flex-col justify-center ">
               <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">
                 Social Network
               </h4>
@@ -377,7 +362,6 @@ export default function Contact() {
             </div>
           </div>
         </div>
-
         {/* Footer Copyright */}
         <div className="w-full flex flex-col md:flex-row items-center justify-between mt-24 pt-8 border-t border-white/[0.05] text-sm text-gray-600 font-medium z-10 relative">
           <p>© 2026 Famesroot Agency. All rights reserved.</p>
